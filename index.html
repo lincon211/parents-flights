@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>爸妈赴加机票追踪</title>
+<style>
+:root{--bg:#f6f5f1;--card:#fff;--ink:#1d1f23;--muted:#6b6f76;--line:#e4e2dc;--accent:#b4232c;--good:#1f7a4d;--warn:#a5620a;--chip:#f0eee8}
+@media (prefers-color-scheme:dark){:root{--bg:#16171a;--card:#202226;--ink:#ecebe7;--muted:#9a9ea6;--line:#33363c;--accent:#ef6b6b;--good:#5fc38f;--warn:#e0a54a;--chip:#2a2c31}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.6 -apple-system,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","Noto Sans SC",sans-serif}
+.wrap{max-width:980px;margin:0 auto;padding:20px 16px 60px}
+h1{font-size:24px;margin:8px 0 4px}
+h2{font-size:18px;margin:32px 0 10px;display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
+h2 small{font-weight:normal;color:var(--muted);font-size:13px}
+.sub{color:var(--muted);font-size:14px}
+.tabs{display:flex;gap:8px;flex-wrap:wrap;margin:18px 0 4px}
+.tabs button{border:1px solid var(--line);background:var(--card);color:var(--ink);padding:7px 14px;border-radius:999px;font:inherit;font-size:14px;cursor:pointer}
+.tabs button.on{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px 16px;margin:10px 0}
+.row{display:grid;grid-template-columns:36px 1fr auto;gap:12px;align-items:start}
+.rk{font-size:22px;font-weight:700;color:var(--muted);line-height:1.2}
+.price{text-align:right;font-size:20px;font-weight:700;white-space:nowrap}
+.price small{display:block;font-size:12px;font-weight:normal;color:var(--muted)}
+.leg{margin:2px 0 8px}
+.leg b{font-weight:600}
+.lt{font-size:12px;color:var(--muted);margin-right:6px}
+.fn{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:13px;background:var(--chip);padding:1px 6px;border-radius:4px}
+.chips{display:flex;gap:6px;flex-wrap:wrap;margin-top:4px}
+.chip{font-size:12px;background:var(--chip);border-radius:4px;padding:1px 7px;color:var(--muted)}
+.chip.g{color:var(--good)}.chip.w{color:var(--warn)}
+.chg{display:flex;gap:10px;padding:6px 0;border-bottom:1px solid var(--line);font-size:14px}
+.chg:last-child{border-bottom:0}
+.tag{flex:none;font-size:12px;padding:1px 8px;border-radius:4px;background:var(--chip);height:fit-content}
+.tag.down{color:var(--good)}.tag.up{color:var(--accent)}.tag.new{color:var(--good)}.tag.gone{color:var(--warn)}
+.note{font-size:13px;color:var(--muted)}
+.note li{margin:3px 0}
+.empty{padding:28px;text-align:center;color:var(--muted)}
+svg text{fill:var(--muted);font-size:11px}
+@media (max-width:560px){.row{grid-template-columns:26px 1fr}.price{grid-column:2;text-align:left}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>爸妈赴加往返机票追踪</h1>
+  <div class="sub">上海 / 杭州 ⇄ 多伦多 / 温哥华 · 2027年6月 · 经济舱 · <span id="upd">加载中…</span></div>
+
+  <div class="tabs" id="tabs"></div>
+
+  <div id="main"></div>
+
+  <h2>价格走势 <small>每个日期方案的最低往返价（每人，加元）</small></h2>
+  <div class="card" id="trend"></div>
+
+  <h2>最近变化 <small>价格涨跌、航班新增或消失、最优解更新</small></h2>
+  <div class="card" id="changes"></div>
+
+  <h2>筛选规则与说明</h2>
+  <div class="card note">
+    <ul>
+      <li>出发：上海浦东、上海虹桥、杭州萧山；到达：多伦多、温哥华。</li>
+      <li>方案一：6月19日出发、6月27日返回；方案二：整体推后一周，6月26日出发、7月4日返回（返程日期为推测）。</li>
+      <li>只看经济舱；转机等待不超过4小时；只保留中国护照无需过境签的转机地（中国大陆、香港、澳门、日本、韩国、加拿大境内）。经美国、台湾转机的航班已排除。</li>
+      <li>托运行李：已排除标注“托运行李另收费”的票价。跨太平洋经济舱一般含1件23公斤，但购票前请再核实。</li>
+      <li><b>时间榜</b>：往返总飞行时间（小时）加上落地罚分。加拿大当地上午落地不罚分，中午+1.5，下午+3，晚上+6，深夜+9。</li>
+      <li><b>价格榜</b>：按每人往返价格从低到高。</li>
+      <li><b>综合榜</b>：时间分和价格各占一半，换算成100分制。</li>
+      <li>价格来自 Google 航班，为单人往返含税价（加元），两人约为两倍；实际以航司或订票网站为准。2027年6月的部分航班可能尚未开售，开售后会自动出现在“最近变化”里。</li>
+      <li>同一个去程在每个榜单里最多出现两次，避免榜单被一个航班占满。</li>
+    </ul>
+    <div id="rej"></div>
+  </div>
+</div>
+<script>
+const $=s=>document.querySelector(s);
+const TRIPNAME={A:"方案一 6/19–6/27",B:"方案二 6/26–7/4"};
+let D=null,H=[],tab="all";
+function fmtDur(m){return Math.floor(m/60)+"小时"+(m%60?String(m%60).padStart(2,"0")+"分":"")}
+function fmtT(t){if(!t)return"";const[d,h]=t.split(" ");const[,mo,da]=d.split("-");return `${+mo}月${+da}日 ${h}`}
+function ap(c){return (D.airports&&D.airports[c])||c}
+function legHtml(l,label){
+  const s=l.segments, stops=l.layovers.length;
+  const via=l.layovers.map(x=>`${ap(x.airport)}转机${fmtDur(x.duration)}`).join("，");
+  const airlines=[...new Set(s.map(x=>x.airline_cn))].join("、");
+  return `<div class="leg"><span class="lt">${label}</span><b>${fmtT(l.dep)} ${ap(l.from)}</b> → <b>${fmtT(l.arr)} ${ap(l.to)}</b>
+  <div class="chips">${s.map(x=>`<span class="fn">${x.flight}</span>`).join("")}
+  <span class="chip">${airlines}</span><span class="chip">${fmtDur(l.total_duration)}</span>
+  <span class="chip ${stops?"":"g"}">${stops?via:"直飞"}</span></div></div>`}
+function pairHtml(p,i){
+  const slotCls=p.arr_slot==="上午"?"g":(p.arr_slot==="晚上"||p.arr_slot==="深夜/凌晨")?"w":"";
+  return `<div class="card"><div class="row"><div class="rk">${i+1}</div><div>
+  ${legHtml(p.out,"去程")}${legHtml(p.ret,"回程")}
+  <div class="chips"><span class="chip">${TRIPNAME[p.trip]}</span><span class="chip ${slotCls}">加拿大${p.arr_slot}落地</span>
+  <span class="chip">往返共飞${fmtDur(p.total_minutes)}</span><span class="chip">综合分 ${p.overall_score}</span></div>
+  </div><div class="price">$${p.price}<small>每人往返 · 两人约 $${p.price*2}</small></div></div></div>`}
+function rankFor(kind){
+  const src=tab==="all"?D.rank_all:D.trips.find(t=>t.id===tab).rank;
+  const byKey=Object.fromEntries(D.pairs.map(p=>[p.key,p]));
+  return src[kind].map(k=>byKey[k]).filter(Boolean)}
+function render(){
+  $("#tabs").innerHTML=[["all","两个日期一起比"],["A",TRIPNAME.A],["B",TRIPNAME.B]].map(([k,v])=>`<button class="${tab===k?"on":""}" data-k="${k}">${v}</button>`).join("");
+  document.querySelectorAll("#tabs button").forEach(b=>b.onclick=()=>{tab=b.dataset.k;render()});
+  if(!D||!D.pairs||!D.pairs.length){$("#main").innerHTML=`<div class="card empty">还没有可用的航班数据。首次自动查询完成后这里会显示结果。</div>`;return}
+  const sec=[["overall","综合最佳前五","时间和价格各占一半"],["time","飞行时间短、上午落地前五","往返总时长＋落地时段"],["price","价格最低前五","每人往返含税价"]];
+  $("#main").innerHTML=sec.map(([k,t,s])=>{const L=rankFor(k);return `<h2>${t} <small>${s}</small></h2>`+(L.length?L.map(pairHtml).join(""):`<div class="card empty">暂无符合条件的组合</div>`)}).join("");
+}
+function renderTrend(){
+  if(H.length<1){$("#trend").innerHTML=`<div class="empty">暂无历史记录</div>`;return}
+  const W=900,Hh=180,pad=40,pts={A:[],B:[]};
+  H.forEach((h,i)=>{for(const k of ["A","B"]){const v=h.best_price&&h.best_price[k];if(v)pts[k].push([i,v])}});
+  const all=[...pts.A,...pts.B].map(p=>p[1]);if(!all.length){$("#trend").innerHTML=`<div class="empty">暂无价格记录</div>`;return}
+  const mn=Math.min(...all)*0.97,mx=Math.max(...all)*1.03,n=Math.max(H.length-1,1);
+  const X=i=>pad+(W-pad*2)*i/n,Y=v=>Hh-25-(Hh-45)*(v-mn)/((mx-mn)||1);
+  const col={A:"var(--accent)",B:"var(--good)"};
+  let svg=`<svg viewBox="0 0 ${W} ${Hh}" width="100%" role="img" aria-label="最低价走势">`;
+  for(const k of ["A","B"]){const p=pts[k];if(!p.length)continue;
+    svg+=`<polyline fill="none" stroke="${col[k]}" stroke-width="2" points="${p.map(([i,v])=>X(i)+","+Y(v)).join(" ")}"/>`;
+    const [li,lv]=p[p.length-1];svg+=`<circle cx="${X(li)}" cy="${Y(lv)}" r="3.5" fill="${col[k]}"/><text x="${X(li)-4}" y="${Y(lv)-8}" text-anchor="end">${TRIPNAME[k].slice(0,3)} $${lv}</text>`}
+  const d0=H[0].time.slice(5,10),d1=H[H.length-1].time.slice(5,10);
+  svg+=`<text x="${pad}" y="${Hh-6}">${d0.replace("-","月")}日</text><text x="${W-pad}" y="${Hh-6}" text-anchor="end">${d1.replace("-","月")}日</text></svg>`;
+  $("#trend").innerHTML=svg}
+function renderChanges(){
+  const items=[];[...H].reverse().forEach(h=>(h.changes||[]).forEach(c=>items.push({...c,time:h.time})));
+  if(!items.length){$("#changes").innerHTML=`<div class="empty">暂无变化记录（至少需要两次查询）</div>`;return}
+  const cls={"降价":"down","涨价":"up","新增航班":"new","航班消失":"gone","最优解更新":""};
+  $("#changes").innerHTML=items.slice(0,40).map(c=>`<div class="chg"><span class="tag ${cls[c.type]||""}">${c.type}</span><div>${c.trip?TRIPNAME[c.trip]+"：":""}${c.detail}<div class="note">${new Date(c.time).toLocaleString("zh-CN",{hour12:false})}</div></div></div>`).join("")}
+Promise.all([fetch("data/latest.json?"+Date.now()).then(r=>r.ok?r.json():null).catch(()=>null),
+             fetch("data/history.json?"+Date.now()).then(r=>r.ok?r.json():[]).catch(()=>[])]).then(([d,h])=>{
+  D=d;H=h||[];
+  $("#upd").textContent=D&&D.updated?"更新于 "+new Date(D.updated).toLocaleString("zh-CN",{hour12:false}):"尚未查询";
+  if(D&&D.rejected){const r=Object.entries(D.rejected);if(r.length)$("#rej").innerHTML="<p>本次排除的航班："+r.map(([k,v])=>`${k} ${v}个`).join("，")+"。</p>"}
+  render();renderTrend();renderChanges()});
+</script>
+</body>
+</html>
