@@ -14,6 +14,7 @@ import json
 import os
 import sys
 import urllib.parse
+import urllib.error
 import urllib.request
 from pathlib import Path
 
@@ -75,15 +76,22 @@ def serpapi(params, offline_dir=None, tag=None):
     if offline_dir:
         p = Path(offline_dir) / f"{tag}.json"
         return json.loads(p.read_text()) if p.exists() else {}
-    key = os.environ.get("SERPAPI_KEY")
+    key = (os.environ.get("SERPAPI_KEY") or "").strip()
     if not key:
         sys.exit("缺少 SERPAPI_KEY 环境变量")
     base = {"engine": "google_flights", "currency": CURRENCY, "hl": "en", "gl": "ca",
             "travel_class": 1, "adults": 1, "api_key": key}
     base.update(params)
     url = "https://serpapi.com/search.json?" + urllib.parse.urlencode(base)
-    with urllib.request.urlopen(url, timeout=90) as r:
-        data = json.loads(r.read())
+    try:
+        with urllib.request.urlopen(url, timeout=90) as r:
+            data = json.loads(r.read())
+    except urllib.error.HTTPError as e:
+        body = e.read().decode("utf-8", "replace")[:500]
+        if e.code == 401:
+            sys.exit(f"SerpApi 拒绝了这个 Key（401）：{body}\n请检查仓库 Secret SERPAPI_KEY 是否为 serpapi.com/manage-api-key 页面上的 Private API Key。")
+        print(f"SerpApi HTTP {e.code}：{body}", file=sys.stderr)
+        return {"error": body}
     if data.get("error"):
         print("SerpApi 返回：", data["error"], file=sys.stderr)
     return data
