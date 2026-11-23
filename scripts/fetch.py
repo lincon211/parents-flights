@@ -263,10 +263,12 @@ def rank(pairs):
         p["time_score"] = round(p["total_minutes"] / 60 + p["arr_penalty"], 2)
     ts = [p["time_score"] for p in pairs]
     ps = [p["price"] for p in pairs]
-    tmin, tmax, pmin, pmax = min(ts), max(ts), min(ps), max(ps)
+    tmin, pmin = min(ts), min(ps)
+    # 按“比最好的多出多少”打分，不受个别天价票影响：
+    # 时间比最短的多50%记满扣分，价格比最便宜的贵一倍记满扣分
     for p in pairs:
-        nt = (p["time_score"] - tmin) / (tmax - tmin) if tmax > tmin else 0
-        np_ = (p["price"] - pmin) / (pmax - pmin) if pmax > pmin else 0
+        nt = min(1, (p["time_score"] - tmin) / (tmin * 0.5)) if tmin else 0
+        np_ = min(1, (p["price"] - pmin) / pmin) if pmin else 0
         p["overall_score"] = round(100 - 50 * nt - 50 * np_, 1)   # 满分100
 
     def top(key, reverse=False):
