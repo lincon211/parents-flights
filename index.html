@@ -56,6 +56,15 @@ details.more > summary{padding:8px 2px;list-style:none}
 details.more > summary::-webkit-details-marker{display:none}
 details.more > summary::before{content:"▸ "}
 details.more[open] > summary::before{content:"▾ "}
+.page{display:none}
+body[data-page="fav"] .page[data-page="fav"],body[data-page="overall"] .page[data-page="overall"],
+body[data-page="time"] .page[data-page="time"],body[data-page="price"] .page[data-page="price"],
+body[data-page="more"] .page[data-page="more"]{display:block}
+.pnav{position:sticky;top:0;z-index:5;display:flex;gap:4px;overflow-x:auto;background:var(--bg);margin:14px -16px 0;padding:8px 16px;border-bottom:1px solid var(--line);scrollbar-width:none}
+.pnav::-webkit-scrollbar{display:none}
+.pnav a{flex:none;padding:8px 14px;border-radius:8px;color:var(--ink);text-decoration:none;font-size:15px;white-space:nowrap}
+.pnav a.on{background:var(--ink);color:var(--bg);font-weight:600}
+.pnav a .cnt{font-size:12px;opacity:.75;margin-left:3px}
 .chg{display:flex;gap:10px;padding:6px 0;border-bottom:1px solid var(--line);font-size:14px}
 .chg:last-child{border-bottom:0}
 .tag{flex:none;font-size:12px;padding:1px 8px;border-radius:4px;background:var(--chip);height:fit-content}
@@ -72,14 +81,25 @@ svg text{fill:var(--muted);font-size:11px}
   <h1>爸妈赴加往返机票追踪</h1>
   <div class="sub">上海 / 杭州 ⇄ 多伦多 / 温哥华 · 2027年6月 · 经济舱 · <span id="upd">加载中…</span></div>
 
+  <nav class="pnav" id="pnav">
+    <a href="#fav" data-p="fav">收藏夹</a>
+    <a href="#overall" data-p="overall">综合最佳前十</a>
+    <a href="#time" data-p="time">时间短·上午落地前十</a>
+    <a href="#price" data-p="price">价格最低前十</a>
+    <a href="#more" data-p="more">更多</a>
+  </nav>
+
   <div class="tabs" id="tabs"></div>
 
+  <div class="page" data-page="fav">
   <h2>收藏夹 <small>任何人打开网站都能看到和修改，价格每次刷新自动更新</small></h2>
   <div class="favtabs" id="favtabs"></div>
   <div id="fav"></div>
+  </div>
 
   <div id="main"></div>
 
+  <div class="page" data-page="more">
   <h2>全部符合条件的组合 <small>按综合分排序，可以从这里挑选收藏</small></h2>
   <details class="card" id="alldet"><summary id="allsum">展开全部组合</summary><div id="all"></div></details>
 
@@ -110,6 +130,7 @@ svg text{fill:var(--muted);font-size:11px}
       <li>同一个去程在每个榜单里最多出现两次，避免榜单被一个航班占满。</li>
     </ul>
     <div id="rej"></div>
+  </div>
   </div>
 </div>
 <script>
@@ -346,7 +367,7 @@ function renderAll(){
   $("#all").innerHTML = L.map((p,i) => pairHtml(p,i,"",true)).join("");
   bindFavBtns($("#all")); bindDecBtns($("#all"));
 }
-function renderAllViews(){ renderFav(); render(); renderAll(); renderExcluded(); renderVetoed(); }
+function renderAllViews(){ renderFav(); render(); renderAll(); renderExcluded(); renderVetoed(); navCounts(); }
 function priceTxt(p){ return (p.price_est ? "约$" : "$") + p.price }
 function pairHtml(p,i,extra,withDec){
   const slotCls=p.arr_slot==="上午"?"g":(p.arr_slot==="晚上"||p.arr_slot==="深夜/凌晨")?"w":"";
@@ -358,18 +379,30 @@ function pairHtml(p,i,extra,withDec){
   <div class="chips"><span class="chip">${TRIPNAME[p.trip]}</span><span class="chip ${slotCls}">加拿大${p.arr_slot}落地</span>
   <span class="chip">往返共飞${fmtDur(p.total_minutes)}</span>${os!=null?`<span class="chip">综合分 ${os}</span>`:""}</div>${extra||""}${linksHtml(p)}
   </div><div class="price">${priceTxt(p)}<small>每人往返 · 两人约 $${p.price*2}</small>${favBtns(p)}${withDec===false?"":decBtns(p)}</div></div></div>`}
+const PAGES=["fav","overall","time","price","more"];
+function showPage(){
+  let pg=(location.hash||"").slice(1); if(!PAGES.includes(pg)) pg="overall";
+  document.body.dataset.page=pg;
+  document.querySelectorAll("#pnav a").forEach(a=>a.classList.toggle("on",a.dataset.p===pg));
+}
+window.addEventListener("hashchange",()=>{showPage();window.scrollTo(0,0)});
+function navCounts(){
+  const n=FAV_DB?Object.keys(FAV.dad).length+Object.keys(FAV.mom).length:0;
+  const a=document.querySelector('#pnav a[data-p="fav"]');
+  if(a)a.innerHTML="收藏夹"+(n?`<span class="cnt">${n}</span>`:"");
+}
 const OPEN=new Set();   // 记住哪些榜单展开了，自动同步时不收起
 function render(){
   $("#tabs").innerHTML=[["all","两个日期一起比"],["A",TRIPNAME.A],["B",TRIPNAME.B]].map(([k,v])=>`<button class="${tab===k?"on":""}" data-k="${k}">${v}</button>`).join("");
   document.querySelectorAll("#tabs button").forEach(b=>b.onclick=()=>{tab=b.dataset.k;renderAllViews()});
-  if(!D||!D.pairs||!D.pairs.length){$("#main").innerHTML=`<div class="card empty">还没有可用的航班数据。首次自动查询完成后这里会显示结果。</div>`;return}
+  if(!D||!D.pairs||!D.pairs.length){$("#main").innerHTML=["overall","time","price"].map(k=>`<div class="page" data-page="${k}"><div class="card empty">还没有可用的航班数据。首次自动查询完成后这里会显示结果。</div></div>`).join("");return}
   const sec=[["overall","综合最佳前十","时间和价格各占一半"],["time","飞行时间短、上午落地前十","往返总时长＋落地时段"],["price","价格最低前十","每人往返含税价"]];
   $("#main").innerHTML=sec.map(([k,t,s])=>{const L=rankFor(k);
-    const head=`<h2>${t} <small>${s}</small></h2>`;
-    if(!L.length) return head+`<div class="card empty">暂无符合条件的组合</div>`;
+    const head=`<div class="page" data-page="${k}"><h2>${t} <small>${s}</small></h2>`;
+    if(!L.length) return head+`<div class="card empty">暂无符合条件的组合</div></div>`;
     const first=L.slice(0,5).map((p,i)=>pairHtml(p,i,"",true)).join("");
     const rest=L.slice(5);
-    return head+first+(rest.length?`<details class="more" data-sec="${k}" ${OPEN.has(k)?"open":""}><summary>展开第6–${L.length}名</summary>${rest.map((p,i)=>pairHtml(p,i+5,"",true)).join("")}</details>`:"");
+    return head+first+(rest.length?`<details class="more" data-sec="${k}" ${OPEN.has(k)?"open":""}><summary>展开第6–${L.length}名</summary>${rest.map((p,i)=>pairHtml(p,i+5,"",true)).join("")}</details>`:"")+`</div>`;
   }).join("");
   $("#main").querySelectorAll("details.more").forEach(d=>d.ontoggle=()=>{d.open?OPEN.add(d.dataset.sec):OPEN.delete(d.dataset.sec);d.querySelector("summary").textContent=d.open?"收起第6名以后":`展开第6–${5+d.querySelectorAll(":scope > .card").length}名`});
   bindFavBtns($("#main")); bindDecBtns($("#main"));
@@ -429,6 +462,7 @@ function renderChanges(){
   if(!items.length){$("#changes").innerHTML=`<div class="empty">暂无变化记录（至少需要两次查询）</div>`;return}
   const cls={"降价":"down","涨价":"up","新增航班":"new","航班消失":"gone","最优解更新":""};
   $("#changes").innerHTML=items.slice(0,40).map(c=>`<div class="chg"><span class="tag ${cls[c.type]||""}">${c.type}</span><div>${c.trip?TRIPNAME[c.trip]+"：":""}${c.detail}<div class="note">${new Date(c.time).toLocaleString("zh-CN",{hour12:false})}</div></div></div>`).join("")}
+showPage();
 Promise.all([fetch("data/latest.json?"+Date.now()).then(r=>r.ok?r.json():null).catch(()=>null),
              fetch("data/history.json?"+Date.now()).then(r=>r.ok?r.json():[]).catch(()=>[])]).then(([d,h])=>{
   D=d;H=h||[];
