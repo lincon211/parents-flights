@@ -69,6 +69,40 @@ details.rule{margin-top:8px;font-size:13px}
 details.rule summary{color:var(--ink);font-weight:600}
 details.rule ul{margin:4px 0 6px;padding-left:20px}
 details.rule li{margin:2px 0}
+.fc{padding:12px 14px}
+.fc-h{display:flex;align-items:center;gap:10px;margin-bottom:6px}
+.fc-h .rk{font-size:15px;font-weight:700;color:var(--bg);background:var(--muted);border-radius:6px;min-width:24px;height:24px;line-height:24px;text-align:center;flex:none}
+.fc-tags{display:flex;gap:5px;flex-wrap:wrap;flex:1;min-width:0}
+.tg{font-size:12px;background:var(--chip);color:var(--muted);border-radius:4px;padding:1px 7px;white-space:nowrap}
+.tg.g{color:var(--good)}.tg.w{color:var(--warn)}
+.tg.new{background:var(--good);color:#fff;font-weight:600}.tg.warn{background:var(--warn);color:#fff}
+.fc-p{text-align:right;font-size:20px;font-weight:700;white-space:nowrap;line-height:1.15;flex:none}
+.fc-p small{display:block;font-size:11px;font-weight:normal;color:var(--muted)}
+.lg{max-width:620px;display:grid;grid-template-columns:40px 70px 1fr 70px;align-items:center;gap:8px;margin-top:8px}
+.lg-l{font-size:12px;color:var(--muted);line-height:1.2}.lg-l small{display:block}
+.lg-t b{display:block;font-size:18px;font-weight:600;line-height:1.15}
+.lg-t sup{font-size:11px;color:var(--warn);margin-left:1px}
+.lg-t small{display:block;font-size:12px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.lg-t.r{text-align:right}
+.lg-m{text-align:center;font-size:12px;color:var(--muted);min-width:0}
+.lg-m small{display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.lg-m small.g{color:var(--good)}
+.lg-m i{display:block;height:2px;background:var(--line);margin:3px 0;position:relative}
+.lg-m i.stop::after{content:"";position:absolute;left:50%;top:-3px;width:8px;height:8px;margin-left:-4px;border-radius:50%;background:var(--card);border:2px solid var(--muted);box-sizing:border-box}
+.lg-f{margin:2px 0 0 48px;font-size:12px;color:var(--muted);display:flex;gap:6px;flex-wrap:wrap;align-items:center}
+.lg-f .fn{font-size:12px;padding:0 5px}
+.fc-b{display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap;margin-top:10px;padding-top:8px;border-top:1px dashed var(--line)}
+.fc-b .meta{font-size:12px;color:var(--muted)}
+.acts{display:flex;gap:6px;flex-wrap:wrap}
+.ib{border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:999px;padding:3px 10px;font:inherit;font-size:13px;cursor:pointer;white-space:nowrap}
+.ib.on{background:var(--accent);border-color:var(--accent);color:#fff}
+.ib.mute{color:var(--muted)}.ib:disabled{opacity:.5}
+.fc-d{margin-top:6px;font-size:13px}
+.fc-d summary{color:var(--accent);font-weight:600;padding:4px 0}
+.fc-d ul{margin:2px 0 8px;padding-left:18px}.fc-d li{margin:3px 0}
+.dh{font-weight:600;margin-top:6px}
+.warnt{color:var(--warn);margin-top:6px}
+.fc .links{margin-top:6px}
+@media (max-width:560px){.tabs{gap:6px;margin-top:12px}.tabs button{padding:5px 11px;font-size:13px}.lg{grid-template-columns:34px 62px 1fr 62px;gap:6px}.lg-t b{font-size:17px}.lg-f{margin-left:40px}.fc-p{font-size:18px}}
 .chg{display:flex;gap:10px;padding:6px 0;border-bottom:1px solid var(--line);font-size:14px}
 .chg:last-child{border-bottom:0}
 .tag{flex:none;font-size:12px;padding:1px 8px;border-radius:4px;background:var(--chip);height:fit-content}
@@ -165,12 +199,11 @@ const BAG={
  "China Airlines":["中华航空","2件，每件23公斤","1件，不超过7公斤"],
  "Qatar Airways":["卡塔尔航空","按票价等级，一般2件，每件23公斤","1件，不超过7公斤"]
 };
-function bagHtml(l){
+function bagLine(seg){
   // 行李额度一般按全程飞行时间最长的航段所属航司（主承运人）的规定执行
-  const main=l.segments.reduce((a,b)=>(b.duration||0)>(a.duration||0)?b:a);
-  const b=BAG[main.airline];
-  if(!b)return `<div class="bag">🧳 行李额度：请在购票页面核实（${main.airline_cn}）</div>`;
-  return `<div class="bag">🧳 免费托运：${b[1]}　👜 随身：${b[2]}<span class="src">（按${b[0]}经济舱规定）</span></div>`}
+  const b=BAG[seg.airline];
+  if(!b)return `<li><b>${seg.airline_cn}</b>：请在购票页面核实行李额度</li>`;
+  return `<li><b>${b[0]}</b>：托运 ${b[1]}；随身 ${b[2]}</li>`}
 // 退改签：按主承运航司经济舱常见票价等级的一般规定整理，仅供参考，以订票时显示的票价规则为准
 const RULE_CN = ["退票：按舱位等级和距离起飞的时间分档收费，离起飞越近费用越高；最低价舱位往往只能退税费","改签：一般可以改日期，按舱位收改期费并补票价差，部分特价舱位不允许改期","一般分为起飞前较早（如7天以上）、临近起飞、起飞后几档，起飞前改退最划算"];
 const RULE={
@@ -198,19 +231,22 @@ function mainCarrier(l){return l.segments.reduce((a,b)=>(b.duration||0)>(a.durat
 function ruleHtml(p){
   const segs=[mainCarrier(p.out),mainCarrier(p.ret)], cn={};segs.forEach(x=>cn[x.airline]=x.airline_cn);
   const cs=[...new Set(segs.map(x=>x.airline))];
-  const body=cs.map(a=>{const r=RULE[a];
-    if(!r)return `<div><b>${cn[a]||a}</b>：请在订票页面的“票价规则”里查看退改签规定。</div>`;
-    return `<div><b>${r[0]}</b><ul><li>${r[1][0]}</li><li>${r[1][1]}</li><li>时间：${r[1][2]}</li></ul></div>`}).join("");
-  return `<details class="rule"><summary>📄 退改签规定（点开查看）</summary>${body}
-    <div class="note">按航司经济舱常见票价等级的一般规定整理，不是这张票的实际票价规则。同一航班不同价格的票，退改规则差别很大，付款前请在订票页面查看“票价规则”。</div></details>`}
+  return cs.map(a=>{const r=RULE[a];
+    if(!r)return `<li><b>${cn[a]||a}</b>：请在订票页面的“票价规则”里查看</li>`;
+    return `<li><b>${r[0]}</b><div>${r[1][0]}</div><div>${r[1][1]}</div><div>时间：${r[1][2]}</div></li>`}).join("")}
+function dayDiff(a,b){return Math.round((new Date(b.slice(0,10))-new Date(a.slice(0,10)))/864e5)}
+function md(t){const[,m,d]=t.slice(0,10).split("-");return `${+m}/${+d}`}
 function legHtml(l,label){
-  const s=l.segments, stops=l.layovers.length;
-  const via=l.layovers.map(x=>`${ap(x.airport)}转机${fmtDur(x.duration)}`).join("，");
+  const s=l.segments, stops=l.layovers.length, dd=dayDiff(l.dep,l.arr);
+  const via=stops?l.layovers.map(x=>`${ap(x.airport)}转${fmtDur(x.duration)}`).join("，"):"直飞";
   const airlines=[...new Set(s.map(x=>x.airline_cn))].join("、");
-  return `<div class="leg"><span class="lt">${label}</span><b>${fmtT(l.dep)} ${ap(l.from)}</b> → <b>${fmtT(l.arr)} ${ap(l.to)}</b>
-  <div class="chips">${s.map(x=>`<a class="fn" href="https://www.flightradar24.com/data/flights/${x.flight.replace(/\s/g,"").toLowerCase()}" target="_blank" rel="noopener" title="在 Flightradar24 查看 ${x.flight}">${x.flight}</a>`).join("")}
-  <span class="chip">${airlines}</span><span class="chip">${fmtDur(l.total_duration)}</span>
-  <span class="chip ${stops?"":"g"}">${stops?via:"直飞"}</span></div>${bagHtml(l)}</div>`}
+  const fns=s.map(x=>`<a class="fn" href="https://www.flightradar24.com/data/flights/${x.flight.replace(/\s/g,"").toLowerCase()}" target="_blank" rel="noopener" title="查看 ${x.flight} 的历史准点">${x.flight}</a>`).join(" ");
+  return `<div class="lg">
+    <div class="lg-l">${label}<small>${md(l.dep)}</small></div>
+    <div class="lg-t"><b>${l.dep.slice(11,16)}</b><small>${ap(l.from)}</small></div>
+    <div class="lg-m"><small>${fmtDur(l.total_duration)}</small><i class="${stops?"stop":""}"></i><small class="${stops?"":"g"}">${via}</small></div>
+    <div class="lg-t r"><b>${l.arr.slice(11,16)}${dd?`<sup>${dd>0?"+":""}${dd}</sup>`:""}</b><small>${ap(l.to)}</small></div>
+  </div><div class="lg-f">${fns}<span>${airlines}</span></div>`}
 const AIRSITE={"Air Canada":"https://www.aircanada.com/cn/zh/aco/home.html","China Eastern":"https://www.ceair.com/","China Southern":"https://www.csair.com/","Air China":"https://www.airchina.com.cn/","Hainan Airlines":"https://www.hainanairlines.com/","Cathay Pacific":"https://www.cathaypacific.com/cx/sc_CN.html","Korean Air":"https://www.koreanair.com/?hl=zh","ANA":"https://www.ana.co.jp/zh/cn/","JAL":"https://www.jal.co.jp/cn/zhcn/","Hong Kong Airlines":"https://www.hongkongairlines.com/","Capital Airlines":"https://www.jdair.net/","Beijing Capital Airlines":"https://www.jdair.net/"};
 function gfSearch(p){
   const od=p.out_date||(p.out.dep||"").slice(0,10), rd=p.ret_date||(p.ret.dep||"").slice(0,10);
@@ -234,12 +270,11 @@ function zh(u){return u?u.replace("hl=en","hl=zh-CN"):u}
 function linksHtml(p){
   const gf=gfExact(p)||zh(p.gf_url)||gfSearch(p);
   const alt=zh(p.gf_url);
-  const main=p.out.segments.reduce((a,b)=>(b.duration||0)>(a.duration||0)?b:a);
+  const main=mainCarrier(p.out);
   const site=AIRSITE[main.airline];
-  return `<div class="links"><a href="${gf}" target="_blank" rel="noopener">在谷歌航班查看这个往返组合 ↗</a>`+
-   (alt?`<a href="${alt}" target="_blank" rel="noopener">备用：只选好去程，自己挑回程 ↗</a>`:"")+
-   (site?`<a href="${site}" target="_blank" rel="noopener">${main.airline_cn}官网 ↗</a>`:"")+
-   `<span class="note">点航班号可查看该航班的历史准点和实际时刻</span></div>`}
+  return `<div class="links"><a href="${gf}" target="_blank" rel="noopener">谷歌航班查看这个组合 ↗</a>`+
+   (alt?`<a href="${alt}" target="_blank" rel="noopener">只选好去程 ↗</a>`:"")+
+   (site?`<a href="${site}" target="_blank" rel="noopener">${main.airline_cn}官网 ↗</a>`:"")+`</div>`}
 // ===== 收藏夹 =====
 // 数据存放在 Firebase 实时数据库（免费），网址不是密钥，规则只允许读写 favorites 下的“爸爸”“妈妈”两个收藏夹
 const FAV_DB = "https://parents-flights-default-rtdb.firebaseio.com";   // 例如 "https://xxxx-default-rtdb.firebaseio.com"
@@ -272,9 +307,9 @@ async function toggleFav(who, key, btn){
 function alertBox(t){ favErr = t; renderFav(); }
 function favBtns(p){
   if(!FAV_DB) return "";
-  return `<div class="favbtns">${Object.entries(WHO).map(([w,n]) => {
+  return Object.entries(WHO).map(([w,n]) => {
     const on = isFav(w, p.key);
-    return `<button class="favbtn ${on?"on":""}" data-who="${w}" data-key="${encodeURIComponent(p.key)}">${on?"★ 已在"+n+"收藏":"☆ 加入"+n+"收藏"}</button>`}).join("")}</div>`;
+    return `<button class="ib ${on?"on":""}" data-who="${w}" data-key="${encodeURIComponent(p.key)}" title="${on?"从"+n+"收藏中移除":"加入"+n+"收藏"}">${on?"★":"☆"} ${n}</button>`}).join("");
 }
 function priceSeries(key){ return H.map(h => ({t:h.time, v:h.prices ? h.prices[key] : undefined})).filter(x => x.v) }
 function favHtml(rec, i){
@@ -305,7 +340,7 @@ function renderFav(){
   bindFavBtns(el);
 }
 function bindFavBtns(root){
-  root.querySelectorAll(".favbtn").forEach(b => b.onclick = () => toggleFav(b.dataset.who, decodeURIComponent(b.dataset.key), b));
+  root.querySelectorAll("[data-who]").forEach(b => b.onclick = () => toggleFav(b.dataset.who, decodeURIComponent(b.dataset.key), b));
 }
 // ===== 新增标签：上一次刷新里没有、这次新出现的组合 =====
 function isNew(key){
@@ -388,9 +423,9 @@ function rankFor(kind){
 function decBtns(p){
   if(!FAV_DB) return "";
   const k = encodeURIComponent(p.key);
-  let h = `<button class="favbtn veto" data-dec="vetoed" data-on="1" data-key="${k}">✕ 否决，移出榜单</button>`;
-  if(p.reject) h += `<button class="favbtn" data-dec="restored" data-on="0" data-key="${k}">↩ 取消加回</button>`;
-  return `<div class="favbtns">${h}</div>`;
+  let h = `<button class="ib mute" data-dec="vetoed" data-on="1" data-key="${k}" title="否决这张票，移出榜单">✕ 否决</button>`;
+  if(p.reject) h = `<button class="ib mute" data-dec="restored" data-on="0" data-key="${k}" title="放回被排除的选项">↩ 取消加回</button>` + h;
+  return h;
 }
 function bindDecBtns(root){
   root.querySelectorAll("[data-dec]").forEach(b => b.onclick = () =>
@@ -409,13 +444,25 @@ function priceTxt(p){ return (p.price_est ? "约$" : "$") + p.price }
 function pairHtml(p,i,extra,withDec){
   const slotCls=p.arr_slot==="上午"?"g":(p.arr_slot==="晚上"||p.arr_slot==="深夜/凌晨")?"w":"";
   const os = p._os != null ? p._os : p.overall_score;
-  const tags = (isNew(p.key)?'<span class="newtag">新增</span>':"") +
-    (p.reject && isRestored(p.key) ? `<span class="newtag warn">手动加回 · 原因：${p.reject}</span>` : "");
-  return `<div class="card"><div class="row"><div class="rk">${i+1}</div><div>${tags}
+  const tags = `<span class="tg">${TRIPNAME[p.trip]}</span><span class="tg ${slotCls}">${p.arr_slot}落地</span>` +
+    (isNew(p.key)?'<span class="tg new">新增</span>':"") +
+    (p.reject && isRestored(p.key) ? `<span class="tg warn" title="${p.reject}">手动加回</span>` : "");
+  const om=mainCarrier(p.out), rm=mainCarrier(p.ret);
+  const bags=[...new Map([om,rm].map(x=>[x.airline,x])).values()].map(bagLine).join("");
+  return `<div class="card fc">
+  <div class="fc-h"><span class="rk">${i+1}</span><div class="fc-tags">${tags}</div>
+    <div class="fc-p">${priceTxt(p)}<small>每人 · 两人 $${p.price*2}</small></div></div>
   ${legHtml(p.out,"去程")}${legHtml(p.ret,"回程")}
-  <div class="chips"><span class="chip">${TRIPNAME[p.trip]}</span><span class="chip ${slotCls}">加拿大${p.arr_slot}落地</span>
-  <span class="chip">往返共飞${fmtDur(p.total_minutes)}</span>${os!=null?`<span class="chip">综合分 ${os}</span>`:""}</div>${ruleHtml(p)}${extra||""}${linksHtml(p)}
-  </div><div class="price">${priceTxt(p)}<small>每人往返 · 两人约 $${p.price*2}</small>${favBtns(p)}${withDec===false?"":decBtns(p)}</div></div></div>`}
+  ${p.reject && isRestored(p.key)?`<div class="note warnt">手动加回，原排除原因：${p.reject}</div>`:""}
+  ${extra||""}
+  <div class="fc-b"><span class="meta">往返共飞 ${fmtDur(p.total_minutes)}${os!=null?` · 综合分 ${os}`:""}</span>
+    <span class="acts">${favBtns(p)}${withDec===false?"":decBtns(p)}</span></div>
+  <details class="fc-d"><summary>行李 · 退改签 · 订票链接</summary>
+    <div class="dh">🧳 行李额度</div><ul>${bags}</ul>
+    <div class="dh">📄 退改签</div><ul>${ruleHtml(p)}</ul>
+    <div class="note">行李和退改签是按主承运航司经济舱的一般规定整理的，不是这张票的实际规则，付款前请在订票页面核实“票价规则”。点航班号可看历史准点。</div>
+    ${linksHtml(p)}
+  </details></div>`}
 const PAGES=["fav","overall","time","price","more"];
 function showPage(){
   let pg=(location.hash||"").slice(1); if(!PAGES.includes(pg)) pg="overall";
