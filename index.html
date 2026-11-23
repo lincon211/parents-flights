@@ -34,6 +34,17 @@ h2 small{font-weight:normal;color:var(--muted);font-size:13px}
 .fn{color:inherit;text-decoration:none}.fn:hover{text-decoration:underline}
 .links{display:flex;gap:14px;flex-wrap:wrap;align-items:center;margin-top:10px;font-size:14px}
 .links a{color:var(--accent);text-decoration:none;font-weight:600}.links a:hover{text-decoration:underline}
+.favbtns{display:flex;gap:6px;justify-content:flex-end;margin-top:8px;flex-wrap:wrap}
+.favbtn{border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:999px;padding:3px 10px;font:inherit;font-size:13px;cursor:pointer;white-space:nowrap}
+.favbtn.on{background:var(--accent);border-color:var(--accent);color:#fff}
+.favbtn:disabled{opacity:.5;cursor:default}
+.newtag{display:inline-block;background:var(--good);color:#fff;font-size:12px;font-weight:600;border-radius:4px;padding:0 7px;margin-left:6px;vertical-align:2px}
+.favtabs{display:flex;gap:8px;margin:6px 0}
+.favtabs button{border:1px solid var(--line);background:var(--card);color:var(--ink);padding:6px 14px;border-radius:8px;font:inherit;font-size:14px;cursor:pointer}
+.favtabs button.on{border-color:var(--accent);color:var(--accent);font-weight:600}
+.pricehist{font-size:13px;margin-top:6px}
+.pricehist .d{color:var(--good);font-weight:600}.pricehist .u{color:var(--accent);font-weight:600}
+details summary{cursor:pointer;color:var(--accent);font-weight:600}
 .chg{display:flex;gap:10px;padding:6px 0;border-bottom:1px solid var(--line);font-size:14px}
 .chg:last-child{border-bottom:0}
 .tag{flex:none;font-size:12px;padding:1px 8px;border-radius:4px;background:var(--chip);height:fit-content}
@@ -52,7 +63,14 @@ svg text{fill:var(--muted);font-size:11px}
 
   <div class="tabs" id="tabs"></div>
 
+  <h2>收藏夹 <small>任何人打开网站都能看到和修改，价格每次刷新自动更新</small></h2>
+  <div class="favtabs" id="favtabs"></div>
+  <div id="fav"></div>
+
   <div id="main"></div>
+
+  <h2>全部符合条件的组合 <small>按综合分排序，可以从这里挑选收藏</small></h2>
+  <details class="card" id="alldet"><summary id="allsum">展开全部组合</summary><div id="all"></div></details>
 
   <h2>价格走势 <small>每个日期方案的最低往返价（每人，加元）</small></h2>
   <div class="card" id="trend"></div>
@@ -149,22 +167,105 @@ function linksHtml(p){
    (alt?`<a href="${alt}" target="_blank" rel="noopener">备用：只选好去程，自己挑回程 ↗</a>`:"")+
    (site?`<a href="${site}" target="_blank" rel="noopener">${main.airline_cn}官网 ↗</a>`:"")+
    `<span class="note">点航班号可查看该航班的历史准点和实际时刻</span></div>`}
-function pairHtml(p,i){
+// ===== 收藏夹 =====
+// 数据存放在 Firebase 实时数据库（免费），网址不是密钥，规则只允许读写 favorites 下的“爸爸”“妈妈”两个收藏夹
+const FAV_DB = "";   // 例如 "https://xxxx-default-rtdb.firebaseio.com"
+const WHO = {dad:"爸爸", mom:"妈妈"};
+let FAV = {dad:{}, mom:{}}, favTab = "dad", favErr = "";
+const fkey = k => k.replace(/[.#$\[\]\/]/g, "_");
+async function loadFav(){
+  if(!FAV_DB) return;
+  try{ const r = await fetch(FAV_DB + "/favorites.json?" + Date.now()); const j = await r.json() || {};
+       FAV = {dad: j.dad || {}, mom: j.mom || {}}; favErr = ""; }
+  catch(e){ favErr = "收藏夹暂时连不上，请稍后刷新页面"; }
+}
+function isFav(who, key){ return !!FAV[who][fkey(key)] }
+async function toggleFav(who, key, btn){
+  if(!FAV_DB) return;
+  btn.disabled = true;
+  const k = fkey(key), url = `${FAV_DB}/favorites/${who}/${encodeURIComponent(k)}.json`;
+  try{
+    if(FAV[who][k]){ await fetch(url, {method:"DELETE"}); delete FAV[who][k]; }
+    else{
+      const p = D.pairs.find(x => x.key === key);
+      const rec = {key, trip:p.trip, added:new Date().toISOString(), price_at_add:p.price, snap:p};
+      const r = await fetch(url, {method:"PUT", body:JSON.stringify(rec)});
+      if(!r.ok) throw new Error(r.status);
+      FAV[who][k] = rec;
+    }
+  }catch(e){ alertBox("保存失败，请检查网络后再试"); }
+  renderAllViews();
+}
+function alertBox(t){ favErr = t; renderFav(); }
+function favBtns(p){
+  if(!FAV_DB) return "";
+  return `<div class="favbtns">${Object.entries(WHO).map(([w,n]) => {
+    const on = isFav(w, p.key);
+    return `<button class="favbtn ${on?"on":""}" data-who="${w}" data-key="${encodeURIComponent(p.key)}">${on?"★ 已在"+n+"收藏":"☆ 加入"+n+"收藏"}</button>`}).join("")}</div>`;
+}
+function priceSeries(key){ return H.map(h => ({t:h.time, v:h.prices ? h.prices[key] : undefined})).filter(x => x.v) }
+function favHtml(rec, i){
+  const cur = D.pairs.find(x => x.key === rec.key);
+  const p = cur || rec.snap;
+  const ser = priceSeries(rec.key);
+  let hist = "";
+  if(cur){
+    const diff = cur.price - rec.price_at_add;
+    hist = `收藏时 $${rec.price_at_add}（${new Date(rec.added).toLocaleDateString("zh-CN")}），现在 $${cur.price}，` +
+      (diff < 0 ? `<span class="d">便宜了 $${-diff}</span>` : diff > 0 ? `<span class="u">贵了 $${diff}</span>` : "没有变化");
+  } else {
+    hist = `<span class="u">最近一次刷新没有查到这个组合</span>（可能售罄、停售或回程不再符合条件），以下为收藏时的信息，收藏时 $${rec.price_at_add}`;
+  }
+  const chg = ser.filter((x,j) => j===0 || x.v !== ser[j-1].v);   // 只显示价格变动的节点
+  if(chg.length > 1) hist += `<br>价格变化：` + chg.slice(-8).map(x => `${x.t.slice(5,10).replace("-","/")} $${x.v}`).join(" → ");
+  return pairHtml(p, i, `<div class="pricehist">${hist}</div>`);
+}
+function renderFav(){
+  const el = $("#fav");
+  $("#favtabs").innerHTML = FAV_DB ? Object.entries(WHO).map(([w,n]) =>
+    `<button class="${favTab===w?"on":""}" data-w="${w}">${n}的收藏（${Object.keys(FAV[w]).length}）</button>`).join("") : "";
+  document.querySelectorAll("#favtabs button").forEach(b => b.onclick = () => { favTab = b.dataset.w; renderFav(); });
+  if(!FAV_DB){ el.innerHTML = `<div class="card empty">收藏夹还没开通，设置好之后这里会出现爸爸和妈妈两个收藏夹。</div>`; return; }
+  const recs = Object.values(FAV[favTab]).sort((a,b) => a.added < b.added ? -1 : 1);
+  el.innerHTML = (favErr ? `<div class="card note">${favErr}</div>` : "") + (recs.length ? recs.map(favHtml).join("") :
+    `<div class="card empty">${WHO[favTab]}还没有收藏。点下面任意航班卡片上的“☆ 加入${WHO[favTab]}收藏”即可。</div>`);
+  bindFavBtns(el);
+}
+function bindFavBtns(root){
+  root.querySelectorAll(".favbtn").forEach(b => b.onclick = () => toggleFav(b.dataset.who, decodeURIComponent(b.dataset.key), b));
+}
+// ===== 新增标签：上一次刷新里没有、这次新出现的组合 =====
+function isNew(key){
+  if(H.length < 2) return false;
+  const prev = H[H.length-2].prices || {};
+  return !(key in prev);
+}
+function renderAll(){
+  if(!D || !D.pairs) return;
+  const L = D.pairs.filter(p => tab==="all" || p.trip===tab).sort((a,b) => b.overall_score - a.overall_score);
+  const nNew = L.filter(p => isNew(p.key)).length;
+  $("#allsum").textContent = `展开全部 ${L.length} 个组合` + (nNew ? `（其中 ${nNew} 个是这次新出现的）` : "");
+  $("#all").innerHTML = L.map(pairHtml).join("");
+  bindFavBtns($("#all"));
+}
+function renderAllViews(){ renderFav(); render(); renderAll(); }
+function pairHtml(p,i,extra){
   const slotCls=p.arr_slot==="上午"?"g":(p.arr_slot==="晚上"||p.arr_slot==="深夜/凌晨")?"w":"";
-  return `<div class="card"><div class="row"><div class="rk">${i+1}</div><div>
+  return `<div class="card"><div class="row"><div class="rk">${i+1}</div><div>${isNew(p.key)?'<span class="newtag">新增</span>':""}
   ${legHtml(p.out,"去程")}${legHtml(p.ret,"回程")}
   <div class="chips"><span class="chip">${TRIPNAME[p.trip]}</span><span class="chip ${slotCls}">加拿大${p.arr_slot}落地</span>
-  <span class="chip">往返共飞${fmtDur(p.total_minutes)}</span><span class="chip">综合分 ${p.overall_score}</span></div>${linksHtml(p)}
-  </div><div class="price">$${p.price}<small>每人往返 · 两人约 $${p.price*2}</small></div></div></div>`}
+  <span class="chip">往返共飞${fmtDur(p.total_minutes)}</span><span class="chip">综合分 ${p.overall_score}</span></div>${extra||""}${linksHtml(p)}
+  </div><div class="price">$${p.price}<small>每人往返 · 两人约 $${p.price*2}</small>${favBtns(p)}</div></div></div>`}
 function rankFor(kind){
   const src=tab==="all"?D.rank_all:D.trips.find(t=>t.id===tab).rank;
   const byKey=Object.fromEntries(D.pairs.map(p=>[p.key,p]));
   return src[kind].map(k=>byKey[k]).filter(Boolean)}
 function render(){
   $("#tabs").innerHTML=[["all","两个日期一起比"],["A",TRIPNAME.A],["B",TRIPNAME.B]].map(([k,v])=>`<button class="${tab===k?"on":""}" data-k="${k}">${v}</button>`).join("");
-  document.querySelectorAll("#tabs button").forEach(b=>b.onclick=()=>{tab=b.dataset.k;render();renderExcluded()});
+  document.querySelectorAll("#tabs button").forEach(b=>b.onclick=()=>{tab=b.dataset.k;render();renderAll();renderExcluded()});
   if(!D||!D.pairs||!D.pairs.length){$("#main").innerHTML=`<div class="card empty">还没有可用的航班数据。首次自动查询完成后这里会显示结果。</div>`;return}
   const sec=[["overall","综合最佳前五","时间和价格各占一半"],["time","飞行时间短、上午落地前五","往返总时长＋落地时段"],["price","价格最低前五","每人往返含税价"]];
+  setTimeout(()=>bindFavBtns($("#main")),0);
   $("#main").innerHTML=sec.map(([k,t,s])=>{const L=rankFor(k);return `<h2>${t} <small>${s}</small></h2>`+(L.length?L.map(pairHtml).join(""):`<div class="card empty">暂无符合条件的组合</div>`)}).join("");
 }
 function renderTrend(){
@@ -214,7 +315,10 @@ Promise.all([fetch("data/latest.json?"+Date.now()).then(r=>r.ok?r.json():null).c
   D=d;H=h||[];
   $("#upd").textContent=D&&D.updated?"更新于 "+new Date(D.updated).toLocaleString("zh-CN",{hour12:false}):"尚未查询";
   if(D&&D.rejected){const r=Object.entries(D.rejected);if(r.length)$("#rej").innerHTML="<p>本次排除的航班："+r.map(([k,v])=>`${k} ${v}个`).join("，")+"。</p>"}
-  render();renderTrend();renderChanges();renderExcluded()});
+  render();renderAll();renderTrend();renderChanges();renderExcluded();
+  loadFav().then(renderAllViews);
+  setInterval(()=>loadFav().then(renderAllViews),60000);   // 每分钟同步一次别人的收藏
+});
 </script>
 </body>
 </html>
