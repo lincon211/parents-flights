@@ -29,6 +29,8 @@ h2 small{font-weight:normal;color:var(--muted);font-size:13px}
 .chips{display:flex;gap:6px;flex-wrap:wrap;margin-top:4px}
 .chip{font-size:12px;background:var(--chip);border-radius:4px;padding:1px 7px;color:var(--muted)}
 .chip.g{color:var(--good)}.chip.w{color:var(--warn)}
+.bag{font-size:13px;margin-top:4px;color:var(--ink)}
+.bag .src{color:var(--muted);font-size:12px}
 .chg{display:flex;gap:10px;padding:6px 0;border-bottom:1px solid var(--line);font-size:14px}
 .chg:last-child{border-bottom:0}
 .tag{flex:none;font-size:12px;padding:1px 8px;border-radius:4px;background:var(--chip);height:fit-content}
@@ -61,7 +63,7 @@ svg text{fill:var(--muted);font-size:11px}
       <li>出发：上海浦东、上海虹桥、杭州萧山；到达：多伦多、温哥华。</li>
       <li>方案一：6月19日出发、6月27日返回；方案二：整体推后一周，6月26日出发、7月4日返回（返程日期为推测）。</li>
       <li>只看经济舱；转机等待不超过4小时；只保留中国护照无需过境签的转机地（中国大陆、香港、澳门、日本、韩国、加拿大境内）。经美国、台湾转机的航班已排除。</li>
-      <li>托运行李：已排除标注“托运行李另收费”的票价。跨太平洋经济舱一般含1件23公斤，但购票前请再核实。</li>
+      <li>托运行李：已排除标注“托运行李另收费”的票价。卡片上的托运和随身行李额度是按主承运航司（飞行时间最长那段的航司）经济舱的一般规定整理的，不是从票价里读出来的；基础票、特价票可能更少，购票前请在订票页面核实。</li>
       <li><b>时间榜</b>：往返总飞行时间（小时）加上落地罚分。加拿大当地上午落地不罚分，中午+1.5，下午+3，晚上+6，深夜+9。</li>
       <li><b>价格榜</b>：按每人往返价格从低到高。</li>
       <li><b>综合榜</b>：时间分和价格各占一半，换算成100分制。</li>
@@ -78,6 +80,32 @@ let D=null,H=[],tab="all";
 function fmtDur(m){return Math.floor(m/60)+"小时"+(m%60?String(m%60).padStart(2,"0")+"分":"")}
 function fmtT(t){if(!t)return"";const[d,h]=t.split(" ");const[,mo,da]=d.split("-");return `${+mo}月${+da}日 ${h}`}
 function ap(c){return (D.airports&&D.airports[c])||c}
+const BAG={
+ "Air Canada":["加拿大航空","2件，每件23公斤（基础票Basic可能只含1件）","1件随身行李＋1件个人物品（不限重）"],
+ "Air Canada Rouge":["加拿大航空","2件，每件23公斤（基础票Basic可能只含1件）","1件随身行李＋1件个人物品"],
+ "China Eastern":["东方航空","2件，每件23公斤","1件，不超过8公斤"],
+ "Shanghai Airlines":["东方航空","2件，每件23公斤","1件，不超过8公斤"],
+ "China Southern":["南方航空","2件，每件23公斤","1件，不超过8公斤"],
+ "Air China":["中国国际航空","2件，每件23公斤","1件，不超过8公斤"],
+ "Hainan Airlines":["海南航空","2件，每件23公斤","1件，不超过8公斤"],
+ "Capital Airlines":["首都航空","2件，每件23公斤","1件，不超过8公斤"],
+ "Beijing Capital Airlines":["首都航空","2件，每件23公斤","1件，不超过8公斤"],
+ "Cathay Pacific":["国泰航空","2件，每件23公斤（轻便经济舱Economy Light可能更少）","1件随身行李＋1件小物品，合计约7公斤"],
+ "Hong Kong Airlines":["香港航空","2件，每件23公斤","1件，不超过7公斤"],
+ "Korean Air":["大韩航空","2件，每件23公斤","1件随身行李＋1件个人物品，合计不超过10公斤"],
+ "Asiana":["韩亚航空","2件，每件23公斤","1件随身行李＋1件个人物品，合计不超过10公斤"],
+ "ANA":["全日空","2件，每件23公斤","1件随身行李＋1件个人物品，合计不超过10公斤"],
+ "JAL":["日本航空","2件，每件23公斤","1件随身行李＋1件个人物品，合计不超过10公斤"],
+ "Japan Airlines":["日本航空","2件，每件23公斤","1件随身行李＋1件个人物品，合计不超过10公斤"],
+ "China Airlines":["中华航空","2件，每件23公斤","1件，不超过7公斤"],
+ "Qatar Airways":["卡塔尔航空","按票价等级，一般2件，每件23公斤","1件，不超过7公斤"]
+};
+function bagHtml(l){
+  // 行李额度一般按全程飞行时间最长的航段所属航司（主承运人）的规定执行
+  const main=l.segments.reduce((a,b)=>(b.duration||0)>(a.duration||0)?b:a);
+  const b=BAG[main.airline];
+  if(!b)return `<div class="bag">🧳 行李额度：请在购票页面核实（${main.airline_cn}）</div>`;
+  return `<div class="bag">🧳 免费托运：${b[1]}　👜 随身：${b[2]}<span class="src">（按${b[0]}经济舱规定）</span></div>`}
 function legHtml(l,label){
   const s=l.segments, stops=l.layovers.length;
   const via=l.layovers.map(x=>`${ap(x.airport)}转机${fmtDur(x.duration)}`).join("，");
@@ -85,7 +113,7 @@ function legHtml(l,label){
   return `<div class="leg"><span class="lt">${label}</span><b>${fmtT(l.dep)} ${ap(l.from)}</b> → <b>${fmtT(l.arr)} ${ap(l.to)}</b>
   <div class="chips">${s.map(x=>`<span class="fn">${x.flight}</span>`).join("")}
   <span class="chip">${airlines}</span><span class="chip">${fmtDur(l.total_duration)}</span>
-  <span class="chip ${stops?"":"g"}">${stops?via:"直飞"}</span></div></div>`}
+  <span class="chip ${stops?"":"g"}">${stops?via:"直飞"}</span></div>${bagHtml(l)}</div>`}
 function pairHtml(p,i){
   const slotCls=p.arr_slot==="上午"?"g":(p.arr_slot==="晚上"||p.arr_slot==="深夜/凌晨")?"w":"";
   return `<div class="card"><div class="row"><div class="rk">${i+1}</div><div>
