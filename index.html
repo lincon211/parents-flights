@@ -31,6 +31,9 @@ h2 small{font-weight:normal;color:var(--muted);font-size:13px}
 .chip.g{color:var(--good)}.chip.w{color:var(--warn)}
 .bag{font-size:13px;margin-top:4px;color:var(--ink)}
 .bag .src{color:var(--muted);font-size:12px}
+.fn{color:inherit;text-decoration:none}.fn:hover{text-decoration:underline}
+.links{display:flex;gap:14px;flex-wrap:wrap;align-items:center;margin-top:10px;font-size:14px}
+.links a{color:var(--accent);text-decoration:none;font-weight:600}.links a:hover{text-decoration:underline}
 .chg{display:flex;gap:10px;padding:6px 0;border-bottom:1px solid var(--line);font-size:14px}
 .chg:last-child{border-bottom:0}
 .tag{flex:none;font-size:12px;padding:1px 8px;border-radius:4px;background:var(--chip);height:fit-content}
@@ -111,15 +114,27 @@ function legHtml(l,label){
   const via=l.layovers.map(x=>`${ap(x.airport)}转机${fmtDur(x.duration)}`).join("，");
   const airlines=[...new Set(s.map(x=>x.airline_cn))].join("、");
   return `<div class="leg"><span class="lt">${label}</span><b>${fmtT(l.dep)} ${ap(l.from)}</b> → <b>${fmtT(l.arr)} ${ap(l.to)}</b>
-  <div class="chips">${s.map(x=>`<span class="fn">${x.flight}</span>`).join("")}
+  <div class="chips">${s.map(x=>`<a class="fn" href="https://www.flightradar24.com/data/flights/${x.flight.replace(/\s/g,"").toLowerCase()}" target="_blank" rel="noopener" title="在 Flightradar24 查看 ${x.flight}">${x.flight}</a>`).join("")}
   <span class="chip">${airlines}</span><span class="chip">${fmtDur(l.total_duration)}</span>
   <span class="chip ${stops?"":"g"}">${stops?via:"直飞"}</span></div>${bagHtml(l)}</div>`}
+const AIRSITE={"Air Canada":"https://www.aircanada.com/cn/zh/aco/home.html","China Eastern":"https://www.ceair.com/","China Southern":"https://www.csair.com/","Air China":"https://www.airchina.com.cn/","Hainan Airlines":"https://www.hainanairlines.com/","Cathay Pacific":"https://www.cathaypacific.com/cx/sc_CN.html","Korean Air":"https://www.koreanair.com/?hl=zh","ANA":"https://www.ana.co.jp/zh/cn/","JAL":"https://www.jal.co.jp/cn/zhcn/","Hong Kong Airlines":"https://www.hongkongairlines.com/","Capital Airlines":"https://www.jdair.net/","Beijing Capital Airlines":"https://www.jdair.net/"};
+function gfSearch(p){
+  const od=p.out_date||(p.out.dep||"").slice(0,10), rd=p.ret_date||(p.ret.dep||"").slice(0,10);
+  const q=`Flights from ${p.out.from} to ${p.out.to} on ${od} through ${rd} economy`;
+  return "https://www.google.com/travel/flights?hl=zh-CN&curr=CAD&q="+encodeURIComponent(q)}
+function linksHtml(p){
+  const gf=p.gf_url||gfSearch(p);
+  const main=p.out.segments.reduce((a,b)=>(b.duration||0)>(a.duration||0)?b:a);
+  const site=AIRSITE[main.airline];
+  return `<div class="links"><a href="${gf}" target="_blank" rel="noopener">在谷歌航班查看这趟行程 ↗</a>`+
+   (site?`<a href="${site}" target="_blank" rel="noopener">${main.airline_cn}官网 ↗</a>`:"")+
+   `<span class="note">点航班号可查看该航班的历史准点和实际时刻</span></div>`}
 function pairHtml(p,i){
   const slotCls=p.arr_slot==="上午"?"g":(p.arr_slot==="晚上"||p.arr_slot==="深夜/凌晨")?"w":"";
   return `<div class="card"><div class="row"><div class="rk">${i+1}</div><div>
   ${legHtml(p.out,"去程")}${legHtml(p.ret,"回程")}
   <div class="chips"><span class="chip">${TRIPNAME[p.trip]}</span><span class="chip ${slotCls}">加拿大${p.arr_slot}落地</span>
-  <span class="chip">往返共飞${fmtDur(p.total_minutes)}</span><span class="chip">综合分 ${p.overall_score}</span></div>
+  <span class="chip">往返共飞${fmtDur(p.total_minutes)}</span><span class="chip">综合分 ${p.overall_score}</span></div>${linksHtml(p)}
   </div><div class="price">$${p.price}<small>每人往返 · 两人约 $${p.price*2}</small></div></div></div>`}
 function rankFor(kind){
   const src=tab==="all"?D.rank_all:D.trips.find(t=>t.id===tab).rank;

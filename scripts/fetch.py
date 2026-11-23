@@ -206,6 +206,7 @@ def build_pairs(trip, offline=None):
         rr = serpapi({"type": 1, "departure_id": ORIGINS, "arrival_id": DESTS,
                       "outbound_date": trip["out"], "return_date": trip["ret"],
                       "departure_token": ob["token"]}, offline, f"{trip['id']}_ret{i}")
+        gf_url = (rr.get("search_metadata") or {}).get("google_flights_url")
         for r in options(rr):
             rleg = parse_leg(r)
             if not rleg:
@@ -220,7 +221,8 @@ def build_pairs(trip, offline=None):
                 "trip": trip["id"], "key": f"{trip['id']}|{ob['key']}|{rleg['key']}",
                 "out": strip(ob), "ret": strip(rleg), "price": price,
                 "total_minutes": ob["total_duration"] + rleg["total_duration"],
-                "arr_penalty": pen, "arr_slot": slot,
+                "arr_penalty": pen, "arr_slot": slot, "gf_url": gf_url,
+                "out_date": trip["out"], "ret_date": trip["ret"],
             })
     return outs, pairs, rejected
 
