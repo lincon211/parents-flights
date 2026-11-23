@@ -23,15 +23,15 @@ DATA = ROOT / "data"
 
 # ---------------- 需求配置 ----------------
 ORIGINS = "PVG,SHA,HGH"          # 上海浦东、上海虹桥、杭州萧山
-DESTS = "YYZ,YVR"                # 多伦多、温哥华
+DESTS = ["YVR", "YYZ"]           # 温哥华、多伦多分开查，保证两个目的地都有足够的候选
 TRIPS = [
     {"id": "A", "label": "方案一：6月19日出发，6月27日返回", "out": "2027-06-19", "ret": "2027-06-27"},
     {"id": "B", "label": "方案二：6月26日出发，7月4日返回（整体推后一周）", "out": "2027-06-26", "ret": "2027-07-04"},
 ]
 CURRENCY = "CAD"
 MAX_LAYOVER_MIN = 240            # 转机等待不超过4小时
-RETURN_PROBES_PER_TRIP = int(os.environ.get("RETURN_PROBES", "6"))  # 每个日期组合深入查回程的合格去程数量
-EXCLUDED_PROBES_PER_TRIP = int(os.environ.get("EXCLUDED_PROBES", "3"))  # 再查几个“便宜但被排除”的去程的回程，供网站上手动加回
+RETURN_PROBES_PER_TRIP = int(os.environ.get("RETURN_PROBES", "4"))  # 每个日期×目的地深入查回程的合格去程数量
+EXCLUDED_PROBES_PER_TRIP = int(os.environ.get("EXCLUDED_PROBES", "1"))  # 再查几个“便宜但被排除”的去程的回程，供网站上手动加回
 TOP_N = 5
 
 # 中国护照无需过境签即可在机场内转机的地区（经美国、台湾转机需签证或许可，排除）
@@ -187,10 +187,22 @@ def arrival_penalty(arr_time):
 
 
 def build_pairs(trip, offline=None):
+    """两个目的地分别查询后合并。每次刷新约 2日期×2目的地×(1+4+1)=24 次查询。"""
+    outs, pairs, rejected, notes, excluded = [], [], {}, [], []
+    for dest in DESTS:
+        o, p, r, n, e = build_pairs_dest(trip, dest, offline)
+        outs += o; pairs += p; notes += n; excluded += e
+        for k, v in r.items():
+            rejected[k] = rejected.get(k, 0) + v
+    excluded = sorted(excluded, key=lambda x: x["price"] or 1e9)[:30]
+    return outs, pairs, rejected, notes, excluded
+
+
+def build_pairs_dest(trip, dest, offline=None):
     """对一个日期组合：查往返去程列表，再对重点去程查回程，返回 (所有去程, 有效组合, 排除统计)。"""
-    rt = serpapi({"type": 1, "departure_id": ORIGINS, "arrival_id": DESTS,
+    rt = serpapi({"type": 1, "departure_id": ORIGINS, "arrival_id": dest,
                   "outbound_date": trip["out"], "return_date": trip["ret"]},
-                 offline, f"{trip['id']}_out")
+                 offline, f"{trip['id']}_{dest}_out")
     outs, rejected = [], {}
     for o in options(rt):
         leg = parse_leg(o)
@@ -224,9 +236,9 @@ def build_pairs(trip, offline=None):
 
     pairs, notes, excluded = [], [], []
     for i, ob in enumerate(probes):
-        rr = serpapi({"type": 1, "departure_id": ORIGINS, "arrival_id": DESTS,
+        rr = serpapi({"type": 1, "departure_id": ORIGINS, "arrival_id": dest,
                       "outbound_date": trip["out"], "return_date": trip["ret"],
-                      "departure_token": ob["token"]}, offline, f"{trip['id']}_ret{i}")
+                      "departure_token": ob["token"]}, offline, f"{trip['id']}_{dest}_ret{i}")
         gf_url = (rr.get("search_metadata") or {}).get("google_flights_url")
         n_ok, bad = 0, []
         for r in options(rr):

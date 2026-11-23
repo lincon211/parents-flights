@@ -1,7 +1,7 @@
 name: 刷新机票数据
 on:
   schedule:
-    - cron: "17 11 */3 * *"   # 每3天一次（美东早上6:17左右），控制在免费额度内
+    - cron: "17 11 */4 * *"   # 每4天一次（美东早上6:17左右），每次约24次查询，控制在每月250次免费额度内
   workflow_dispatch: {}        # 也可在 Actions 页面手动点“Run workflow”
 permissions:
   contents: write

@@ -103,6 +103,9 @@ details.rule li{margin:2px 0}
 .warnt{color:var(--warn);margin-top:6px}
 .fc .links{margin-top:6px}
 @media (max-width:560px){.tabs{gap:6px;margin-top:12px}.tabs button{padding:5px 11px;font-size:13px}.lg{grid-template-columns:34px 62px 1fr 62px;gap:6px}.lg-t b{font-size:17px}.lg-f{margin-left:40px}.fc-p{font-size:18px}}
+.tabs{flex-direction:column;align-items:stretch}
+.tgrp{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.tl{font-size:12px;color:var(--muted);width:42px;flex:none}
 .chg{display:flex;gap:10px;padding:6px 0;border-bottom:1px solid var(--line);font-size:14px}
 .chg:last-child{border-bottom:0}
 .tag{flex:none;font-size:12px;padding:1px 8px;border-radius:4px;background:var(--chip);height:fit-content}
@@ -175,7 +178,9 @@ svg text{fill:var(--muted);font-size:11px}
 <script>
 const $=s=>document.querySelector(s);
 const TRIPNAME={A:"方案一 6/19–6/27",B:"方案二 6/26–7/4"};
-let D=null,H=[],tab="all";
+let D=null,H=[],tab="all",dest="all";
+try{const v=localStorage.getItem("dest");if(["all","YVR","YYZ"].includes(v))dest=v}catch(e){}
+const DESTNAME={all:"多伦多和温哥华",YVR:"只看温哥华",YYZ:"只看多伦多"};
 function fmtDur(m){return Math.floor(m/60)+"小时"+(m%60?String(m%60).padStart(2,"0")+"分":"")}
 function fmtT(t){if(!t)return"";const[d,h]=t.split(" ");const[,mo,da]=d.split("-");return `${+mo}月${+da}日 ${h}`}
 function ap(c){return (D.airports&&D.airports[c])||c}
@@ -387,11 +392,11 @@ function byKey(){
   (D.excluded_pairs || []).forEach(p => m[p.key] = p);
   return m;
 }
-const inTab = t => tab === "all" || t === tab;
+const inTab = (t, to) => (tab === "all" || t === tab) && (dest === "all" || !to || to === dest);
 // 参与排名的组合：合格的 + 手动加回的，去掉被否决的
 function pool(){
   const L = (D.pairs || []).concat((D.excluded_pairs || []).filter(p => isRestored(p.key)));
-  return L.filter(p => inTab(p.trip) && !isVetoed(p.key));
+  return L.filter(p => inTab(p.trip, p.out.to) && !isVetoed(p.key));
 }
 // 和后台同样的打分方法：时间比最短多50%扣满50分，价格比最便宜贵一倍扣满50分
 function score(L){
@@ -477,8 +482,10 @@ function navCounts(){
 }
 const OPEN=new Set();   // 记住哪些榜单展开了，自动同步时不收起
 function render(){
-  $("#tabs").innerHTML=[["all","两个日期一起比"],["A",TRIPNAME.A],["B",TRIPNAME.B]].map(([k,v])=>`<button class="${tab===k?"on":""}" data-k="${k}">${v}</button>`).join("");
-  document.querySelectorAll("#tabs button").forEach(b=>b.onclick=()=>{tab=b.dataset.k;renderAllViews()});
+  $("#tabs").innerHTML=`<div class="tgrp"><span class="tl">日期</span>`+[["all","两个日期一起比"],["A",TRIPNAME.A],["B",TRIPNAME.B]].map(([k,v])=>`<button class="${tab===k?"on":""}" data-k="${k}">${v}</button>`).join("")+
+    `</div><div class="tgrp"><span class="tl">目的地</span>`+Object.entries(DESTNAME).map(([k,v])=>`<button class="${dest===k?"on":""}" data-d="${k}">${v}</button>`).join("")+`</div>`;
+  document.querySelectorAll("#tabs button[data-k]").forEach(b=>b.onclick=()=>{tab=b.dataset.k;renderAllViews()});
+  document.querySelectorAll("#tabs button[data-d]").forEach(b=>b.onclick=()=>{dest=b.dataset.d;try{localStorage.setItem("dest",dest)}catch(e){}renderAllViews()});
   if(!D||!D.pairs||!D.pairs.length){$("#main").innerHTML=["overall","time","price"].map(k=>`<div class="page" data-page="${k}"><div class="card empty">还没有可用的航班数据。首次自动查询完成后这里会显示结果。</div></div>`).join("");return}
   const sec=[["overall","综合最佳前十","时间和价格各占一半"],["time","飞行时间短、上午落地前十","往返总时长＋落地时段"],["price","价格最低前十","每人往返含税价"]];
   $("#main").innerHTML=sec.map(([k,t,s])=>{const L=rankFor(k);
@@ -497,18 +504,18 @@ function renderExcluded(){
   const el=$("#excluded");if(!D){el.innerHTML="";return}
   const rows=[];
   // 1）可以加回的组合（去程和回程都查到了，只是不满足条件）
-  (D.excluded_pairs||[]).filter(p=>inTab(p.trip)&&!isRestored(p.key)&&!isVetoed(p.key)).forEach(p=>{
+  (D.excluded_pairs||[]).filter(p=>inTab(p.trip,p.out.to)&&!isRestored(p.key)&&!isVetoed(p.key)).forEach(p=>{
     rows.push([p.price,`<div><b>${TRIPNAME[p.trip]}</b> · 每人往返 ${priceTxt(p)}${p.price_est?"（回程单独价格未查到，按去程报价估算）":""}<br>
       去程 ${legLine(p.out)}<br>回程 ${legLine(p.ret)}<br>
       <span class="u">排除原因：${p.reject}</span> · <a href="${gfExact(p)||zh(p.gf_url)||gfSearch(p)}" target="_blank" rel="noopener">在谷歌航班核对 ↗</a></div>
       <div class="favbtns"><button class="favbtn" data-dec="restored" data-on="1" data-key="${encodeURIComponent(p.key)}">↩ 撤回否决，加回榜单</button></div>`])});
   // 2）查不到可搭配回程的去程，只能说明原因，没法加回
-  (D.probe_notes||[]).filter(n=>n.returns_seen===0&&inTab(n.trip)).forEach(n=>{
+  (D.probe_notes||[]).filter(n=>n.returns_seen===0&&inTab(n.trip,n.out_to)).forEach(n=>{
     rows.push([n.out_price,`<div><b>${TRIPNAME[n.trip]}</b>：去程 <span class="fn">${n.out}</span>（${ap(n.out_from)}→${ap(n.out_to)}）往返最低 $${n.out_price}，但谷歌航班没有给出可以搭配的回程，所以无法组成往返组合。</div>`])});
   // 3）不合格、这次也没查回程的去程
   const probed=new Set((D.probe_notes||[]).map(n=>n.trip+"|"+n.out));
   const best={};(D.pairs||[]).forEach(p=>{best[p.trip]=Math.min(best[p.trip]||1e9,p.price)});
-  (D.outbounds||[]).filter(o=>!o.valid&&o.price&&o.price<(best[o.trip]||1e9)&&!probed.has(o.trip+"|"+o.key)&&inTab(o.trip)).forEach(o=>{
+  (D.outbounds||[]).filter(o=>!o.valid&&o.price&&o.price<(best[o.trip]||1e9)&&!probed.has(o.trip+"|"+o.key)&&inTab(o.trip,o.to)).forEach(o=>{
     rows.push([o.price,`<div><b>${TRIPNAME[o.trip]}</b>：去程 <span class="fn">${o.key}</span>（${ap(o.from)}→${ap(o.to)}）往返最低 $${o.price}，排除原因：${o.reject}${layTxt(o.layovers)}。这次没有查它的回程，暂时不能加回。</div>`])});
   rows.sort((a,b)=>a[0]-b[0]);
   el.innerHTML=(decErr?`<div class="note u">${decErr}</div>`:"")+(rows.length?rows.map(r=>`<div class="chg exrow">${r[1]}</div>`).join(""):`<div class="empty">没有被排除的选项</div>`);
@@ -517,7 +524,7 @@ function renderExcluded(){
 function renderVetoed(){
   const el=$("#vetoed");if(!D){el.innerHTML="";return}
   const m=byKey();
-  const recs=Object.values(DEC.vetoed).filter(r=>inTab(r.key.split("|")[0]));
+  const recs=Object.values(DEC.vetoed).filter(r=>{const q=m[r.key];return inTab(r.key.split("|")[0],q&&q.out.to)});
   if(!recs.length){el.innerHTML=`<div class="empty">还没有否决的机票。在榜单卡片上点“✕ 否决，移出榜单”即可放到这里。</div>`;return}
   el.innerHTML=recs.map(r=>{const p=m[r.key];
     const body=p?`<b>${TRIPNAME[p.trip]}</b> · 每人往返 ${priceTxt(p)}<br>去程 ${legLine(p.out)}<br>回程 ${legLine(p.ret)}`:
