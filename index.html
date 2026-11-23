@@ -65,6 +65,10 @@ body[data-page="more"] .page[data-page="more"]{display:block}
 .pnav a{flex:none;padding:8px 14px;border-radius:8px;color:var(--ink);text-decoration:none;font-size:15px;white-space:nowrap}
 .pnav a.on{background:var(--ink);color:var(--bg);font-weight:600}
 .pnav a .cnt{font-size:12px;opacity:.75;margin-left:3px}
+details.rule{margin-top:8px;font-size:13px}
+details.rule summary{color:var(--ink);font-weight:600}
+details.rule ul{margin:4px 0 6px;padding-left:20px}
+details.rule li{margin:2px 0}
 .chg{display:flex;gap:10px;padding:6px 0;border-bottom:1px solid var(--line);font-size:14px}
 .chg:last-child{border-bottom:0}
 .tag{flex:none;font-size:12px;padding:1px 8px;border-radius:4px;background:var(--chip);height:fit-content}
@@ -126,6 +130,7 @@ svg text{fill:var(--muted);font-size:11px}
       <li><b>价格榜</b>：按每人往返价格从低到高。</li>
       <li><b>否决和加回</b>：任何人都可以把榜单里的机票否决（移到否决区），或把被排除的机票加回榜单。所有人看到的是同一份结果，三个榜单会立即按新名单重新排名，下次自动刷新后也会保持。</li>
       <li><b>综合榜</b>：时间和价格各占50分，满分100。时间比最短的组合多出50%或以上扣满50分，价格比最便宜的贵一倍或以上扣满50分，中间按比例扣。</li>
+      <li><b>退改签</b>：卡片上的退改签说明是按主承运航司经济舱常见票价等级的一般规定整理的，不是那张票的实际规则；最便宜的票通常限制最多，付款前请在订票页面查看“票价规则”。</li>
       <li>价格来自 Google 航班，为单人往返含税价（加元），两人约为两倍；实际以航司或订票网站为准。2027年6月的部分航班可能尚未开售，开售后会自动出现在“最近变化”里。</li>
       <li>同一个去程在每个榜单里最多出现两次，避免榜单被一个航班占满。</li>
     </ul>
@@ -166,6 +171,38 @@ function bagHtml(l){
   const b=BAG[main.airline];
   if(!b)return `<div class="bag">🧳 行李额度：请在购票页面核实（${main.airline_cn}）</div>`;
   return `<div class="bag">🧳 免费托运：${b[1]}　👜 随身：${b[2]}<span class="src">（按${b[0]}经济舱规定）</span></div>`}
+// 退改签：按主承运航司经济舱常见票价等级的一般规定整理，仅供参考，以订票时显示的票价规则为准
+const RULE_CN = ["退票：按舱位等级和距离起飞的时间分档收费，离起飞越近费用越高；最低价舱位往往只能退税费","改签：一般可以改日期，按舱位收改期费并补票价差，部分特价舱位不允许改期","一般分为起飞前较早（如7天以上）、临近起飞、起飞后几档，起飞前改退最划算"];
+const RULE={
+ "Air Canada":["加拿大航空",["退票：基础票（Basic）和标准票（Standard）一般不退，只能退税费或转成旅行抵用金；灵活票（Flex）可退但收手续费；Latitude 票可全额退",
+   "改签：基础票不能改；标准票可改，收改签费并补差价；灵活票及以上免改签费，只补差价",
+   "订票后24小时内可免费取消（需在起飞前7天以上订票）；其余按票价等级执行，与距起飞时间关系不大"]],
+ "China Eastern":["东方航空",RULE_CN],"Shanghai Airlines":["东方航空",RULE_CN],"China Southern":["南方航空",RULE_CN],
+ "Air China":["中国国际航空",RULE_CN],"Hainan Airlines":["海南航空",RULE_CN],"Capital Airlines":["首都航空",RULE_CN],"Beijing Capital Airlines":["首都航空",RULE_CN],
+ "Korean Air":["大韩航空",["退票：按票价等级和距离起飞的天数分档收费，越早退越便宜；最低价票退票费最高",
+   "改签：可以改，收改签费并补差价，同样越早改越便宜",
+   "按起飞前91天以上、61–90天、15–60天、4–14天、3天内等档次收费"]],
+ "Cathay Pacific":["国泰航空",["退票：轻便经济舱（Economy Light）一般不可退；基本经济舱（Essential）收退票费；灵活经济舱（Flex）可退",
+   "改签：轻便经济舱不能改；基本经济舱收改签费并补差价；灵活经济舱免改签费，只补差价",
+   "主要看票价等级，起飞前办理即可；错过航班后再改退通常费用更高或不允许"]],
+ "Hong Kong Airlines":["香港航空",["退票：最低价票不可退或只退税费；其他票价收退票费",
+   "改签：收改签费并补差价","起飞前办理，错过航班后通常不能再改退"]],
+ "ANA":["全日空",["退票：收退票手续费，最低价票费用较高或不可退","改签：低价票通常不能改，只能退票重买；较高票价可改","起飞前办理"]],
+ "JAL":["日本航空",["退票：收退票手续费，最低价票费用较高或不可退","改签：低价票通常不能改，只能退票重买；较高票价可改","起飞前办理"]],
+ "Japan Airlines":["日本航空",["退票：收退票手续费，最低价票费用较高或不可退","改签：低价票通常不能改，只能退票重买；较高票价可改","起飞前办理"]],
+ "China Airlines":["中华航空",["退票：按票价等级收费，最低价票较高","改签：收改签费并补差价","起飞前办理"]],
+ "Qatar Airways":["卡塔尔航空",["退票：经典票（Classic）收较高退票费；便利票（Convenience）和舒适票（Comfort）费用更低",
+   "改签：经典票收改签费；舒适票可免费改，只补差价","起飞前办理，越早越好"]]
+};
+function mainCarrier(l){return l.segments.reduce((a,b)=>(b.duration||0)>(a.duration||0)?b:a)}
+function ruleHtml(p){
+  const segs=[mainCarrier(p.out),mainCarrier(p.ret)], cn={};segs.forEach(x=>cn[x.airline]=x.airline_cn);
+  const cs=[...new Set(segs.map(x=>x.airline))];
+  const body=cs.map(a=>{const r=RULE[a];
+    if(!r)return `<div><b>${cn[a]||a}</b>：请在订票页面的“票价规则”里查看退改签规定。</div>`;
+    return `<div><b>${r[0]}</b><ul><li>${r[1][0]}</li><li>${r[1][1]}</li><li>时间：${r[1][2]}</li></ul></div>`}).join("");
+  return `<details class="rule"><summary>📄 退改签规定（点开查看）</summary>${body}
+    <div class="note">按航司经济舱常见票价等级的一般规定整理，不是这张票的实际票价规则。同一航班不同价格的票，退改规则差别很大，付款前请在订票页面查看“票价规则”。</div></details>`}
 function legHtml(l,label){
   const s=l.segments, stops=l.layovers.length;
   const via=l.layovers.map(x=>`${ap(x.airport)}转机${fmtDur(x.duration)}`).join("，");
@@ -377,7 +414,7 @@ function pairHtml(p,i,extra,withDec){
   return `<div class="card"><div class="row"><div class="rk">${i+1}</div><div>${tags}
   ${legHtml(p.out,"去程")}${legHtml(p.ret,"回程")}
   <div class="chips"><span class="chip">${TRIPNAME[p.trip]}</span><span class="chip ${slotCls}">加拿大${p.arr_slot}落地</span>
-  <span class="chip">往返共飞${fmtDur(p.total_minutes)}</span>${os!=null?`<span class="chip">综合分 ${os}</span>`:""}</div>${extra||""}${linksHtml(p)}
+  <span class="chip">往返共飞${fmtDur(p.total_minutes)}</span>${os!=null?`<span class="chip">综合分 ${os}</span>`:""}</div>${ruleHtml(p)}${extra||""}${linksHtml(p)}
   </div><div class="price">${priceTxt(p)}<small>每人往返 · 两人约 $${p.price*2}</small>${favBtns(p)}${withDec===false?"":decBtns(p)}</div></div></div>`}
 const PAGES=["fav","overall","time","price","more"];
 function showPage(){
