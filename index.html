@@ -169,7 +169,7 @@ function linksHtml(p){
    `<span class="note">点航班号可查看该航班的历史准点和实际时刻</span></div>`}
 // ===== 收藏夹 =====
 // 数据存放在 Firebase 实时数据库（免费），网址不是密钥，规则只允许读写 favorites 下的“爸爸”“妈妈”两个收藏夹
-const FAV_DB = "";   // 例如 "https://xxxx-default-rtdb.firebaseio.com"
+const FAV_DB = "https://parents-flights-default-rtdb.firebaseio.com";   // 例如 "https://xxxx-default-rtdb.firebaseio.com"
 const WHO = {dad:"爸爸", mom:"妈妈"};
 let FAV = {dad:{}, mom:{}}, favTab = "dad", favErr = "";
 const fkey = k => k.replace(/[.#$\[\]\/]/g, "_");

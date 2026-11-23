@@ -1,0 +1,14 @@
+name: 检查收藏夹数据库
+on:
+  workflow_dispatch: {}
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 读写测试
+        run: |
+          DB=https://parents-flights-default-rtdb.firebaseio.com
+          echo "读取 favorites："; curl -s -w "  HTTP %{http_code}\n" "$DB/favorites.json"
+          echo "写入测试："; curl -s -X PUT -d '{"test":true}' -w "  HTTP %{http_code}\n" "$DB/favorites/dad/_check.json"
+          echo "删除测试："; curl -s -X DELETE -w "  HTTP %{http_code}\n" "$DB/favorites/dad/_check.json"
+          echo "越权写入（应被拒绝）："; curl -s -X PUT -d '1' -w "  HTTP %{http_code}\n" "$DB/other.json"
