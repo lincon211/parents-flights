@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-23T00:04:55+00:00",
+ "updated": "2026-11-23T00:14:54+00:00",
  "currency": "CAD",
  "trips": [
   {
@@ -19,8 +19,8 @@
      "A|AC26|AC29+CA1883",
      "A|AC26|CA992+CA1883",
      "A|KE890+KE75|KE72+KE891",
-     "A|KE888+KE71|KE72+KE891",
-     "A|KE888+KE71|KE76+KE881"
+     "A|CX959+CX810|CX867+CX964",
+     "A|CX959+CX810|CX865+CX958"
     ],
     "overall": [
      "A|AC26|AC25",
@@ -31,8 +31,8 @@
     ]
    },
    "outbound_count": 11,
-   "valid_outbound_count": 8,
-   "pair_count": 8
+   "valid_outbound_count": 9,
+   "pair_count": 10
   },
   {
    "id": "B",
@@ -50,21 +50,21 @@
     "price": [
      "B|KE890+KE75|KE72+KE893",
      "B|KE890+KE75|KE72+KE891",
-     "B|AC26|AC25",
-     "B|AC26|AC29+CA1883",
-     "B|NH920+JL18|NH115+NH967"
+     "B|CX959+CX810|CX867+CX964",
+     "B|CX959+CX810|CX865+CX958",
+     "B|AC26|AC25"
     ],
     "overall": [
      "B|AC26|AC25",
      "B|AC26|AC29+CA1883",
      "B|KE890+KE75|KE72+KE891",
      "B|KE890+KE75|KE72+KE893",
-     "B|NH920+JL18|AC3+NH971"
+     "B|CX959+CX810|CX867+CX964"
     ]
    },
    "outbound_count": 12,
-   "valid_outbound_count": 7,
-   "pair_count": 7
+   "valid_outbound_count": 8,
+   "pair_count": 9
   }
  ],
  "outbounds": [
@@ -245,8 +245,8 @@
    "to": "YYZ",
    "dep": "2027-06-19 00:55",
    "arr": "2027-06-19 15:00",
-   "valid": false,
-   "reject": "经DOH转机需签证或未确认免签",
+   "valid": true,
+   "reject": null,
    "trip": "A",
    "segments": [
     {
@@ -704,8 +704,8 @@
    "to": "YYZ",
    "dep": "2027-06-26 00:55",
    "arr": "2027-06-26 15:00",
-   "valid": false,
-   "reject": "经DOH转机需签证或未确认免签",
+   "valid": true,
+   "reject": null,
    "trip": "B",
    "segments": [
     {
@@ -1108,8 +1108,11 @@
    "total_minutes": 1775,
    "arr_penalty": 0,
    "arr_slot": "上午",
+   "gf_url": "https://www.google.com/travel/flights?hl=en&gl=ca&curr=CAD&tfs=CBwQAhpZEgoyMDI3LTA2LTE5Ih4KA1BWRxIKMjAyNy0wNi0xORoDWVZSKgJBQzICMjZqBwgBEgNQVkdqBwgBEgNTSEFqBwgBEgNIR0hyBwgBEgNZWVpyBwgBEgNZVlIaORIKMjAyNy0wNi0yN2oHCAESA1lZWmoHCAESA1lWUnIHCAESA1BWR3IHCAESA1NIQXIHCAESA0hHSEABSAFwAZgBAQ&tfu=EgIIAQ",
+   "out_date": "2027-06-19",
+   "ret_date": "2027-06-27",
    "time_score": 29.58,
-   "overall_score": 70.1
+   "overall_score": 70.9
   },
   {
    "trip": "A",
@@ -1186,8 +1189,11 @@
    "total_minutes": 1735,
    "arr_penalty": 0,
    "arr_slot": "上午",
+   "gf_url": "https://www.google.com/travel/flights?hl=en&gl=ca&curr=CAD&tfs=CBwQAhpZEgoyMDI3LTA2LTE5Ih4KA1BWRxIKMjAyNy0wNi0xORoDWVZSKgJBQzICMjZqBwgBEgNQVkdqBwgBEgNTSEFqBwgBEgNIR0hyBwgBEgNZWVpyBwgBEgNZVlIaORIKMjAyNy0wNi0yN2oHCAESA1lZWmoHCAESA1lWUnIHCAESA1BWR3IHCAESA1NIQXIHCAESA0hHSEABSAFwAZgBAQ&tfu=EgIIAQ",
+   "out_date": "2027-06-19",
+   "ret_date": "2027-06-27",
    "time_score": 28.92,
-   "overall_score": 72.7
+   "overall_score": 73.4
   },
   {
    "trip": "A",
@@ -1246,6 +1252,9 @@
    "total_minutes": 1355,
    "arr_penalty": 0,
    "arr_slot": "上午",
+   "gf_url": "https://www.google.com/travel/flights?hl=en&gl=ca&curr=CAD&tfs=CBwQAhpZEgoyMDI3LTA2LTE5Ih4KA1BWRxIKMjAyNy0wNi0xORoDWVZSKgJBQzICMjZqBwgBEgNQVkdqBwgBEgNTSEFqBwgBEgNIR0hyBwgBEgNZWVpyBwgBEgNZVlIaORIKMjAyNy0wNi0yN2oHCAESA1lZWmoHCAESA1lWUnIHCAESA1BWR3IHCAESA1NIQXIHCAESA0hHSEABSAFwAZgBAQ&tfu=EgIIAQ",
+   "out_date": "2027-06-19",
+   "ret_date": "2027-06-27",
    "time_score": 22.58,
    "overall_score": 96.9
   },
@@ -1324,8 +1333,11 @@
    "total_minutes": 1505,
    "arr_penalty": 0,
    "arr_slot": "上午",
+   "gf_url": "https://www.google.com/travel/flights?hl=en&gl=ca&curr=CAD&tfs=CBwQAhpZEgoyMDI3LTA2LTE5Ih4KA1BWRxIKMjAyNy0wNi0xORoDWVZSKgJBQzICMjZqBwgBEgNQVkdqBwgBEgNTSEFqBwgBEgNIR0hyBwgBEgNZWVpyBwgBEgNZVlIaORIKMjAyNy0wNi0yN2oHCAESA1lZWmoHCAESA1lWUnIHCAESA1BWR3IHCAESA1NIQXIHCAESA0hHSEABSAFwAZgBAQ&tfu=EgIIAQ",
+   "out_date": "2027-06-19",
+   "ret_date": "2027-06-27",
    "time_score": 25.08,
-   "overall_score": 56.4
+   "overall_score": 56.7
   },
   {
    "trip": "A",
@@ -1420,8 +1432,11 @@
    "total_minutes": 1900,
    "arr_penalty": 1.5,
    "arr_slot": "中午",
+   "gf_url": "https://www.google.com/travel/flights?hl=en&gl=ca&curr=CAD&tfs=CBwQAhp6EgoyMDI3LTA2LTE5Ih8KA1BWRxIKMjAyNy0wNi0xORoDSUNOKgJLRTIDODg4Ih4KA0lDThIKMjAyNy0wNi0xORoDWVZSKgJLRTICNzFqBwgBEgNQVkdqBwgBEgNTSEFqBwgBEgNIR0hyBwgBEgNZWVpyBwgBEgNZVlIaORIKMjAyNy0wNi0yN2oHCAESA1lZWmoHCAESA1lWUnIHCAESA1BWR3IHCAESA1NIQXIHCAESA0hHSEABSAFwAZgBAQ&tfu=EgIIAQ",
+   "out_date": "2027-06-19",
+   "ret_date": "2027-06-27",
    "time_score": 33.17,
-   "overall_score": 53.1
+   "overall_score": 54.4
   },
   {
    "trip": "A",
@@ -1516,8 +1531,11 @@
    "total_minutes": 1695,
    "arr_penalty": 1.5,
    "arr_slot": "中午",
+   "gf_url": "https://www.google.com/travel/flights?hl=en&gl=ca&curr=CAD&tfs=CBwQAhp6EgoyMDI3LTA2LTE5Ih8KA1BWRxIKMjAyNy0wNi0xORoDSUNOKgJLRTIDODg4Ih4KA0lDThIKMjAyNy0wNi0xORoDWVZSKgJLRTICNzFqBwgBEgNQVkdqBwgBEgNTSEFqBwgBEgNIR0hyBwgBEgNZWVpyBwgBEgNZVlIaORIKMjAyNy0wNi0yN2oHCAESA1lZWmoHCAESA1lWUnIHCAESA1BWR3IHCAESA1NIQXIHCAESA0hHSEABSAFwAZgBAQ&tfu=EgIIAQ",
+   "out_date": "2027-06-19",
+   "ret_date": "2027-06-27",
    "time_score": 29.75,
-   "overall_score": 66.4
+   "overall_score": 67.3
   },
   {
    "trip": "A",
@@ -1612,8 +1630,11 @@
    "total_minutes": 1855,
    "arr_penalty": 1.5,
    "arr_slot": "中午",
+   "gf_url": "https://www.google.com/travel/flights?hl=en&gl=ca&curr=CAD&tfs=CBwQAhp6EgoyMDI3LTA2LTE5Ih8KA1BWRxIKMjAyNy0wNi0xORoDSUNOKgJLRTIDODg4Ih4KA0lDThIKMjAyNy0wNi0xORoDWVZSKgJLRTICNzFqBwgBEgNQVkdqBwgBEgNTSEFqBwgBEgNIR0hyBwgBEgNZWVpyBwgBEgNZVlIaORIKMjAyNy0wNi0yN2oHCAESA1lZWmoHCAESA1lWUnIHCAESA1BWR3IHCAESA1NIQXIHCAESA0hHSEABSAFwAZgBAQ&tfu=EgIIAQ",
+   "out_date": "2027-06-19",
+   "ret_date": "2027-06-27",
    "time_score": 32.42,
-   "overall_score": 35.0
+   "overall_score": 36.2
   },
   {
    "trip": "A",
@@ -1708,8 +1729,209 @@
    "total_minutes": 1785,
    "arr_penalty": 3,
    "arr_slot": "下午",
+   "gf_url": "https://www.google.com/travel/flights?hl=en&gl=ca&curr=CAD&tfs=CBwQAhp6EgoyMDI3LTA2LTE5Ih8KA1BWRxIKMjAyNy0wNi0xORoDSUNOKgJLRTIDODkwIh4KA0lDThIKMjAyNy0wNi0xORoDWVZSKgJLRTICNzVqBwgBEgNQVkdqBwgBEgNTSEFqBwgBEgNIR0hyBwgBEgNZWVpyBwgBEgNZVlIaORIKMjAyNy0wNi0yN2oHCAESA1lZWmoHCAESA1lWUnIHCAESA1BWR3IHCAESA1NIQXIHCAESA0hHSEABSAFwAZgBAQ&tfu=EgIIAQ",
+   "out_date": "2027-06-19",
+   "ret_date": "2027-06-27",
    "time_score": 32.75,
-   "overall_score": 57.7
+   "overall_score": 58.9
+  },
+  {
+   "trip": "A",
+   "key": "A|CX959+CX810|CX865+CX958",
+   "out": {
+    "segments": [
+     {
+      "flight": "CX 959",
+      "airline": "Cathay Pacific",
+      "airline_cn": "国泰航空",
+      "from": "HGH",
+      "to": "HKG",
+      "dep": "2027-06-19 11:25",
+      "arr": "2027-06-19 14:05",
+      "duration": 160,
+      "aircraft": "Airbus A321neo",
+      "class": "Economy"
+     },
+     {
+      "flight": "CX 810",
+      "airline": "Cathay Pacific",
+      "airline_cn": "国泰航空",
+      "from": "HKG",
+      "to": "YVR",
+      "dep": "2027-06-19 15:55",
+      "arr": "2027-06-19 13:00",
+      "duration": 725,
+      "aircraft": "Airbus A350",
+      "class": "Economy"
+     }
+    ],
+    "layovers": [
+     {
+      "airport": "HKG",
+      "duration": 110,
+      "overnight": false
+     }
+    ],
+    "total_duration": 995,
+    "price": 2048,
+    "key": "CX959+CX810",
+    "from": "HGH",
+    "to": "YVR",
+    "dep": "2027-06-19 11:25",
+    "arr": "2027-06-19 13:00",
+    "valid": true,
+    "reject": null
+   },
+   "ret": {
+    "segments": [
+     {
+      "flight": "CX 865",
+      "airline": "Cathay Pacific",
+      "airline_cn": "国泰航空",
+      "from": "YVR",
+      "to": "HKG",
+      "dep": "2027-06-27 01:25",
+      "arr": "2027-06-28 05:35",
+      "duration": 790,
+      "aircraft": "Airbus A350",
+      "class": "Economy"
+     },
+     {
+      "flight": "CX 958",
+      "airline": "Cathay Pacific",
+      "airline_cn": "国泰航空",
+      "from": "HKG",
+      "to": "HGH",
+      "dep": "2027-06-28 07:45",
+      "arr": "2027-06-28 10:10",
+      "duration": 145,
+      "aircraft": "Airbus A321neo",
+      "class": "Economy"
+     }
+    ],
+    "layovers": [
+     {
+      "airport": "HKG",
+      "duration": 130,
+      "overnight": false
+     }
+    ],
+    "total_duration": 1065,
+    "price": 2048,
+    "key": "CX865+CX958",
+    "from": "YVR",
+    "to": "HGH",
+    "dep": "2027-06-27 01:25",
+    "arr": "2027-06-28 10:10"
+   },
+   "price": 2048,
+   "total_minutes": 2060,
+   "arr_penalty": 1.5,
+   "arr_slot": "中午",
+   "gf_url": "https://www.google.com/travel/flights?hl=en&gl=ca&curr=CAD&tfs=CBwQAhp7EgoyMDI3LTA2LTE5Ih8KA0hHSBIKMjAyNy0wNi0xORoDSEtHKgJDWDIDOTU5Ih8KA0hLRxIKMjAyNy0wNi0xORoDWVZSKgJDWDIDODEwagcIARIDUFZHagcIARIDU0hBagcIARIDSEdIcgcIARIDWVlacgcIARIDWVZSGjkSCjIwMjctMDYtMjdqBwgBEgNZWVpqBwgBEgNZVlJyBwgBEgNQVkdyBwgBEgNTSEFyBwgBEgNIR0hAAUgBcAGYAQE&tfu=EgIIAQ",
+   "out_date": "2027-06-19",
+   "ret_date": "2027-06-27",
+   "time_score": 35.83,
+   "overall_score": 47.3
+  },
+  {
+   "trip": "A",
+   "key": "A|CX959+CX810|CX867+CX964",
+   "out": {
+    "segments": [
+     {
+      "flight": "CX 959",
+      "airline": "Cathay Pacific",
+      "airline_cn": "国泰航空",
+      "from": "HGH",
+      "to": "HKG",
+      "dep": "2027-06-19 11:25",
+      "arr": "2027-06-19 14:05",
+      "duration": 160,
+      "aircraft": "Airbus A321neo",
+      "class": "Economy"
+     },
+     {
+      "flight": "CX 810",
+      "airline": "Cathay Pacific",
+      "airline_cn": "国泰航空",
+      "from": "HKG",
+      "to": "YVR",
+      "dep": "2027-06-19 15:55",
+      "arr": "2027-06-19 13:00",
+      "duration": 725,
+      "aircraft": "Airbus A350",
+      "class": "Economy"
+     }
+    ],
+    "layovers": [
+     {
+      "airport": "HKG",
+      "duration": 110,
+      "overnight": false
+     }
+    ],
+    "total_duration": 995,
+    "price": 2048,
+    "key": "CX959+CX810",
+    "from": "HGH",
+    "to": "YVR",
+    "dep": "2027-06-19 11:25",
+    "arr": "2027-06-19 13:00",
+    "valid": true,
+    "reject": null
+   },
+   "ret": {
+    "segments": [
+     {
+      "flight": "CX 867",
+      "airline": "Cathay Pacific",
+      "airline_cn": "国泰航空",
+      "from": "YVR",
+      "to": "HKG",
+      "dep": "2027-06-27 14:55",
+      "arr": "2027-06-28 19:20",
+      "duration": 805,
+      "aircraft": "Airbus A350",
+      "class": "Economy"
+     },
+     {
+      "flight": "CX 964",
+      "airline": "Cathay Pacific",
+      "airline_cn": "国泰航空",
+      "from": "HKG",
+      "to": "HGH",
+      "dep": "2027-06-28 20:10",
+      "arr": "2027-06-28 22:35",
+      "duration": 145,
+      "aircraft": "Airbus A330",
+      "class": "Economy"
+     }
+    ],
+    "layovers": [
+     {
+      "airport": "HKG",
+      "duration": 50,
+      "overnight": false
+     }
+    ],
+    "total_duration": 1000,
+    "price": 2048,
+    "key": "CX867+CX964",
+    "from": "YVR",
+    "to": "HGH",
+    "dep": "2027-06-27 14:55",
+    "arr": "2027-06-28 22:35"
+   },
+   "price": 2048,
+   "total_minutes": 1995,
+   "arr_penalty": 1.5,
+   "arr_slot": "中午",
+   "gf_url": "https://www.google.com/travel/flights?hl=en&gl=ca&curr=CAD&tfs=CBwQAhp7EgoyMDI3LTA2LTE5Ih8KA0hHSBIKMjAyNy0wNi0xORoDSEtHKgJDWDIDOTU5Ih8KA0hLRxIKMjAyNy0wNi0xORoDWVZSKgJDWDIDODEwagcIARIDUFZHagcIARIDU0hBagcIARIDSEdIcgcIARIDWVlacgcIARIDWVZSGjkSCjIwMjctMDYtMjdqBwgBEgNZWVpqBwgBEgNZVlJyBwgBEgNQVkdyBwgBEgNTSEFyBwgBEgNIR0hAAUgBcAGYAQE&tfu=EgIIAQ",
+   "out_date": "2027-06-19",
+   "ret_date": "2027-06-27",
+   "time_score": 34.75,
+   "overall_score": 51.3
   },
   {
    "trip": "B",
@@ -1768,6 +1990,9 @@
    "total_minutes": 1355,
    "arr_penalty": 0,
    "arr_slot": "上午",
+   "gf_url": "https://www.google.com/travel/flights?hl=en&gl=ca&curr=CAD&tfs=CBwQAhpZEgoyMDI3LTA2LTI2Ih4KA1BWRxIKMjAyNy0wNi0yNhoDWVZSKgJBQzICMjZqBwgBEgNQVkdqBwgBEgNTSEFqBwgBEgNIR0hyBwgBEgNZWVpyBwgBEgNZVlIaORIKMjAyNy0wNy0wNGoHCAESA1lZWmoHCAESA1lWUnIHCAESA1BWR3IHCAESA1NIQXIHCAESA0hHSEABSAFwAZgBAQ&tfu=EgIIAQ",
+   "out_date": "2027-06-26",
+   "ret_date": "2027-07-04",
    "time_score": 22.58,
    "overall_score": 97.1
   },
@@ -1846,8 +2071,11 @@
    "total_minutes": 1735,
    "arr_penalty": 0,
    "arr_slot": "上午",
+   "gf_url": "https://www.google.com/travel/flights?hl=en&gl=ca&curr=CAD&tfs=CBwQAhpZEgoyMDI3LTA2LTI2Ih4KA1BWRxIKMjAyNy0wNi0yNhoDWVZSKgJBQzICMjZqBwgBEgNQVkdqBwgBEgNTSEFqBwgBEgNIR0hyBwgBEgNZWVpyBwgBEgNZVlIaORIKMjAyNy0wNy0wNGoHCAESA1lZWmoHCAESA1lWUnIHCAESA1BWR3IHCAESA1NIQXIHCAESA0hHSEABSAFwAZgBAQ&tfu=EgIIAQ",
+   "out_date": "2027-06-26",
+   "ret_date": "2027-07-04",
    "time_score": 28.92,
-   "overall_score": 72.4
+   "overall_score": 73.2
   },
   {
    "trip": "B",
@@ -1942,8 +2170,11 @@
    "total_minutes": 1830,
    "arr_penalty": 0,
    "arr_slot": "上午",
+   "gf_url": "https://www.google.com/travel/flights?hl=en&gl=ca&curr=CAD&tfs=CBwQAhp6EgoyMDI3LTA2LTI2Ih8KA1BWRxIKMjAyNy0wNi0yNhoDTlJUKgJOSDIDOTIwIh4KA05SVBIKMjAyNy0wNi0yNhoDWVZSKgJKTDICMThqBwgBEgNQVkdqBwgBEgNTSEFqBwgBEgNIR0hyBwgBEgNZWVpyBwgBEgNZVlIaORIKMjAyNy0wNy0wNGoHCAESA1lZWmoHCAESA1lWUnIHCAESA1BWR3IHCAESA1NIQXIHCAESA0hHSEABSAFwAZgBAQ&tfu=EgIIAQ",
+   "out_date": "2027-06-26",
+   "ret_date": "2027-07-04",
    "time_score": 30.5,
-   "overall_score": 19.2
+   "overall_score": 20.2
   },
   {
    "trip": "B",
@@ -2038,8 +2269,11 @@
    "total_minutes": 1800,
    "arr_penalty": 0,
    "arr_slot": "上午",
+   "gf_url": "https://www.google.com/travel/flights?hl=en&gl=ca&curr=CAD&tfs=CBwQAhp6EgoyMDI3LTA2LTI2Ih8KA1BWRxIKMjAyNy0wNi0yNhoDTlJUKgJOSDIDOTIwIh4KA05SVBIKMjAyNy0wNi0yNhoDWVZSKgJKTDICMThqBwgBEgNQVkdqBwgBEgNTSEFqBwgBEgNIR0hyBwgBEgNZWVpyBwgBEgNZVlIaORIKMjAyNy0wNy0wNGoHCAESA1lZWmoHCAESA1lWUnIHCAESA1BWR3IHCAESA1NIQXIHCAESA0hHSEABSAFwAZgBAQ&tfu=EgIIAQ",
+   "out_date": "2027-06-26",
+   "ret_date": "2027-07-04",
    "time_score": 30.0,
-   "overall_score": 21.1
+   "overall_score": 22.0
   },
   {
    "trip": "B",
@@ -2134,8 +2368,11 @@
    "total_minutes": 1830,
    "arr_penalty": 3,
    "arr_slot": "下午",
+   "gf_url": "https://www.google.com/travel/flights?hl=en&gl=ca&curr=CAD&tfs=CBwQAhp6EgoyMDI3LTA2LTI2Ih8KA1BWRxIKMjAyNy0wNi0yNhoDSUNOKgJLRTIDODkwIh4KA0lDThIKMjAyNy0wNi0yNhoDWVZSKgJLRTICNzVqBwgBEgNQVkdqBwgBEgNTSEFqBwgBEgNIR0hyBwgBEgNZWVpyBwgBEgNZVlIaORIKMjAyNy0wNy0wNGoHCAESA1lZWmoHCAESA1lWUnIHCAESA1BWR3IHCAESA1NIQXIHCAESA0hHSEABSAFwAZgBAQ&tfu=EgIIAQ",
+   "out_date": "2027-06-26",
+   "ret_date": "2027-07-04",
    "time_score": 33.5,
-   "overall_score": 57.5
+   "overall_score": 58.8
   },
   {
    "trip": "B",
@@ -2230,8 +2467,11 @@
    "total_minutes": 1785,
    "arr_penalty": 3,
    "arr_slot": "下午",
+   "gf_url": "https://www.google.com/travel/flights?hl=en&gl=ca&curr=CAD&tfs=CBwQAhp6EgoyMDI3LTA2LTI2Ih8KA1BWRxIKMjAyNy0wNi0yNhoDSUNOKgJLRTIDODkwIh4KA0lDThIKMjAyNy0wNi0yNhoDWVZSKgJLRTICNzVqBwgBEgNQVkdqBwgBEgNTSEFqBwgBEgNIR0hyBwgBEgNZWVpyBwgBEgNZVlIaORIKMjAyNy0wNy0wNGoHCAESA1lZWmoHCAESA1lWUnIHCAESA1BWR3IHCAESA1NIQXIHCAESA0hHSEABSAFwAZgBAQ&tfu=EgIIAQ",
+   "out_date": "2027-06-26",
+   "ret_date": "2027-07-04",
    "time_score": 32.75,
-   "overall_score": 59.6
+   "overall_score": 60.8
   },
   {
    "trip": "B",
@@ -2326,8 +2566,209 @@
    "total_minutes": 1945,
    "arr_penalty": 3,
    "arr_slot": "下午",
+   "gf_url": "https://www.google.com/travel/flights?hl=en&gl=ca&curr=CAD&tfs=CBwQAhp6EgoyMDI3LTA2LTI2Ih8KA1BWRxIKMjAyNy0wNi0yNhoDSUNOKgJLRTIDODkwIh4KA0lDThIKMjAyNy0wNi0yNhoDWVZSKgJLRTICNzVqBwgBEgNQVkdqBwgBEgNTSEFqBwgBEgNIR0hyBwgBEgNZWVpyBwgBEgNZVlIaORIKMjAyNy0wNy0wNGoHCAESA1lZWmoHCAESA1lWUnIHCAESA1BWR3IHCAESA1NIQXIHCAESA0hHSEABSAFwAZgBAQ&tfu=EgIIAQ",
+   "out_date": "2027-06-26",
+   "ret_date": "2027-07-04",
    "time_score": 35.42,
-   "overall_score": 28.3
+   "overall_score": 29.8
+  },
+  {
+   "trip": "B",
+   "key": "B|CX959+CX810|CX867+CX964",
+   "out": {
+    "segments": [
+     {
+      "flight": "CX 959",
+      "airline": "Cathay Pacific",
+      "airline_cn": "国泰航空",
+      "from": "HGH",
+      "to": "HKG",
+      "dep": "2027-06-26 11:25",
+      "arr": "2027-06-26 14:05",
+      "duration": 160,
+      "aircraft": "Airbus A321neo",
+      "class": "Economy"
+     },
+     {
+      "flight": "CX 810",
+      "airline": "Cathay Pacific",
+      "airline_cn": "国泰航空",
+      "from": "HKG",
+      "to": "YVR",
+      "dep": "2027-06-26 15:55",
+      "arr": "2027-06-26 13:00",
+      "duration": 725,
+      "aircraft": "Airbus A350",
+      "class": "Economy"
+     }
+    ],
+    "layovers": [
+     {
+      "airport": "HKG",
+      "duration": 110,
+      "overnight": false
+     }
+    ],
+    "total_duration": 995,
+    "price": 2048,
+    "key": "CX959+CX810",
+    "from": "HGH",
+    "to": "YVR",
+    "dep": "2027-06-26 11:25",
+    "arr": "2027-06-26 13:00",
+    "valid": true,
+    "reject": null
+   },
+   "ret": {
+    "segments": [
+     {
+      "flight": "CX 867",
+      "airline": "Cathay Pacific",
+      "airline_cn": "国泰航空",
+      "from": "YVR",
+      "to": "HKG",
+      "dep": "2027-07-04 14:55",
+      "arr": "2027-07-05 19:20",
+      "duration": 805,
+      "aircraft": "Airbus A350",
+      "class": "Economy"
+     },
+     {
+      "flight": "CX 964",
+      "airline": "Cathay Pacific",
+      "airline_cn": "国泰航空",
+      "from": "HKG",
+      "to": "HGH",
+      "dep": "2027-07-05 20:10",
+      "arr": "2027-07-05 22:35",
+      "duration": 145,
+      "aircraft": "Airbus A330",
+      "class": "Economy"
+     }
+    ],
+    "layovers": [
+     {
+      "airport": "HKG",
+      "duration": 50,
+      "overnight": false
+     }
+    ],
+    "total_duration": 1000,
+    "price": 2048,
+    "key": "CX867+CX964",
+    "from": "YVR",
+    "to": "HGH",
+    "dep": "2027-07-04 14:55",
+    "arr": "2027-07-05 22:35"
+   },
+   "price": 2048,
+   "total_minutes": 1995,
+   "arr_penalty": 1.5,
+   "arr_slot": "中午",
+   "gf_url": "https://www.google.com/travel/flights?hl=en&gl=ca&curr=CAD&tfs=CBwQAhp7EgoyMDI3LTA2LTI2Ih8KA0hHSBIKMjAyNy0wNi0yNhoDSEtHKgJDWDIDOTU5Ih8KA0hLRxIKMjAyNy0wNi0yNhoDWVZSKgJDWDIDODEwagcIARIDUFZHagcIARIDU0hBagcIARIDSEdIcgcIARIDWVlacgcIARIDWVZSGjkSCjIwMjctMDctMDRqBwgBEgNZWVpqBwgBEgNZVlJyBwgBEgNQVkdyBwgBEgNTSEFyBwgBEgNIR0hAAUgBcAGYAQE&tfu=EgIIAQ",
+   "out_date": "2027-06-26",
+   "ret_date": "2027-07-04",
+   "time_score": 34.75,
+   "overall_score": 51.3
+  },
+  {
+   "trip": "B",
+   "key": "B|CX959+CX810|CX865+CX958",
+   "out": {
+    "segments": [
+     {
+      "flight": "CX 959",
+      "airline": "Cathay Pacific",
+      "airline_cn": "国泰航空",
+      "from": "HGH",
+      "to": "HKG",
+      "dep": "2027-06-26 11:25",
+      "arr": "2027-06-26 14:05",
+      "duration": 160,
+      "aircraft": "Airbus A321neo",
+      "class": "Economy"
+     },
+     {
+      "flight": "CX 810",
+      "airline": "Cathay Pacific",
+      "airline_cn": "国泰航空",
+      "from": "HKG",
+      "to": "YVR",
+      "dep": "2027-06-26 15:55",
+      "arr": "2027-06-26 13:00",
+      "duration": 725,
+      "aircraft": "Airbus A350",
+      "class": "Economy"
+     }
+    ],
+    "layovers": [
+     {
+      "airport": "HKG",
+      "duration": 110,
+      "overnight": false
+     }
+    ],
+    "total_duration": 995,
+    "price": 2048,
+    "key": "CX959+CX810",
+    "from": "HGH",
+    "to": "YVR",
+    "dep": "2027-06-26 11:25",
+    "arr": "2027-06-26 13:00",
+    "valid": true,
+    "reject": null
+   },
+   "ret": {
+    "segments": [
+     {
+      "flight": "CX 865",
+      "airline": "Cathay Pacific",
+      "airline_cn": "国泰航空",
+      "from": "YVR",
+      "to": "HKG",
+      "dep": "2027-07-04 01:25",
+      "arr": "2027-07-05 05:35",
+      "duration": 790,
+      "aircraft": "Airbus A350",
+      "class": "Economy"
+     },
+     {
+      "flight": "CX 958",
+      "airline": "Cathay Pacific",
+      "airline_cn": "国泰航空",
+      "from": "HKG",
+      "to": "HGH",
+      "dep": "2027-07-05 07:45",
+      "arr": "2027-07-05 10:10",
+      "duration": 145,
+      "aircraft": "Airbus A321neo",
+      "class": "Economy"
+     }
+    ],
+    "layovers": [
+     {
+      "airport": "HKG",
+      "duration": 130,
+      "overnight": false
+     }
+    ],
+    "total_duration": 1065,
+    "price": 2048,
+    "key": "CX865+CX958",
+    "from": "YVR",
+    "to": "HGH",
+    "dep": "2027-07-04 01:25",
+    "arr": "2027-07-05 10:10"
+   },
+   "price": 2048,
+   "total_minutes": 2060,
+   "arr_penalty": 1.5,
+   "arr_slot": "中午",
+   "gf_url": "https://www.google.com/travel/flights?hl=en&gl=ca&curr=CAD&tfs=CBwQAhp7EgoyMDI3LTA2LTI2Ih8KA0hHSBIKMjAyNy0wNi0yNhoDSEtHKgJDWDIDOTU5Ih8KA0hLRxIKMjAyNy0wNi0yNhoDWVZSKgJDWDIDODEwagcIARIDUFZHagcIARIDU0hBagcIARIDSEdIcgcIARIDWVlacgcIARIDWVZSGjkSCjIwMjctMDctMDRqBwgBEgNZWVpqBwgBEgNZVlJyBwgBEgNQVkdyBwgBEgNTSEFyBwgBEgNIR0hAAUgBcAGYAQE&tfu=EgIIAQ",
+   "out_date": "2027-06-26",
+   "ret_date": "2027-07-04",
+   "time_score": 35.83,
+   "overall_score": 47.3
   }
  ],
  "rank_all": {
@@ -2355,14 +2796,13 @@
  },
  "rejected": {
   "转机等待超过4小时": 4,
-  "经DOH转机需签证或未确认免签": 2,
   "经台北桃园转机需签证或未确认免签": 2,
-  "回程转机等待超过4小时": 10,
+  "回程转机等待超过4小时": 11,
   "回程经台北桃园转机需签证或未确认免签": 1,
-  "回程经西雅图转机需签证或未确认免签": 1,
+  "回程经西雅图转机需签证或未确认免签": 2,
   "回程经旧金山转机需签证或未确认免签": 1,
   "回程非经济舱": 2,
-  "回程非普通经济舱": 1
+  "回程非普通经济舱": 3
  },
  "airports": {
   "PVG": "上海浦东",
@@ -2391,6 +2831,9 @@
   "YYC": "卡尔加里",
   "YUL": "蒙特利尔",
   "YEG": "埃德蒙顿",
+  "DOH": "多哈",
+  "DXB": "迪拜",
+  "AUH": "阿布扎比",
   "YOW": "渥太华",
   "YWG": "温尼伯",
   "TPE": "台北桃园",
@@ -2400,6 +2843,411 @@
   "JFK": "纽约肯尼迪",
   "ORD": "芝加哥",
   "DTW": "底特律"
+ },
+ "probe_notes": [
+  {
+   "trip": "A",
+   "out": "AC26",
+   "out_price": 2136,
+   "out_from": "PVG",
+   "out_to": "YVR",
+   "valid_returns": 4,
+   "returns_seen": 5,
+   "gf_url": "https://www.google.com/travel/flights?hl=en&gl=ca&curr=CAD&tfs=CBwQAhpZEgoyMDI3LTA2LTE5Ih4KA1BWRxIKMjAyNy0wNi0xORoDWVZSKgJBQzICMjZqBwgBEgNQVkdqBwgBEgNTSEFqBwgBEgNIR0hyBwgBEgNZWVpyBwgBEgNZVlIaORIKMjAyNy0wNi0yN2oHCAESA1lZWmoHCAESA1lWUnIHCAESA1BWR3IHCAESA1NIQXIHCAESA0hHSEABSAFwAZgBAQ&tfu=EgIIAQ",
+   "rejected_returns": [
+    {
+     "ret": "CA992+CA8321",
+     "price": 2955,
+     "reason": "转机等待超过4小时",
+     "layovers": [
+      {
+       "airport": "PEK",
+       "duration": 1060,
+       "overnight": false
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "trip": "A",
+   "out": "HX247+HX80",
+   "out_price": 1223,
+   "out_from": "PVG",
+   "out_to": "YVR",
+   "valid_returns": 0,
+   "returns_seen": 3,
+   "gf_url": "https://www.google.com/travel/flights?hl=en&gl=ca&curr=CAD&tfs=CBwQAhp6EgoyMDI3LTA2LTE5Ih8KA1BWRxIKMjAyNy0wNi0xORoDSEtHKgJIWDIDMjQ3Ih4KA0hLRxIKMjAyNy0wNi0xORoDWVZSKgJIWDICODBqBwgBEgNQVkdqBwgBEgNTSEFqBwgBEgNIR0hyBwgBEgNZWVpyBwgBEgNZVlIaORIKMjAyNy0wNi0yN2oHCAESA1lZWmoHCAESA1lWUnIHCAESA1BWR3IHCAESA1NIQXIHCAESA0hHSEABSAFwAZgBAQ&tfu=EgIIAQ",
+   "rejected_returns": [
+    {
+     "ret": "HX81+HX246",
+     "price": 1222,
+     "reason": "转机等待超过4小时",
+     "layovers": [
+      {
+       "airport": "HKG",
+       "duration": 405,
+       "overnight": false
+      }
+     ]
+    },
+    {
+     "ret": "BR9+BR891+CX376",
+     "price": 4364,
+     "reason": "经台北桃园转机需签证或未确认免签",
+     "layovers": [
+      {
+       "airport": "TPE",
+       "duration": 120,
+       "overnight": false
+      },
+      {
+       "airport": "HKG",
+       "duration": 95,
+       "overnight": false
+      }
+     ]
+    },
+    {
+     "ret": "AC8810+BR25+BR722",
+     "price": 6406,
+     "reason": "经西雅图转机需签证或未确认免签",
+     "layovers": [
+      {
+       "airport": "SEA",
+       "duration": 233,
+       "overnight": false
+      },
+      {
+       "airport": "TPE",
+       "duration": 685,
+       "overnight": false
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "trip": "A",
+   "out": "KE888+KE71",
+   "out_price": 2484,
+   "out_from": "PVG",
+   "out_to": "YVR",
+   "valid_returns": 3,
+   "returns_seen": 4,
+   "gf_url": "https://www.google.com/travel/flights?hl=en&gl=ca&curr=CAD&tfs=CBwQAhp6EgoyMDI3LTA2LTE5Ih8KA1BWRxIKMjAyNy0wNi0xORoDSUNOKgJLRTIDODg4Ih4KA0lDThIKMjAyNy0wNi0xORoDWVZSKgJLRTICNzFqBwgBEgNQVkdqBwgBEgNTSEFqBwgBEgNIR0hyBwgBEgNZWVpyBwgBEgNZVlIaORIKMjAyNy0wNi0yN2oHCAESA1lZWmoHCAESA1lWUnIHCAESA1BWR3IHCAESA1NIQXIHCAESA0hHSEABSAFwAZgBAQ&tfu=EgIIAQ",
+   "rejected_returns": [
+    {
+     "ret": "KE72+KE881",
+     "price": 2447,
+     "reason": "转机等待超过4小时",
+     "layovers": [
+      {
+       "airport": "ICN",
+       "duration": 875,
+       "overnight": false
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "trip": "A",
+   "out": "KE890+KE75",
+   "out_price": 1581,
+   "out_from": "PVG",
+   "out_to": "YVR",
+   "valid_returns": 1,
+   "returns_seen": 5,
+   "gf_url": "https://www.google.com/travel/flights?hl=en&gl=ca&curr=CAD&tfs=CBwQAhp6EgoyMDI3LTA2LTE5Ih8KA1BWRxIKMjAyNy0wNi0xORoDSUNOKgJLRTIDODkwIh4KA0lDThIKMjAyNy0wNi0xORoDWVZSKgJLRTICNzVqBwgBEgNQVkdqBwgBEgNTSEFqBwgBEgNIR0hyBwgBEgNZWVpyBwgBEgNZVlIaORIKMjAyNy0wNi0yN2oHCAESA1lZWmoHCAESA1lWUnIHCAESA1BWR3IHCAESA1NIQXIHCAESA0hHSEABSAFwAZgBAQ&tfu=EgIIAQ",
+   "rejected_returns": [
+    {
+     "ret": "KE72+KE889",
+     "price": 1560,
+     "reason": "转机等待超过4小时",
+     "layovers": [
+      {
+       "airport": "ICN",
+       "duration": 1210,
+       "overnight": false
+      }
+     ]
+    },
+    {
+     "ret": "KE72+KE881",
+     "price": 1581,
+     "reason": "转机等待超过4小时",
+     "layovers": [
+      {
+       "airport": "ICN",
+       "duration": 875,
+       "overnight": false
+      }
+     ]
+    },
+    {
+     "ret": "AC572+UA35+NH975",
+     "price": 6806,
+     "reason": "经旧金山转机需签证或未确认免签",
+     "layovers": [
+      {
+       "airport": "SFO",
+       "duration": 713,
+       "overnight": false
+      },
+      {
+       "airport": "KIX",
+       "duration": 65,
+       "overnight": false
+      }
+     ]
+    },
+    {
+     "ret": "AC25",
+     "price": 15296,
+     "reason": "非经济舱",
+     "layovers": []
+    }
+   ]
+  },
+  {
+   "trip": "A",
+   "out": "CX959+CX810",
+   "out_price": 2048,
+   "out_from": "HGH",
+   "out_to": "YVR",
+   "valid_returns": 2,
+   "returns_seen": 3,
+   "gf_url": "https://www.google.com/travel/flights?hl=en&gl=ca&curr=CAD&tfs=CBwQAhp7EgoyMDI3LTA2LTE5Ih8KA0hHSBIKMjAyNy0wNi0xORoDSEtHKgJDWDIDOTU5Ih8KA0hLRxIKMjAyNy0wNi0xORoDWVZSKgJDWDIDODEwagcIARIDUFZHagcIARIDU0hBagcIARIDSEdIcgcIARIDWVlacgcIARIDWVZSGjkSCjIwMjctMDYtMjdqBwgBEgNZWVpqBwgBEgNZVlJyBwgBEgNQVkdyBwgBEgNTSEFyBwgBEgNIR0hAAUgBcAGYAQE&tfu=EgIIAQ",
+   "rejected_returns": [
+    {
+     "ret": "CZ330+CZ3521",
+     "price": 6398,
+     "reason": "非普通经济舱",
+     "layovers": [
+      {
+       "airport": "CAN",
+       "duration": 170,
+       "overnight": false
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "trip": "A",
+   "out": "QR891+QR767",
+   "out_price": 1739,
+   "out_from": "HGH",
+   "out_to": "YYZ",
+   "valid_returns": 0,
+   "returns_seen": 0,
+   "gf_url": "https://www.google.com/travel/flights?hl=en&gl=ca&curr=CAD&tfs=CBwQAhp7EgoyMDI3LTA2LTE5Ih8KA0hHSBIKMjAyNy0wNi0xORoDRE9IKgJRUjIDODkxIh8KA0RPSBIKMjAyNy0wNi0xORoDWVlaKgJRUjIDNzY3agcIARIDUFZHagcIARIDU0hBagcIARIDSEdIcgcIARIDWVlacgcIARIDWVZSGjkSCjIwMjctMDYtMjdqBwgBEgNZWVpqBwgBEgNZVlJyBwgBEgNQVkdyBwgBEgNTSEFyBwgBEgNIR0hAAUgBcAGYAQE&tfu=EgIIAQ",
+   "rejected_returns": []
+  },
+  {
+   "trip": "B",
+   "out": "AC26",
+   "out_price": 2087,
+   "out_from": "PVG",
+   "out_to": "YVR",
+   "valid_returns": 2,
+   "returns_seen": 4,
+   "gf_url": "https://www.google.com/travel/flights?hl=en&gl=ca&curr=CAD&tfs=CBwQAhpZEgoyMDI3LTA2LTI2Ih4KA1BWRxIKMjAyNy0wNi0yNhoDWVZSKgJBQzICMjZqBwgBEgNQVkdqBwgBEgNTSEFqBwgBEgNIR0hyBwgBEgNZWVpyBwgBEgNZVlIaORIKMjAyNy0wNy0wNGoHCAESA1lZWmoHCAESA1lWUnIHCAESA1BWR3IHCAESA1NIQXIHCAESA0hHSEABSAFwAZgBAQ&tfu=EgIIAQ",
+   "rejected_returns": [
+    {
+     "ret": "AC126+AC27",
+     "price": 3720,
+     "reason": "转机等待超过4小时",
+     "layovers": [
+      {
+       "airport": "YYZ",
+       "duration": 360,
+       "overnight": false
+      }
+     ]
+    },
+    {
+     "ret": "AC3+NH971",
+     "price": 5898,
+     "reason": "非经济舱",
+     "layovers": [
+      {
+       "airport": "NRT",
+       "duration": 220,
+       "overnight": false
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "trip": "B",
+   "out": "HX247+HX80",
+   "out_price": 1223,
+   "out_from": "PVG",
+   "out_to": "YVR",
+   "valid_returns": 0,
+   "returns_seen": 1,
+   "gf_url": "https://www.google.com/travel/flights?hl=en&gl=ca&curr=CAD&tfs=CBwQAhp6EgoyMDI3LTA2LTI2Ih8KA1BWRxIKMjAyNy0wNi0yNhoDSEtHKgJIWDIDMjQ3Ih4KA0hLRxIKMjAyNy0wNi0yNhoDWVZSKgJIWDICODBqBwgBEgNQVkdqBwgBEgNTSEFqBwgBEgNIR0hyBwgBEgNZWVpyBwgBEgNZVlIaORIKMjAyNy0wNy0wNGoHCAESA1lZWmoHCAESA1lWUnIHCAESA1BWR3IHCAESA1NIQXIHCAESA0hHSEABSAFwAZgBAQ&tfu=EgIIAQ",
+   "rejected_returns": [
+    {
+     "ret": "HX81+HX246",
+     "price": null,
+     "reason": "转机等待超过4小时",
+     "layovers": [
+      {
+       "airport": "HKG",
+       "duration": 405,
+       "overnight": false
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "trip": "B",
+   "out": "NH920+JL18",
+   "out_price": 13706,
+   "out_from": "PVG",
+   "out_to": "YVR",
+   "valid_returns": 2,
+   "returns_seen": 5,
+   "gf_url": "https://www.google.com/travel/flights?hl=en&gl=ca&curr=CAD&tfs=CBwQAhp6EgoyMDI3LTA2LTI2Ih8KA1BWRxIKMjAyNy0wNi0yNhoDTlJUKgJOSDIDOTIwIh4KA05SVBIKMjAyNy0wNi0yNhoDWVZSKgJKTDICMThqBwgBEgNQVkdqBwgBEgNTSEFqBwgBEgNIR0hyBwgBEgNZWVpyBwgBEgNZVlIaORIKMjAyNy0wNy0wNGoHCAESA1lZWmoHCAESA1lWUnIHCAESA1BWR3IHCAESA1NIQXIHCAESA0hHSEABSAFwAZgBAQ&tfu=EgIIAQ",
+   "rejected_returns": [
+    {
+     "ret": "CZ330+CZ3550",
+     "price": 13150,
+     "reason": "非普通经济舱",
+     "layovers": [
+      {
+       "airport": "CAN",
+       "duration": 310,
+       "overnight": false
+      }
+     ]
+    },
+    {
+     "ret": "AC3+CA920",
+     "price": 13465,
+     "reason": "转机等待超过4小时",
+     "layovers": [
+      {
+       "airport": "NRT",
+       "duration": 315,
+       "overnight": false
+      }
+     ]
+    },
+    {
+     "ret": "JL17+CA920",
+     "price": 13813,
+     "reason": "转机等待超过4小时",
+     "layovers": [
+      {
+       "airport": "NRT",
+       "duration": 255,
+       "overnight": false
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "trip": "B",
+   "out": "KE890+KE75",
+   "out_price": 1392,
+   "out_from": "PVG",
+   "out_to": "YVR",
+   "valid_returns": 3,
+   "returns_seen": 4,
+   "gf_url": "https://www.google.com/travel/flights?hl=en&gl=ca&curr=CAD&tfs=CBwQAhp6EgoyMDI3LTA2LTI2Ih8KA1BWRxIKMjAyNy0wNi0yNhoDSUNOKgJLRTIDODkwIh4KA0lDThIKMjAyNy0wNi0yNhoDWVZSKgJLRTICNzVqBwgBEgNQVkdqBwgBEgNTSEFqBwgBEgNIR0hyBwgBEgNZWVpyBwgBEgNZVlIaORIKMjAyNy0wNy0wNGoHCAESA1lZWmoHCAESA1lWUnIHCAESA1BWR3IHCAESA1NIQXIHCAESA0hHSEABSAFwAZgBAQ&tfu=EgIIAQ",
+   "rejected_returns": [
+    {
+     "ret": "KE76+KE889",
+     "price": 1392,
+     "reason": "转机等待超过4小时",
+     "layovers": [
+      {
+       "airport": "ICN",
+       "duration": 575,
+       "overnight": false
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "trip": "B",
+   "out": "CX959+CX810",
+   "out_price": 2048,
+   "out_from": "HGH",
+   "out_to": "YVR",
+   "valid_returns": 2,
+   "returns_seen": 5,
+   "gf_url": "https://www.google.com/travel/flights?hl=en&gl=ca&curr=CAD&tfs=CBwQAhp7EgoyMDI3LTA2LTI2Ih8KA0hHSBIKMjAyNy0wNi0yNhoDSEtHKgJDWDIDOTU5Ih8KA0hLRxIKMjAyNy0wNi0yNhoDWVZSKgJDWDIDODEwagcIARIDUFZHagcIARIDU0hBagcIARIDSEdIcgcIARIDWVlacgcIARIDWVZSGjkSCjIwMjctMDctMDRqBwgBEgNZWVpqBwgBEgNZVlJyBwgBEgNQVkdyBwgBEgNTSEFyBwgBEgNIR0hAAUgBcAGYAQE&tfu=EgIIAQ",
+   "rejected_returns": [
+    {
+     "ret": "AS2330+CX833+CX964",
+     "price": 2489,
+     "reason": "经西雅图转机需签证或未确认免签",
+     "layovers": [
+      {
+       "airport": "SEA",
+       "duration": 180,
+       "overnight": false
+      },
+      {
+       "airport": "HKG",
+       "duration": 220,
+       "overnight": false
+      }
+     ]
+    },
+    {
+     "ret": "CX865+CA728",
+     "price": 2825,
+     "reason": "非普通经济舱",
+     "layovers": [
+      {
+       "airport": "HKG",
+       "duration": 780,
+       "overnight": false
+      }
+     ]
+    },
+    {
+     "ret": "JL17+CA146",
+     "price": 11439,
+     "reason": "转机等待超过4小时",
+     "layovers": [
+      {
+       "airport": "NRT",
+       "duration": 305,
+       "overnight": false
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "trip": "B",
+   "out": "QR891+QR767",
+   "out_price": 1739,
+   "out_from": "HGH",
+   "out_to": "YYZ",
+   "valid_returns": 0,
+   "returns_seen": 0,
+   "gf_url": "https://www.google.com/travel/flights?hl=en&gl=ca&curr=CAD&tfs=CBwQAhp7EgoyMDI3LTA2LTI2Ih8KA0hHSBIKMjAyNy0wNi0yNhoDRE9IKgJRUjIDODkxIh8KA0RPSBIKMjAyNy0wNi0yNhoDWVlaKgJRUjIDNzY3agcIARIDUFZHagcIARIDU0hBagcIARIDSEdIcgcIARIDWVlacgcIARIDWVZSGjkSCjIwMjctMDctMDRqBwgBEgNZWVpqBwgBEgNZVlJyBwgBEgNQVkdyBwgBEgNTSEFyBwgBEgNIR0hAAUgBcAGYAQE&tfu=EgIIAQ",
+   "rejected_returns": []
+  }
+ ],
+ "quota": {
+  "plan_name": "Free Plan",
+  "searches_per_month": 250,
+  "plan_searches_left": 236,
+  "this_month_usage": 14,
+  "total_searches_left": 236
  },
  "changes": []
 }
