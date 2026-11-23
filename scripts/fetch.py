@@ -26,7 +26,6 @@ ORIGINS = "PVG,SHA,HGH"          # 上海浦东、上海虹桥、杭州萧山
 DESTS = ["YVR", "YYZ"]           # 温哥华、多伦多分开查，保证两个目的地都有足够的候选
 TRIPS = [
     {"id": "A", "label": "方案一：6月19日出发，6月27日返回", "out": "2027-06-19", "ret": "2027-06-27"},
-    {"id": "B", "label": "方案二：6月26日出发，7月4日返回（整体推后一周）", "out": "2027-06-26", "ret": "2027-07-04"},
 ]
 CURRENCY = "CAD"
 MAX_LAYOVER_MIN = 240            # 转机等待不超过4小时
@@ -187,7 +186,7 @@ def arrival_penalty(arr_time):
 
 
 def build_pairs(trip, offline=None):
-    """两个目的地分别查询后合并。每次刷新约 2日期×2目的地×(1+4+1)=24 次查询。"""
+    """两个目的地分别查询后合并。每次刷新约 1日期×2目的地×(1+4+1)=12 次查询。"""
     outs, pairs, rejected, notes, excluded = [], [], {}, [], []
     for dest in DESTS:
         o, p, r, n, e = build_pairs_dest(trip, dest, offline)

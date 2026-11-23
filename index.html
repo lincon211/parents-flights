@@ -120,7 +120,7 @@ svg text{fill:var(--muted);font-size:11px}
 <body>
 <div class="wrap">
   <h1>爸妈赴加往返机票追踪</h1>
-  <div class="sub">上海 / 杭州 ⇄ 多伦多 / 温哥华 · 2027年6月 · 经济舱 · <span id="upd">加载中…</span></div>
+  <div class="sub">上海 / 杭州 ⇄ 多伦多 / 温哥华 · 2027年6月19日去 · 6月27日回 · 经济舱 · <span id="upd">加载中…</span></div>
 
   <nav class="pnav" id="pnav">
     <a href="#fav" data-p="fav">收藏夹</a>
@@ -144,7 +144,7 @@ svg text{fill:var(--muted);font-size:11px}
   <h2>全部符合条件的组合 <small>按综合分排序，可以从这里挑选收藏</small></h2>
   <details class="card" id="alldet"><summary id="allsum">展开全部组合</summary><div id="all"></div></details>
 
-  <h2>价格走势 <small>每个日期方案的最低往返价（每人，加元）</small></h2>
+  <h2>价格走势 <small>最低往返价（每人，加元）</small></h2>
   <div class="card" id="trend"></div>
 
   <h2>最近变化 <small>价格涨跌、航班新增或消失、最优解更新</small></h2>
@@ -160,7 +160,7 @@ svg text{fill:var(--muted);font-size:11px}
   <div class="card note">
     <ul>
       <li>出发：上海浦东、上海虹桥、杭州萧山；到达：多伦多、温哥华。</li>
-      <li>方案一：6月19日出发、6月27日返回；方案二：整体推后一周，6月26日出发、7月4日返回（返程日期为推测）。</li>
+      <li>日期：2027年6月19日出发，6月27日返回（原先比较的6月26日出发方案已取消）。</li>
       <li>只看经济舱；转机等待不超过4小时；只保留中国护照无需过境签的转机地（中国大陆、香港、澳门、日本、韩国、卡塔尔、阿联酋、加拿大境内）。经美国、台湾转机的航班已排除。</li>
       <li>托运行李：已排除标注“托运行李另收费”的票价。卡片上的托运和随身行李额度是按主承运航司（飞行时间最长那段的航司）经济舱的一般规定整理的，不是从票价里读出来的；基础票、特价票可能更少，购票前请在订票页面核实。</li>
       <li><b>时间榜</b>：往返总飞行时间（小时）加上落地罚分。加拿大当地上午落地不罚分，中午+1.5，下午+3，晚上+6，深夜+9。</li>
@@ -177,8 +177,9 @@ svg text{fill:var(--muted);font-size:11px}
 </div>
 <script>
 const $=s=>document.querySelector(s);
-const TRIPNAME={A:"方案一 6/19–6/27",B:"方案二 6/26–7/4"};
-let D=null,H=[],tab="all",dest="all";
+const TRIPNAME={A:"6/19去·6/27回",B:"6/26去·7/4回（已取消）"};
+const ACTIVE=["A"];   // 只看6/19–6/27
+let D=null,H=[],tab="A",dest="all";
 try{const v=localStorage.getItem("dest");if(["all","YVR","YYZ"].includes(v))dest=v}catch(e){}
 const DESTNAME={all:"多伦多和温哥华",YVR:"只看温哥华",YYZ:"只看多伦多"};
 function fmtDur(m){return Math.floor(m/60)+"小时"+(m%60?String(m%60).padStart(2,"0")+"分":"")}
@@ -336,10 +337,10 @@ function favHtml(rec, i){
 function renderFav(){
   const el = $("#fav");
   $("#favtabs").innerHTML = FAV_DB ? Object.entries(WHO).map(([w,n]) =>
-    `<button class="${favTab===w?"on":""}" data-w="${w}">${n}的收藏（${Object.keys(FAV[w]).length}）</button>`).join("") : "";
+    `<button class="${favTab===w?"on":""}" data-w="${w}">${n}的收藏（${Object.values(FAV[w]).filter(r=>ACTIVE.includes(r.trip)).length}）</button>`).join("") : "";
   document.querySelectorAll("#favtabs button").forEach(b => b.onclick = () => { favTab = b.dataset.w; renderFav(); });
   if(!FAV_DB){ el.innerHTML = `<div class="card empty">收藏夹还没开通，设置好之后这里会出现爸爸和妈妈两个收藏夹。</div>`; return; }
-  const recs = Object.values(FAV[favTab]).sort((a,b) => a.added < b.added ? -1 : 1);
+  const recs = Object.values(FAV[favTab]).filter(r => ACTIVE.includes(r.trip)).sort((a,b) => a.added < b.added ? -1 : 1);
   el.innerHTML = (favErr ? `<div class="card note">${favErr}</div>` : "") + (recs.length ? recs.map(favHtml).join("") :
     `<div class="card empty">${WHO[favTab]}还没有收藏。点下面任意航班卡片上的“☆ 加入${WHO[favTab]}收藏”即可。</div>`);
   bindFavBtns(el);
@@ -392,7 +393,7 @@ function byKey(){
   (D.excluded_pairs || []).forEach(p => m[p.key] = p);
   return m;
 }
-const inTab = (t, to) => (tab === "all" || t === tab) && (dest === "all" || !to || to === dest);
+const inTab = (t, to) => ACTIVE.includes(t) && (dest === "all" || !to || to === dest);
 // 参与排名的组合：合格的 + 手动加回的，去掉被否决的
 function pool(){
   const L = (D.pairs || []).concat((D.excluded_pairs || []).filter(p => isRestored(p.key)));
@@ -449,7 +450,7 @@ function priceTxt(p){ return (p.price_est ? "约$" : "$") + p.price }
 function pairHtml(p,i,extra,withDec){
   const slotCls=p.arr_slot==="上午"?"g":(p.arr_slot==="晚上"||p.arr_slot==="深夜/凌晨")?"w":"";
   const os = p._os != null ? p._os : p.overall_score;
-  const tags = `<span class="tg">${TRIPNAME[p.trip]}</span><span class="tg ${slotCls}">${p.arr_slot}落地</span>` +
+  const tags = `<span class="tg ${slotCls}">${p.arr_slot}落地</span>` +
     (isNew(p.key)?'<span class="tg new">新增</span>':"") +
     (p.reject && isRestored(p.key) ? `<span class="tg warn" title="${p.reject}">手动加回</span>` : "");
   const om=mainCarrier(p.out), rm=mainCarrier(p.ret);
@@ -476,14 +477,13 @@ function showPage(){
 }
 window.addEventListener("hashchange",()=>{showPage();window.scrollTo(0,0)});
 function navCounts(){
-  const n=FAV_DB?Object.keys(FAV.dad).length+Object.keys(FAV.mom).length:0;
+  const n=FAV_DB?[...Object.values(FAV.dad),...Object.values(FAV.mom)].filter(r=>ACTIVE.includes(r.trip)).length:0;
   const a=document.querySelector('#pnav a[data-p="fav"]');
   if(a)a.innerHTML="收藏夹"+(n?`<span class="cnt">${n}</span>`:"");
 }
 const OPEN=new Set();   // 记住哪些榜单展开了，自动同步时不收起
 function render(){
-  $("#tabs").innerHTML=`<div class="tgrp"><span class="tl">日期</span>`+[["all","两个日期一起比"],["A",TRIPNAME.A],["B",TRIPNAME.B]].map(([k,v])=>`<button class="${tab===k?"on":""}" data-k="${k}">${v}</button>`).join("")+
-    `</div><div class="tgrp"><span class="tl">目的地</span>`+Object.entries(DESTNAME).map(([k,v])=>`<button class="${dest===k?"on":""}" data-d="${k}">${v}</button>`).join("")+`</div>`;
+  $("#tabs").innerHTML=`<div class="tgrp"><span class="tl">目的地</span>`+Object.entries(DESTNAME).map(([k,v])=>`<button class="${dest===k?"on":""}" data-d="${k}">${v}</button>`).join("")+`</div>`;
   document.querySelectorAll("#tabs button[data-k]").forEach(b=>b.onclick=()=>{tab=b.dataset.k;renderAllViews()});
   document.querySelectorAll("#tabs button[data-d]").forEach(b=>b.onclick=()=>{dest=b.dataset.d;try{localStorage.setItem("dest",dest)}catch(e){}renderAllViews()});
   if(!D||!D.pairs||!D.pairs.length){$("#main").innerHTML=["overall","time","price"].map(k=>`<div class="page" data-page="${k}"><div class="card empty">还没有可用的航班数据。首次自动查询完成后这里会显示结果。</div></div>`).join("");return}
@@ -536,23 +536,23 @@ function renderVetoed(){
 function renderTrend(){
   if(H.length<1){$("#trend").innerHTML=`<div class="empty">暂无历史记录</div>`;return}
   const W=900,Hh=180,pad=40,pts={A:[],B:[]};
-  H.forEach((h,i)=>{for(const k of ["A","B"]){const v=h.best_price&&h.best_price[k];if(v)pts[k].push([i,v])}});
+  H.forEach((h,i)=>{for(const k of ACTIVE){const v=h.best_price&&h.best_price[k];if(v)pts[k].push([i,v])}});
   const all=[...pts.A,...pts.B].map(p=>p[1]);if(!all.length){$("#trend").innerHTML=`<div class="empty">暂无价格记录</div>`;return}
   const mn=Math.min(...all)*0.97,mx=Math.max(...all)*1.03,n=Math.max(H.length-1,1);
   const X=i=>pad+(W-pad*2)*i/n,Y=v=>Hh-25-(Hh-45)*(v-mn)/((mx-mn)||1);
   const col={A:"var(--accent)",B:"var(--good)"};
   let svg=`<svg viewBox="0 0 ${W} ${Hh}" width="100%" role="img" aria-label="最低价走势">`;
-  for(const k of ["A","B"]){const p=pts[k];if(!p.length)continue;
+  for(const k of ACTIVE){const p=pts[k];if(!p.length)continue;
     svg+=`<polyline fill="none" stroke="${col[k]}" stroke-width="2" points="${p.map(([i,v])=>X(i)+","+Y(v)).join(" ")}"/>`;
-    const [li,lv]=p[p.length-1];svg+=`<circle cx="${X(li)}" cy="${Y(lv)}" r="3.5" fill="${col[k]}"/><text x="${X(li)-4}" y="${Y(lv)-8}" text-anchor="end">${TRIPNAME[k].slice(0,3)} $${lv}</text>`}
+    const [li,lv]=p[p.length-1];svg+=`<circle cx="${X(li)}" cy="${Y(lv)}" r="3.5" fill="${col[k]}"/><text x="${X(li)-4}" y="${Y(lv)-8}" text-anchor="end">最低 $${lv}</text>`}
   const d0=H[0].time.slice(5,10),d1=H[H.length-1].time.slice(5,10);
   svg+=`<text x="${pad}" y="${Hh-6}">${d0.replace("-","月")}日</text><text x="${W-pad}" y="${Hh-6}" text-anchor="end">${d1.replace("-","月")}日</text></svg>`;
   $("#trend").innerHTML=svg}
 function renderChanges(){
-  const items=[];[...H].reverse().forEach(h=>(h.changes||[]).forEach(c=>items.push({...c,time:h.time})));
+  const items=[];[...H].reverse().forEach(h=>(h.changes||[]).filter(c=>!c.trip||ACTIVE.includes(c.trip)).forEach(c=>items.push({...c,time:h.time})));
   if(!items.length){$("#changes").innerHTML=`<div class="empty">暂无变化记录（至少需要两次查询）</div>`;return}
   const cls={"降价":"down","涨价":"up","新增航班":"new","航班消失":"gone","最优解更新":""};
-  $("#changes").innerHTML=items.slice(0,40).map(c=>`<div class="chg"><span class="tag ${cls[c.type]||""}">${c.type}</span><div>${c.trip?TRIPNAME[c.trip]+"：":""}${c.detail}<div class="note">${new Date(c.time).toLocaleString("zh-CN",{hour12:false})}</div></div></div>`).join("")}
+  $("#changes").innerHTML=items.slice(0,40).map(c=>`<div class="chg"><span class="tag ${cls[c.type]||""}">${c.type}</span><div>${c.detail}<div class="note">${new Date(c.time).toLocaleString("zh-CN",{hour12:false})}</div></div></div>`).join("")}
 showPage();
 Promise.all([fetch("data/latest.json?"+Date.now()).then(r=>r.ok?r.json():null).catch(()=>null),
              fetch("data/history.json?"+Date.now()).then(r=>r.ok?r.json():[]).catch(()=>[])]).then(([d,h])=>{
