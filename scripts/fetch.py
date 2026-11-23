@@ -30,7 +30,7 @@ TRIPS = [
 ]
 CURRENCY = "CAD"
 MAX_LAYOVER_MIN = 240            # 转机等待不超过4小时
-RETURN_PROBES_PER_TRIP = int(os.environ.get("RETURN_PROBES", "4"))  # 每个日期组合深入查回程的去程数量
+RETURN_PROBES_PER_TRIP = int(os.environ.get("RETURN_PROBES", "6"))  # 每个日期组合深入查回程的去程数量
 TOP_N = 5
 
 # 中国护照无需过境签即可在机场内转机的地区（经美国、台湾转机需签证或许可，排除）
@@ -42,6 +42,8 @@ TRANSIT_OK_PREFIX = {
     "HKG", "MFM",
     # 韩国、日本（机场内转机免签）
     "ICN", "GMP", "PUS", "NRT", "HND", "KIX", "NGO", "FUK", "CTS",
+    # 卡塔尔、阿联酋（中国护照免签，机场内转机无需签证）
+    "DOH", "DXB", "AUH",
     # 加拿大境内（持加拿大签证入境后转国内航班）
     "YVR", "YYZ", "YYC", "YUL", "YEG", "YOW", "YWG",
 }
@@ -64,7 +66,7 @@ AIRPORT_CN = {
     "TFU": "成都天府", "CKG": "重庆江北", "XMN": "厦门高崎", "TAO": "青岛胶东", "NKG": "南京禄口",
     "HKG": "香港", "MFM": "澳门", "ICN": "首尔仁川", "GMP": "首尔金浦", "NRT": "东京成田",
     "HND": "东京羽田", "KIX": "大阪关西", "NGO": "名古屋", "YYC": "卡尔加里", "YUL": "蒙特利尔",
-    "YEG": "埃德蒙顿", "YOW": "渥太华", "YWG": "温尼伯", "TPE": "台北桃园", "SEA": "西雅图",
+    "YEG": "埃德蒙顿", "DOH": "多哈", "DXB": "迪拜", "AUH": "阿布扎比", "YOW": "渥太华", "YWG": "温尼伯", "TPE": "台北桃园", "SEA": "西雅图",
     "SFO": "旧金山", "LAX": "洛杉矶", "JFK": "纽约肯尼迪", "ORD": "芝加哥", "DTW": "底特律",
 }
 
@@ -95,6 +97,20 @@ def serpapi(params, offline_dir=None, tag=None):
     if data.get("error"):
         print("SerpApi 返回：", data["error"], file=sys.stderr)
     return data
+
+
+def account_info(offline=None):
+    """查询 SerpApi 剩余额度（这个接口不占用查询次数）。"""
+    if offline:
+        return None
+    try:
+        key = (os.environ.get("SERPAPI_KEY") or "").strip()
+        with urllib.request.urlopen("https://serpapi.com/account.json?api_key=" + key, timeout=30) as r:
+            a = json.loads(r.read())
+        return {k: a.get(k) for k in ("plan_name", "searches_per_month", "plan_searches_left",
+                                      "this_month_usage", "total_searches_left")}
+    except Exception as e:  # 额度查询失败不影响主流程
+        return {"error": str(e)[:200]}
 
 
 def options(resp):
@@ -201,12 +217,13 @@ def build_pairs(trip, offline=None):
             break
     probes = probes[:RETURN_PROBES_PER_TRIP]
 
-    pairs = []
+    pairs, notes = [], []
     for i, ob in enumerate(probes):
         rr = serpapi({"type": 1, "departure_id": ORIGINS, "arrival_id": DESTS,
                       "outbound_date": trip["out"], "return_date": trip["ret"],
                       "departure_token": ob["token"]}, offline, f"{trip['id']}_ret{i}")
         gf_url = (rr.get("search_metadata") or {}).get("google_flights_url")
+        n_ok, bad = 0, []
         for r in options(rr):
             rleg = parse_leg(r)
             if not rleg:
@@ -214,7 +231,10 @@ def build_pairs(trip, offline=None):
             why = reject_reason(rleg)
             if why:
                 rejected["回程" + why] = rejected.get("回程" + why, 0) + 1
+                bad.append({"ret": rleg["key"], "price": rleg["price"], "reason": why,
+                            "layovers": rleg["layovers"]})
                 continue
+            n_ok += 1
             price = rleg["price"] or ob["price"]
             pen, slot = arrival_penalty(ob["arr"])
             pairs.append({
@@ -224,7 +244,11 @@ def build_pairs(trip, offline=None):
                 "arr_penalty": pen, "arr_slot": slot, "gf_url": gf_url,
                 "out_date": trip["out"], "ret_date": trip["ret"],
             })
-    return outs, pairs, rejected
+        notes.append({"trip": trip["id"], "out": ob["key"], "out_price": ob["price"],
+                      "out_from": ob["from"], "out_to": ob["to"], "valid_returns": n_ok,
+                      "returns_seen": n_ok + len(bad), "gf_url": gf_url,
+                      "rejected_returns": sorted(bad, key=lambda b: b["price"] or 1e9)[:5]})
+    return outs, pairs, rejected, notes
 
 
 def strip(leg):
@@ -304,9 +328,10 @@ def main():
     args = ap.parse_args()
 
     now = dt.datetime.now(dt.timezone.utc).isoformat(timespec="seconds")
-    all_outs, all_pairs, rejected_all, trips_out = [], [], {}, []
+    all_outs, all_pairs, rejected_all, trips_out, all_notes = [], [], {}, [], []
     for trip in TRIPS:
-        outs, pairs, rej = build_pairs(trip, args.offline)
+        outs, pairs, rej, notes = build_pairs(trip, args.offline)
+        all_notes += notes
         for o in outs:
             o["trip"] = trip["id"]
         all_outs += outs
@@ -323,7 +348,7 @@ def main():
         "outbounds": [{k: v for k, v in strip(o).items() if k != "segments"} | {"segments": o["segments"]}
                       for o in all_outs],
         "pairs": all_pairs, "rank_all": rank(all_pairs), "rejected": rejected_all,
-        "airports": AIRPORT_CN,
+        "airports": AIRPORT_CN, "probe_notes": all_notes, "quota": account_info(args.offline),
     }
     # rank() 会给 pairs 写入分数，按全部组合重新计算一次以统一口径
     DATA.mkdir(exist_ok=True)

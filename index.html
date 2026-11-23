@@ -60,12 +60,15 @@ svg text{fill:var(--muted);font-size:11px}
   <h2>最近变化 <small>价格涨跌、航班新增或消失、最优解更新</small></h2>
   <div class="card" id="changes"></div>
 
+  <h2>便宜但被排除的选项 <small>为什么谷歌上更便宜的票没有进榜</small></h2>
+  <div class="card" id="excluded"></div>
+
   <h2>筛选规则与说明</h2>
   <div class="card note">
     <ul>
       <li>出发：上海浦东、上海虹桥、杭州萧山；到达：多伦多、温哥华。</li>
       <li>方案一：6月19日出发、6月27日返回；方案二：整体推后一周，6月26日出发、7月4日返回（返程日期为推测）。</li>
-      <li>只看经济舱；转机等待不超过4小时；只保留中国护照无需过境签的转机地（中国大陆、香港、澳门、日本、韩国、加拿大境内）。经美国、台湾转机的航班已排除。</li>
+      <li>只看经济舱；转机等待不超过4小时；只保留中国护照无需过境签的转机地（中国大陆、香港、澳门、日本、韩国、卡塔尔、阿联酋、加拿大境内）。经美国、台湾转机的航班已排除。</li>
       <li>托运行李：已排除标注“托运行李另收费”的票价。卡片上的托运和随身行李额度是按主承运航司（飞行时间最长那段的航司）经济舱的一般规定整理的，不是从票价里读出来的；基础票、特价票可能更少，购票前请在订票页面核实。</li>
       <li><b>时间榜</b>：往返总飞行时间（小时）加上落地罚分。加拿大当地上午落地不罚分，中午+1.5，下午+3，晚上+6，深夜+9。</li>
       <li><b>价格榜</b>：按每人往返价格从低到高。</li>
@@ -142,7 +145,7 @@ function rankFor(kind){
   return src[kind].map(k=>byKey[k]).filter(Boolean)}
 function render(){
   $("#tabs").innerHTML=[["all","两个日期一起比"],["A",TRIPNAME.A],["B",TRIPNAME.B]].map(([k,v])=>`<button class="${tab===k?"on":""}" data-k="${k}">${v}</button>`).join("");
-  document.querySelectorAll("#tabs button").forEach(b=>b.onclick=()=>{tab=b.dataset.k;render()});
+  document.querySelectorAll("#tabs button").forEach(b=>b.onclick=()=>{tab=b.dataset.k;render();renderExcluded()});
   if(!D||!D.pairs||!D.pairs.length){$("#main").innerHTML=`<div class="card empty">还没有可用的航班数据。首次自动查询完成后这里会显示结果。</div>`;return}
   const sec=[["overall","综合最佳前五","时间和价格各占一半"],["time","飞行时间短、上午落地前五","往返总时长＋落地时段"],["price","价格最低前五","每人往返含税价"]];
   $("#main").innerHTML=sec.map(([k,t,s])=>{const L=rankFor(k);return `<h2>${t} <small>${s}</small></h2>`+(L.length?L.map(pairHtml).join(""):`<div class="card empty">暂无符合条件的组合</div>`)}).join("");
@@ -162,6 +165,28 @@ function renderTrend(){
   const d0=H[0].time.slice(5,10),d1=H[H.length-1].time.slice(5,10);
   svg+=`<text x="${pad}" y="${Hh-6}">${d0.replace("-","月")}日</text><text x="${W-pad}" y="${Hh-6}" text-anchor="end">${d1.replace("-","月")}日</text></svg>`;
   $("#trend").innerHTML=svg}
+function layTxt(ls){return ls&&ls.length?"（"+ls.map(l=>ap(l.airport)+"转机"+fmtDur(l.duration)).join("，")+"）":""}
+function renderExcluded(){
+  const el=$("#excluded");if(!D){el.innerHTML="";return}
+  const best={};D.pairs.forEach(p=>{best[p.trip]=Math.min(best[p.trip]||1e9,p.price)});
+  const inTab=t=>tab==="all"||t===tab;
+  const rows=[];
+  (D.probe_notes||[]).filter(n=>n.valid_returns===0&&inTab(n.trip)).forEach(n=>{
+    const r=n.rejected_returns&&n.rejected_returns[0];
+    let t=`<b>${TRIPNAME[n.trip]}</b>：去程 <span class="fn">${n.out}</span>（${ap(n.out_from)}→${ap(n.out_to)}）往返最低 $${n.out_price}。去程符合要求，但查到的 ${n.returns_seen} 个回程都不符合`;
+    if(r)t+=`，例如回程 <span class="fn">${r.ret}</span> $${r.price}：${r.reason}${layTxt(r.layovers)}`;
+    t+="。";
+    if(n.gf_url)t+=` <a href="${n.gf_url}" target="_blank" rel="noopener">在谷歌航班核对 ↗</a>`;
+    rows.push([n.out_price,t])});
+  (D.outbounds||[]).filter(o=>!o.valid&&o.price&&o.price<(best[o.trip]||1e9)&&inTab(o.trip)).forEach(o=>{
+    rows.push([o.price,`<b>${TRIPNAME[o.trip]}</b>：去程 <span class="fn">${o.key}</span>（${ap(o.from)}→${ap(o.to)}）往返最低 $${o.price}，排除原因：${o.reject}${layTxt(o.layovers)}。`])});
+  if(D.probe_notes){
+    const probed=new Set(D.probe_notes.map(n=>n.trip+"|"+n.out));
+    (D.outbounds||[]).filter(o=>o.valid&&!probed.has(o.trip+"|"+o.key)&&inTab(o.trip)).forEach(o=>{
+      rows.push([o.price,`<b>${TRIPNAME[o.trip]}</b>：去程 <span class="fn">${o.key}</span> 往返最低 $${o.price}，这次没有轮到查它的回程（每次查询次数有限）。`])});
+  }
+  rows.sort((a,b)=>a[0]-b[0]);
+  el.innerHTML=rows.length?rows.map(r=>`<div class="chg"><div>${r[1]}</div></div>`).join(""):`<div class="empty">没有比榜单更便宜但被排除的选项</div>`}
 function renderChanges(){
   const items=[];[...H].reverse().forEach(h=>(h.changes||[]).forEach(c=>items.push({...c,time:h.time})));
   if(!items.length){$("#changes").innerHTML=`<div class="empty">暂无变化记录（至少需要两次查询）</div>`;return}
@@ -172,7 +197,7 @@ Promise.all([fetch("data/latest.json?"+Date.now()).then(r=>r.ok?r.json():null).c
   D=d;H=h||[];
   $("#upd").textContent=D&&D.updated?"更新于 "+new Date(D.updated).toLocaleString("zh-CN",{hour12:false}):"尚未查询";
   if(D&&D.rejected){const r=Object.entries(D.rejected);if(r.length)$("#rej").innerHTML="<p>本次排除的航班："+r.map(([k,v])=>`${k} ${v}个`).join("，")+"。</p>"}
-  render();renderTrend();renderChanges()});
+  render();renderTrend();renderChanges();renderExcluded()});
 </script>
 </body>
 </html>
