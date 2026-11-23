@@ -51,6 +51,11 @@ details summary{cursor:pointer;color:var(--accent);font-weight:600}
 .favbtn.veto{color:var(--muted)}
 .u{color:var(--accent)}
 @media (max-width:560px){.exrow{flex-direction:column}}
+details.more{margin:4px 0 0}
+details.more > summary{padding:8px 2px;list-style:none}
+details.more > summary::-webkit-details-marker{display:none}
+details.more > summary::before{content:"▸ "}
+details.more[open] > summary::before{content:"▾ "}
 .chg{display:flex;gap:10px;padding:6px 0;border-bottom:1px solid var(--line);font-size:14px}
 .chg:last-child{border-bottom:0}
 .tag{flex:none;font-size:12px;padding:1px 8px;border-radius:4px;background:var(--chip);height:fit-content}
@@ -311,7 +316,7 @@ function topN(L, cmp){
     const o = p.trip + p.out.key;
     if((per[o] || 0) >= 2) continue;          // 同一去程最多出现两次
     per[o] = (per[o] || 0) + 1; out.push(p);
-    if(out.length >= 5) break;
+    if(out.length >= 10) break;
   }
   return out;
 }
@@ -353,12 +358,20 @@ function pairHtml(p,i,extra,withDec){
   <div class="chips"><span class="chip">${TRIPNAME[p.trip]}</span><span class="chip ${slotCls}">加拿大${p.arr_slot}落地</span>
   <span class="chip">往返共飞${fmtDur(p.total_minutes)}</span>${os!=null?`<span class="chip">综合分 ${os}</span>`:""}</div>${extra||""}${linksHtml(p)}
   </div><div class="price">${priceTxt(p)}<small>每人往返 · 两人约 $${p.price*2}</small>${favBtns(p)}${withDec===false?"":decBtns(p)}</div></div></div>`}
+const OPEN=new Set();   // 记住哪些榜单展开了，自动同步时不收起
 function render(){
   $("#tabs").innerHTML=[["all","两个日期一起比"],["A",TRIPNAME.A],["B",TRIPNAME.B]].map(([k,v])=>`<button class="${tab===k?"on":""}" data-k="${k}">${v}</button>`).join("");
   document.querySelectorAll("#tabs button").forEach(b=>b.onclick=()=>{tab=b.dataset.k;renderAllViews()});
   if(!D||!D.pairs||!D.pairs.length){$("#main").innerHTML=`<div class="card empty">还没有可用的航班数据。首次自动查询完成后这里会显示结果。</div>`;return}
-  const sec=[["overall","综合最佳前五","时间和价格各占一半"],["time","飞行时间短、上午落地前五","往返总时长＋落地时段"],["price","价格最低前五","每人往返含税价"]];
-  $("#main").innerHTML=sec.map(([k,t,s])=>{const L=rankFor(k);return `<h2>${t} <small>${s}</small></h2>`+(L.length?L.map((p,i)=>pairHtml(p,i,"",true)).join(""):`<div class="card empty">暂无符合条件的组合</div>`)}).join("");
+  const sec=[["overall","综合最佳前十","时间和价格各占一半"],["time","飞行时间短、上午落地前十","往返总时长＋落地时段"],["price","价格最低前十","每人往返含税价"]];
+  $("#main").innerHTML=sec.map(([k,t,s])=>{const L=rankFor(k);
+    const head=`<h2>${t} <small>${s}</small></h2>`;
+    if(!L.length) return head+`<div class="card empty">暂无符合条件的组合</div>`;
+    const first=L.slice(0,5).map((p,i)=>pairHtml(p,i,"",true)).join("");
+    const rest=L.slice(5);
+    return head+first+(rest.length?`<details class="more" data-sec="${k}" ${OPEN.has(k)?"open":""}><summary>展开第6–${L.length}名</summary>${rest.map((p,i)=>pairHtml(p,i+5,"",true)).join("")}</details>`:"");
+  }).join("");
+  $("#main").querySelectorAll("details.more").forEach(d=>d.ontoggle=()=>{d.open?OPEN.add(d.dataset.sec):OPEN.delete(d.dataset.sec);d.querySelector("summary").textContent=d.open?"收起第6名以后":`展开第6–${5+d.querySelectorAll(":scope > .card").length}名`});
   bindFavBtns($("#main")); bindDecBtns($("#main"));
 }
 function layTxt(ls){return ls&&ls.length?"（"+ls.map(l=>ap(l.airport)+"转机"+fmtDur(l.duration)).join("，")+"）":""}
