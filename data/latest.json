@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-23T00:16:25+00:00",
+ "updated": "2026-11-23T00:53:44+00:00",
  "currency": "CAD",
  "trips": [
   {
@@ -1105,6 +1105,7 @@
     "arr": "2027-06-28 22:50"
    },
    "price": 2028,
+   "price_est": false,
    "total_minutes": 1775,
    "arr_penalty": 0,
    "arr_slot": "上午",
@@ -1186,6 +1187,7 @@
     "arr": "2027-06-28 22:50"
    },
    "price": 2028,
+   "price_est": false,
    "total_minutes": 1735,
    "arr_penalty": 0,
    "arr_slot": "上午",
@@ -1249,6 +1251,7 @@
     "arr": "2027-06-28 14:05"
    },
    "price": 2136,
+   "price_est": false,
    "total_minutes": 1355,
    "arr_penalty": 0,
    "arr_slot": "上午",
@@ -1330,6 +1333,7 @@
     "arr": "2027-06-28 20:10"
    },
    "price": 9489,
+   "price_est": false,
    "total_minutes": 1505,
    "arr_penalty": 0,
    "arr_slot": "上午",
@@ -1429,6 +1433,7 @@
     "arr": "2027-06-28 09:40"
    },
    "price": 2752,
+   "price_est": false,
    "total_minutes": 1900,
    "arr_penalty": 1.5,
    "arr_slot": "中午",
@@ -1528,6 +1533,7 @@
     "arr": "2027-06-28 20:10"
    },
    "price": 2752,
+   "price_est": false,
    "total_minutes": 1695,
    "arr_penalty": 1.5,
    "arr_slot": "中午",
@@ -1627,6 +1633,7 @@
     "arr": "2027-06-29 00:45"
    },
    "price": 7778,
+   "price_est": false,
    "total_minutes": 1855,
    "arr_penalty": 1.5,
    "arr_slot": "中午",
@@ -1726,6 +1733,7 @@
     "arr": "2027-06-28 20:10"
    },
    "price": 2034,
+   "price_est": false,
    "total_minutes": 1785,
    "arr_penalty": 3,
    "arr_slot": "下午",
@@ -1825,6 +1833,7 @@
     "arr": "2027-06-28 10:10"
    },
    "price": 2048,
+   "price_est": false,
    "total_minutes": 2060,
    "arr_penalty": 1.5,
    "arr_slot": "中午",
@@ -1924,6 +1933,7 @@
     "arr": "2027-06-28 22:35"
    },
    "price": 2048,
+   "price_est": false,
    "total_minutes": 1995,
    "arr_penalty": 1.5,
    "arr_slot": "中午",
@@ -1987,6 +1997,7 @@
     "arr": "2027-07-05 14:05"
    },
    "price": 2087,
+   "price_est": false,
    "total_minutes": 1355,
    "arr_penalty": 0,
    "arr_slot": "上午",
@@ -2068,6 +2079,7 @@
     "arr": "2027-07-05 22:50"
    },
    "price": 2087,
+   "price_est": true,
    "total_minutes": 1735,
    "arr_penalty": 0,
    "arr_slot": "上午",
@@ -2167,6 +2179,7 @@
     "arr": "2027-07-06 00:45"
    },
    "price": 13345,
+   "price_est": false,
    "total_minutes": 1830,
    "arr_penalty": 0,
    "arr_slot": "上午",
@@ -2266,6 +2279,7 @@
     "arr": "2027-07-05 20:40"
    },
    "price": 13358,
+   "price_est": false,
    "total_minutes": 1800,
    "arr_penalty": 0,
    "arr_slot": "上午",
@@ -2365,6 +2379,7 @@
     "arr": "2027-07-05 20:55"
    },
    "price": 1392,
+   "price_est": false,
    "total_minutes": 1830,
    "arr_penalty": 3,
    "arr_slot": "下午",
@@ -2464,6 +2479,7 @@
     "arr": "2027-07-05 20:10"
    },
    "price": 1581,
+   "price_est": false,
    "total_minutes": 1785,
    "arr_penalty": 3,
    "arr_slot": "下午",
@@ -2563,6 +2579,7 @@
     "arr": "2027-07-06 00:45"
    },
    "price": 6585,
+   "price_est": false,
    "total_minutes": 1945,
    "arr_penalty": 3,
    "arr_slot": "下午",
@@ -2662,6 +2679,7 @@
     "arr": "2027-07-05 22:35"
    },
    "price": 2048,
+   "price_est": false,
    "total_minutes": 1995,
    "arr_penalty": 1.5,
    "arr_slot": "中午",
@@ -2761,6 +2779,7 @@
     "arr": "2027-07-05 10:10"
    },
    "price": 2048,
+   "price_est": false,
    "total_minutes": 2060,
    "arr_penalty": 1.5,
    "arr_slot": "中午",
@@ -2797,12 +2816,13 @@
  "rejected": {
   "转机等待超过4小时": 4,
   "经台北桃园转机需签证或未确认免签": 2,
-  "回程转机等待超过4小时": 11,
-  "回程经台北桃园转机需签证或未确认免签": 1,
+  "回程转机等待超过4小时": 14,
+  "回程经台北桃园转机需签证或未确认免签": 3,
   "回程经西雅图转机需签证或未确认免签": 2,
   "回程经旧金山转机需签证或未确认免签": 1,
-  "回程非经济舱": 2,
-  "回程非普通经济舱": 3
+  "回程非经济舱": 3,
+  "回程非普通经济舱": 3,
+  "回程经DFW转机需签证或未确认免签": 1
  },
  "airports": {
   "PVG": "上海浦东",
@@ -2849,6 +2869,8 @@
    "trip": "A",
    "out": "AC26",
    "out_price": 2136,
+   "out_valid": true,
+   "out_reject": null,
    "out_from": "PVG",
    "out_to": "YVR",
    "valid_returns": 4,
@@ -2873,6 +2895,8 @@
    "trip": "A",
    "out": "HX247+HX80",
    "out_price": 1223,
+   "out_valid": true,
+   "out_reject": null,
    "out_from": "PVG",
    "out_to": "YVR",
    "valid_returns": 0,
@@ -2931,6 +2955,8 @@
    "trip": "A",
    "out": "KE888+KE71",
    "out_price": 2484,
+   "out_valid": true,
+   "out_reject": null,
    "out_from": "PVG",
    "out_to": "YVR",
    "valid_returns": 3,
@@ -2955,6 +2981,8 @@
    "trip": "A",
    "out": "KE890+KE75",
    "out_price": 1581,
+   "out_valid": true,
+   "out_reject": null,
    "out_from": "PVG",
    "out_to": "YVR",
    "valid_returns": 1,
@@ -3014,6 +3042,8 @@
    "trip": "A",
    "out": "CX959+CX810",
    "out_price": 2048,
+   "out_valid": true,
+   "out_reject": null,
    "out_from": "HGH",
    "out_to": "YVR",
    "valid_returns": 2,
@@ -3038,6 +3068,8 @@
    "trip": "A",
    "out": "QR891+QR767",
    "out_price": 1739,
+   "out_valid": true,
+   "out_reject": null,
    "out_from": "HGH",
    "out_to": "YYZ",
    "valid_returns": 0,
@@ -3046,9 +3078,50 @@
    "rejected_returns": []
   },
   {
+   "trip": "A",
+   "out": "KE894+KE75",
+   "out_price": 1563,
+   "out_valid": false,
+   "out_reject": "转机等待超过4小时",
+   "out_from": "PVG",
+   "out_to": "YVR",
+   "valid_returns": 0,
+   "returns_seen": 0,
+   "gf_url": "https://www.google.com/travel/flights?hl=en&gl=ca&curr=CAD&tfs=CBwQAhp6EgoyMDI3LTA2LTE5Ih8KA1BWRxIKMjAyNy0wNi0xORoDSUNOKgJLRTIDODk0Ih4KA0lDThIKMjAyNy0wNi0xORoDWVZSKgJLRTICNzVqBwgBEgNQVkdqBwgBEgNTSEFqBwgBEgNIR0hyBwgBEgNZWVpyBwgBEgNZVlIaORIKMjAyNy0wNi0yN2oHCAESA1lZWmoHCAESA1lWUnIHCAESA1BWR3IHCAESA1NIQXIHCAESA0hHSEABSAFwAZgBAQ&tfu=EgIIAQ",
+   "rejected_returns": []
+  },
+  {
+   "trip": "A",
+   "out": "CI504+CI32",
+   "out_price": 1958,
+   "out_valid": false,
+   "out_reject": "经台北桃园转机需签证或未确认免签",
+   "out_from": "PVG",
+   "out_to": "YVR",
+   "valid_returns": 0,
+   "returns_seen": 1,
+   "gf_url": "https://www.google.com/travel/flights?hl=en&gl=ca&curr=CAD&tfs=CBwQAhp6EgoyMDI3LTA2LTE5Ih8KA1BWRxIKMjAyNy0wNi0xORoDVFBFKgJDSTIDNTA0Ih4KA1RQRRIKMjAyNy0wNi0xORoDWVZSKgJDSTICMzJqBwgBEgNQVkdqBwgBEgNTSEFqBwgBEgNIR0hyBwgBEgNZWVpyBwgBEgNZVlIaORIKMjAyNy0wNi0yN2oHCAESA1lZWmoHCAESA1lWUnIHCAESA1BWR3IHCAESA1NIQXIHCAESA0hHSEABSAFwAZgBAQ&tfu=EgIIAQ",
+   "rejected_returns": [
+    {
+     "ret": "CI31+CI501",
+     "price": 1957,
+     "reason": "经台北桃园转机需签证或未确认免签",
+     "layovers": [
+      {
+       "airport": "TPE",
+       "duration": 190,
+       "overnight": false
+      }
+     ]
+    }
+   ]
+  },
+  {
    "trip": "B",
    "out": "AC26",
    "out_price": 2087,
+   "out_valid": true,
+   "out_reject": null,
    "out_from": "PVG",
    "out_to": "YVR",
    "valid_returns": 2,
@@ -3085,6 +3158,8 @@
    "trip": "B",
    "out": "HX247+HX80",
    "out_price": 1223,
+   "out_valid": true,
+   "out_reject": null,
    "out_from": "PVG",
    "out_to": "YVR",
    "valid_returns": 0,
@@ -3109,6 +3184,8 @@
    "trip": "B",
    "out": "NH920+JL18",
    "out_price": 13706,
+   "out_valid": true,
+   "out_reject": null,
    "out_from": "PVG",
    "out_to": "YVR",
    "valid_returns": 2,
@@ -3157,6 +3234,8 @@
    "trip": "B",
    "out": "KE890+KE75",
    "out_price": 1392,
+   "out_valid": true,
+   "out_reject": null,
    "out_from": "PVG",
    "out_to": "YVR",
    "valid_returns": 3,
@@ -3181,6 +3260,8 @@
    "trip": "B",
    "out": "CX959+CX810",
    "out_price": 2048,
+   "out_valid": true,
+   "out_reject": null,
    "out_from": "HGH",
    "out_to": "YVR",
    "valid_returns": 2,
@@ -3234,27 +3315,2843 @@
    "trip": "B",
    "out": "QR891+QR767",
    "out_price": 1739,
+   "out_valid": true,
+   "out_reject": null,
    "out_from": "HGH",
    "out_to": "YYZ",
    "valid_returns": 0,
    "returns_seen": 0,
    "gf_url": "https://www.google.com/travel/flights?hl=en&gl=ca&curr=CAD&tfs=CBwQAhp7EgoyMDI3LTA2LTI2Ih8KA0hHSBIKMjAyNy0wNi0yNhoDRE9IKgJRUjIDODkxIh8KA0RPSBIKMjAyNy0wNi0yNhoDWVlaKgJRUjIDNzY3agcIARIDUFZHagcIARIDU0hBagcIARIDSEdIcgcIARIDWVlacgcIARIDWVZSGjkSCjIwMjctMDctMDRqBwgBEgNZWVpqBwgBEgNZVlJyBwgBEgNQVkdyBwgBEgNTSEFyBwgBEgNIR0hAAUgBcAGYAQE&tfu=EgIIAQ",
    "rejected_returns": []
+  },
+  {
+   "trip": "B",
+   "out": "KE110+KE75",
+   "out_price": 1620,
+   "out_valid": false,
+   "out_reject": "转机等待超过4小时",
+   "out_from": "HGH",
+   "out_to": "YVR",
+   "valid_returns": 0,
+   "returns_seen": 2,
+   "gf_url": "https://www.google.com/travel/flights?hl=en&gl=ca&curr=CAD&tfs=CBwQAhp6EgoyMDI3LTA2LTI2Ih8KA0hHSBIKMjAyNy0wNi0yNhoDSUNOKgJLRTIDMTEwIh4KA0lDThIKMjAyNy0wNi0yNhoDWVZSKgJLRTICNzVqBwgBEgNQVkdqBwgBEgNTSEFqBwgBEgNIR0hyBwgBEgNZWVpyBwgBEgNZVlIaORIKMjAyNy0wNy0wNGoHCAESA1lZWmoHCAESA1lWUnIHCAESA1BWR3IHCAESA1NIQXIHCAESA0hHSEABSAFwAZgBAQ&tfu=EgIIAQ",
+   "rejected_returns": [
+    {
+     "ret": "KE76+KE107",
+     "price": 1619,
+     "reason": "转机等待超过4小时",
+     "layovers": [
+      {
+       "airport": "ICN",
+       "duration": 455,
+       "overnight": false
+      }
+     ]
+    },
+    {
+     "ret": "KE72+KE109",
+     "price": 1806,
+     "reason": "转机等待超过4小时",
+     "layovers": [
+      {
+       "airport": "ICN",
+       "duration": 1120,
+       "overnight": false
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "trip": "B",
+   "out": "KE892+KE71",
+   "out_price": 1807,
+   "out_valid": false,
+   "out_reject": "转机等待超过4小时",
+   "out_from": "PVG",
+   "out_to": "YVR",
+   "valid_returns": 0,
+   "returns_seen": 3,
+   "gf_url": "https://www.google.com/travel/flights?hl=en&gl=ca&curr=CAD&tfs=CBwQAhp6EgoyMDI3LTA2LTI2Ih8KA1BWRxIKMjAyNy0wNi0yNhoDSUNOKgJLRTIDODkyIh4KA0lDThIKMjAyNy0wNi0yNhoDWVZSKgJLRTICNzFqBwgBEgNQVkdqBwgBEgNTSEFqBwgBEgNIR0hyBwgBEgNZWVpyBwgBEgNZVlIaORIKMjAyNy0wNy0wNGoHCAESA1lZWmoHCAESA1lWUnIHCAESA1BWR3IHCAESA1NIQXIHCAESA0hHSEABSAFwAZgBAQ&tfu=EgIIAQ",
+   "rejected_returns": [
+    {
+     "ret": "KE72+KE889",
+     "price": 1581,
+     "reason": "转机等待超过4小时",
+     "layovers": [
+      {
+       "airport": "ICN",
+       "duration": 1210,
+       "overnight": false
+      }
+     ]
+    },
+    {
+     "ret": "CA992+CA8357",
+     "price": 9468,
+     "reason": "非经济舱",
+     "layovers": [
+      {
+       "airport": "PEK",
+       "duration": 880,
+       "overnight": false
+      }
+     ]
+    },
+    {
+     "ret": "AA2776+AA127",
+     "price": 15580,
+     "reason": "经DFW转机需签证或未确认免签",
+     "layovers": [
+      {
+       "airport": "DFW",
+       "duration": 284,
+       "overnight": false
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "trip": "B",
+   "out": "CI504+CI32",
+   "out_price": 1958,
+   "out_valid": false,
+   "out_reject": "经台北桃园转机需签证或未确认免签",
+   "out_from": "PVG",
+   "out_to": "YVR",
+   "valid_returns": 0,
+   "returns_seen": 1,
+   "gf_url": "https://www.google.com/travel/flights?hl=en&gl=ca&curr=CAD&tfs=CBwQAhp6EgoyMDI3LTA2LTI2Ih8KA1BWRxIKMjAyNy0wNi0yNhoDVFBFKgJDSTIDNTA0Ih4KA1RQRRIKMjAyNy0wNi0yNhoDWVZSKgJDSTICMzJqBwgBEgNQVkdqBwgBEgNTSEFqBwgBEgNIR0hyBwgBEgNZWVpyBwgBEgNZVlIaORIKMjAyNy0wNy0wNGoHCAESA1lZWmoHCAESA1lWUnIHCAESA1BWR3IHCAESA1NIQXIHCAESA0hHSEABSAFwAZgBAQ&tfu=EgIIAQ",
+   "rejected_returns": [
+    {
+     "ret": "CI31+CI501",
+     "price": 1957,
+     "reason": "经台北桃园转机需签证或未确认免签",
+     "layovers": [
+      {
+       "airport": "TPE",
+       "duration": 190,
+       "overnight": false
+      }
+     ]
+    }
+   ]
+  }
+ ],
+ "excluded_pairs": [
+  {
+   "trip": "A",
+   "key": "A|HX247+HX80|HX81+HX246",
+   "out": {
+    "segments": [
+     {
+      "flight": "HX 247",
+      "airline": "Hong Kong Airlines",
+      "airline_cn": "香港航空",
+      "from": "PVG",
+      "to": "HKG",
+      "dep": "2027-06-19 16:55",
+      "arr": "2027-06-19 19:45",
+      "duration": 170,
+      "aircraft": "Airbus A320",
+      "class": "Economy"
+     },
+     {
+      "flight": "HX 80",
+      "airline": "Hong Kong Airlines",
+      "airline_cn": "香港航空",
+      "from": "HKG",
+      "to": "YVR",
+      "dep": "2027-06-19 22:55",
+      "arr": "2027-06-19 20:15",
+      "duration": 740,
+      "aircraft": "Airbus A330",
+      "class": "Economy"
+     }
+    ],
+    "layovers": [
+     {
+      "airport": "HKG",
+      "duration": 190,
+      "overnight": false
+     }
+    ],
+    "total_duration": 1100,
+    "price": 1223,
+    "key": "HX247+HX80",
+    "from": "PVG",
+    "to": "YVR",
+    "dep": "2027-06-19 16:55",
+    "arr": "2027-06-19 20:15",
+    "valid": true,
+    "reject": null
+   },
+   "ret": {
+    "segments": [
+     {
+      "flight": "HX 81",
+      "airline": "Hong Kong Airlines",
+      "airline_cn": "香港航空",
+      "from": "YVR",
+      "to": "HKG",
+      "dep": "2027-06-27 01:00",
+      "arr": "2027-06-28 06:20",
+      "duration": 860,
+      "aircraft": "Airbus A330",
+      "class": "Economy"
+     },
+     {
+      "flight": "HX 246",
+      "airline": "Hong Kong Airlines",
+      "airline_cn": "香港航空",
+      "from": "HKG",
+      "to": "PVG",
+      "dep": "2027-06-28 13:05",
+      "arr": "2027-06-28 15:45",
+      "duration": 160,
+      "aircraft": "Airbus A320",
+      "class": "Economy"
+     }
+    ],
+    "layovers": [
+     {
+      "airport": "HKG",
+      "duration": 405,
+      "overnight": false
+     }
+    ],
+    "total_duration": 1425,
+    "price": 1222,
+    "key": "HX81+HX246",
+    "from": "YVR",
+    "to": "PVG",
+    "dep": "2027-06-27 01:00",
+    "arr": "2027-06-28 15:45"
+   },
+   "price": 1222,
+   "price_est": false,
+   "total_minutes": 2525,
+   "arr_penalty": 6,
+   "arr_slot": "晚上",
+   "gf_url": "https://www.google.com/travel/flights?hl=en&gl=ca&curr=CAD&tfs=CBwQAhp6EgoyMDI3LTA2LTE5Ih8KA1BWRxIKMjAyNy0wNi0xORoDSEtHKgJIWDIDMjQ3Ih4KA0hLRxIKMjAyNy0wNi0xORoDWVZSKgJIWDICODBqBwgBEgNQVkdqBwgBEgNTSEFqBwgBEgNIR0hyBwgBEgNZWVpyBwgBEgNZVlIaORIKMjAyNy0wNi0yN2oHCAESA1lZWmoHCAESA1lWUnIHCAESA1BWR3IHCAESA1NIQXIHCAESA0hHSEABSAFwAZgBAQ&tfu=EgIIAQ",
+   "out_date": "2027-06-19",
+   "ret_date": "2027-06-27",
+   "reject": "回程转机等待超过4小时"
+  },
+  {
+   "trip": "A",
+   "key": "A|KE890+KE75|KE72+KE889",
+   "out": {
+    "segments": [
+     {
+      "flight": "KE 890",
+      "airline": "Korean Air",
+      "airline_cn": "大韩航空",
+      "from": "PVG",
+      "to": "ICN",
+      "dep": "2027-06-19 16:20",
+      "arr": "2027-06-19 19:20",
+      "duration": 120,
+      "aircraft": "Airbus A321neo",
+      "class": "Economy"
+     },
+     {
+      "flight": "KE 75",
+      "airline": "Korean Air",
+      "airline_cn": "大韩航空",
+      "from": "ICN",
+      "to": "YVR",
+      "dep": "2027-06-19 22:40",
+      "arr": "2027-06-19 16:45",
+      "duration": 605,
+      "aircraft": "Boeing 787-10",
+      "class": "Economy"
+     }
+    ],
+    "layovers": [
+     {
+      "airport": "ICN",
+      "duration": 200,
+      "overnight": false
+     }
+    ],
+    "total_duration": 925,
+    "price": 1581,
+    "key": "KE890+KE75",
+    "from": "PVG",
+    "to": "YVR",
+    "dep": "2027-06-19 16:20",
+    "arr": "2027-06-19 16:45",
+    "valid": true,
+    "reject": null
+   },
+   "ret": {
+    "segments": [
+     {
+      "flight": "KE 72",
+      "airline": "Korean Air",
+      "airline_cn": "大韩航空",
+      "from": "YVR",
+      "to": "ICN",
+      "dep": "2027-06-27 14:50",
+      "arr": "2027-06-28 17:50",
+      "duration": 660,
+      "aircraft": "Boeing 787-10",
+      "class": "Economy"
+     },
+     {
+      "flight": "KE 889",
+      "airline": "Korean Air",
+      "airline_cn": "大韩航空",
+      "from": "ICN",
+      "to": "PVG",
+      "dep": "2027-06-29 14:00",
+      "arr": "2027-06-29 15:00",
+      "duration": 120,
+      "aircraft": "Airbus A321neo",
+      "class": "Economy"
+     }
+    ],
+    "layovers": [
+     {
+      "airport": "ICN",
+      "duration": 1210,
+      "overnight": false
+     }
+    ],
+    "total_duration": 1990,
+    "price": 1560,
+    "key": "KE72+KE889",
+    "from": "YVR",
+    "to": "PVG",
+    "dep": "2027-06-27 14:50",
+    "arr": "2027-06-29 15:00"
+   },
+   "price": 1560,
+   "price_est": false,
+   "total_minutes": 2915,
+   "arr_penalty": 3,
+   "arr_slot": "下午",
+   "gf_url": "https://www.google.com/travel/flights?hl=en&gl=ca&curr=CAD&tfs=CBwQAhp6EgoyMDI3LTA2LTE5Ih8KA1BWRxIKMjAyNy0wNi0xORoDSUNOKgJLRTIDODkwIh4KA0lDThIKMjAyNy0wNi0xORoDWVZSKgJLRTICNzVqBwgBEgNQVkdqBwgBEgNTSEFqBwgBEgNIR0hyBwgBEgNZWVpyBwgBEgNZVlIaORIKMjAyNy0wNi0yN2oHCAESA1lZWmoHCAESA1lWUnIHCAESA1BWR3IHCAESA1NIQXIHCAESA0hHSEABSAFwAZgBAQ&tfu=EgIIAQ",
+   "out_date": "2027-06-19",
+   "ret_date": "2027-06-27",
+   "reject": "回程转机等待超过4小时"
+  },
+  {
+   "trip": "A",
+   "key": "A|KE890+KE75|KE72+KE881",
+   "out": {
+    "segments": [
+     {
+      "flight": "KE 890",
+      "airline": "Korean Air",
+      "airline_cn": "大韩航空",
+      "from": "PVG",
+      "to": "ICN",
+      "dep": "2027-06-19 16:20",
+      "arr": "2027-06-19 19:20",
+      "duration": 120,
+      "aircraft": "Airbus A321neo",
+      "class": "Economy"
+     },
+     {
+      "flight": "KE 75",
+      "airline": "Korean Air",
+      "airline_cn": "大韩航空",
+      "from": "ICN",
+      "to": "YVR",
+      "dep": "2027-06-19 22:40",
+      "arr": "2027-06-19 16:45",
+      "duration": 605,
+      "aircraft": "Boeing 787-10",
+      "class": "Economy"
+     }
+    ],
+    "layovers": [
+     {
+      "airport": "ICN",
+      "duration": 200,
+      "overnight": false
+     }
+    ],
+    "total_duration": 925,
+    "price": 1581,
+    "key": "KE890+KE75",
+    "from": "PVG",
+    "to": "YVR",
+    "dep": "2027-06-19 16:20",
+    "arr": "2027-06-19 16:45",
+    "valid": true,
+    "reject": null
+   },
+   "ret": {
+    "segments": [
+     {
+      "flight": "KE 72",
+      "airline": "Korean Air",
+      "airline_cn": "大韩航空",
+      "from": "YVR",
+      "to": "ICN",
+      "dep": "2027-06-27 14:50",
+      "arr": "2027-06-28 17:50",
+      "duration": 660,
+      "aircraft": "Boeing 787-10",
+      "class": "Economy"
+     },
+     {
+      "flight": "KE 881",
+      "airline": "Korean Air",
+      "airline_cn": "大韩航空",
+      "from": "ICN",
+      "to": "PVG",
+      "dep": "2027-06-29 08:25",
+      "arr": "2027-06-29 09:40",
+      "duration": 135,
+      "aircraft": "Airbus A330",
+      "class": "Economy"
+     }
+    ],
+    "layovers": [
+     {
+      "airport": "ICN",
+      "duration": 875,
+      "overnight": false
+     }
+    ],
+    "total_duration": 1670,
+    "price": 1581,
+    "key": "KE72+KE881",
+    "from": "YVR",
+    "to": "PVG",
+    "dep": "2027-06-27 14:50",
+    "arr": "2027-06-29 09:40"
+   },
+   "price": 1581,
+   "price_est": false,
+   "total_minutes": 2595,
+   "arr_penalty": 3,
+   "arr_slot": "下午",
+   "gf_url": "https://www.google.com/travel/flights?hl=en&gl=ca&curr=CAD&tfs=CBwQAhp6EgoyMDI3LTA2LTE5Ih8KA1BWRxIKMjAyNy0wNi0xORoDSUNOKgJLRTIDODkwIh4KA0lDThIKMjAyNy0wNi0xORoDWVZSKgJLRTICNzVqBwgBEgNQVkdqBwgBEgNTSEFqBwgBEgNIR0hyBwgBEgNZWVpyBwgBEgNZVlIaORIKMjAyNy0wNi0yN2oHCAESA1lZWmoHCAESA1lWUnIHCAESA1BWR3IHCAESA1NIQXIHCAESA0hHSEABSAFwAZgBAQ&tfu=EgIIAQ",
+   "out_date": "2027-06-19",
+   "ret_date": "2027-06-27",
+   "reject": "回程转机等待超过4小时"
+  },
+  {
+   "trip": "A",
+   "key": "A|CI504+CI32|CI31+CI501",
+   "out": {
+    "segments": [
+     {
+      "flight": "CI 504",
+      "airline": "China Airlines",
+      "airline_cn": "China Airlines",
+      "from": "PVG",
+      "to": "TPE",
+      "dep": "2027-06-19 19:50",
+      "arr": "2027-06-19 21:50",
+      "duration": 120,
+      "aircraft": "Airbus A350",
+      "class": "Economy"
+     },
+     {
+      "flight": "CI 32",
+      "airline": "China Airlines",
+      "airline_cn": "China Airlines",
+      "from": "TPE",
+      "to": "YVR",
+      "dep": "2027-06-19 23:35",
+      "arr": "2027-06-19 19:20",
+      "duration": 645,
+      "aircraft": "Boeing 777",
+      "class": "Economy"
+     }
+    ],
+    "layovers": [
+     {
+      "airport": "TPE",
+      "duration": 105,
+      "overnight": false
+     }
+    ],
+    "total_duration": 870,
+    "price": 1958,
+    "key": "CI504+CI32",
+    "from": "PVG",
+    "to": "YVR",
+    "dep": "2027-06-19 19:50",
+    "arr": "2027-06-19 19:20",
+    "valid": false,
+    "reject": "经台北桃园转机需签证或未确认免签"
+   },
+   "ret": {
+    "segments": [
+     {
+      "flight": "CI 31",
+      "airline": "China Airlines",
+      "airline_cn": "China Airlines",
+      "from": "YVR",
+      "to": "TPE",
+      "dep": "2027-06-27 02:00",
+      "arr": "2027-06-28 05:30",
+      "duration": 750,
+      "aircraft": "Boeing 777",
+      "class": "Economy"
+     },
+     {
+      "flight": "CI 501",
+      "airline": "China Airlines",
+      "airline_cn": "China Airlines",
+      "from": "TPE",
+      "to": "PVG",
+      "dep": "2027-06-28 08:40",
+      "arr": "2027-06-28 10:50",
+      "duration": 130,
+      "aircraft": "Airbus A350",
+      "class": "Economy"
+     }
+    ],
+    "layovers": [
+     {
+      "airport": "TPE",
+      "duration": 190,
+      "overnight": false
+     }
+    ],
+    "total_duration": 1070,
+    "price": 1957,
+    "key": "CI31+CI501",
+    "from": "YVR",
+    "to": "PVG",
+    "dep": "2027-06-27 02:00",
+    "arr": "2027-06-28 10:50"
+   },
+   "price": 1957,
+   "price_est": false,
+   "total_minutes": 1940,
+   "arr_penalty": 6,
+   "arr_slot": "晚上",
+   "gf_url": "https://www.google.com/travel/flights?hl=en&gl=ca&curr=CAD&tfs=CBwQAhp6EgoyMDI3LTA2LTE5Ih8KA1BWRxIKMjAyNy0wNi0xORoDVFBFKgJDSTIDNTA0Ih4KA1RQRRIKMjAyNy0wNi0xORoDWVZSKgJDSTICMzJqBwgBEgNQVkdqBwgBEgNTSEFqBwgBEgNIR0hyBwgBEgNZWVpyBwgBEgNZVlIaORIKMjAyNy0wNi0yN2oHCAESA1lZWmoHCAESA1lWUnIHCAESA1BWR3IHCAESA1NIQXIHCAESA0hHSEABSAFwAZgBAQ&tfu=EgIIAQ",
+   "out_date": "2027-06-19",
+   "ret_date": "2027-06-27",
+   "reject": "去程经台北桃园转机需签证或未确认免签；回程经台北桃园转机需签证或未确认免签"
+  },
+  {
+   "trip": "A",
+   "key": "A|KE894+KE75|KE76+KE881",
+   "out": {
+    "segments": [
+     {
+      "flight": "KE 894",
+      "airline": "Korean Air",
+      "airline_cn": "大韩航空",
+      "from": "PVG",
+      "to": "ICN",
+      "dep": "2027-06-19 01:05",
+      "arr": "2027-06-19 04:05",
+      "duration": 120,
+      "aircraft": "Airbus A321neo",
+      "class": "Economy"
+     },
+     {
+      "flight": "KE 75",
+      "airline": "Korean Air",
+      "airline_cn": "大韩航空",
+      "from": "ICN",
+      "to": "YVR",
+      "dep": "2027-06-19 22:40",
+      "arr": "2027-06-19 16:45",
+      "duration": 605,
+      "aircraft": "Boeing 787-10",
+      "class": "Economy"
+     }
+    ],
+    "layovers": [
+     {
+      "airport": "ICN",
+      "duration": 1115,
+      "overnight": false
+     }
+    ],
+    "total_duration": 1840,
+    "price": 1563,
+    "key": "KE894+KE75",
+    "from": "PVG",
+    "to": "YVR",
+    "dep": "2027-06-19 01:05",
+    "arr": "2027-06-19 16:45",
+    "valid": false,
+    "reject": "转机等待超过4小时"
+   },
+   "ret": {
+    "segments": [
+     {
+      "flight": "KE 76",
+      "airline": "Korean Air",
+      "airline_cn": "大韩航空",
+      "from": "YVR",
+      "to": "ICN",
+      "dep": "2027-06-27 00:55",
+      "arr": "2027-06-28 04:25",
+      "duration": 690,
+      "aircraft": "Boeing 787-10",
+      "class": "Economy"
+     },
+     {
+      "flight": "KE 881",
+      "airline": "Korean Air",
+      "airline_cn": "大韩航空",
+      "from": "ICN",
+      "to": "PVG",
+      "dep": "2027-06-28 08:25",
+      "arr": "2027-06-28 09:40",
+      "duration": 135,
+      "aircraft": "Airbus A330",
+      "class": "Economy"
+     }
+    ],
+    "layovers": [
+     {
+      "airport": "ICN",
+      "duration": 240,
+      "overnight": false
+     }
+    ],
+    "total_duration": 1065,
+    "price": 2034,
+    "key": "KE76+KE881",
+    "from": "YVR",
+    "to": "PVG",
+    "dep": "2027-06-27 00:55",
+    "arr": "2027-06-28 09:40"
+   },
+   "price": 2034,
+   "price_est": false,
+   "total_minutes": 2905,
+   "arr_penalty": 3,
+   "arr_slot": "下午",
+   "gf_url": "https://www.google.com/travel/flights?hl=en&gl=ca&curr=CAD&tfs=CBwQAhp6EgoyMDI3LTA2LTE5Ih8KA1BWRxIKMjAyNy0wNi0xORoDSUNOKgJLRTIDODk0Ih4KA0lDThIKMjAyNy0wNi0xORoDWVZSKgJLRTICNzVqBwgBEgNQVkdqBwgBEgNTSEFqBwgBEgNIR0hyBwgBEgNZWVpyBwgBEgNZVlIaORIKMjAyNy0wNi0yN2oHCAESA1lZWmoHCAESA1lWUnIHCAESA1BWR3IHCAESA1NIQXIHCAESA0hHSEABSAFwAZgBAQ&tfu=EgIIAQ",
+   "out_date": "2027-06-19",
+   "ret_date": "2027-06-27",
+   "reject": "去程转机等待超过4小时"
+  },
+  {
+   "trip": "A",
+   "key": "A|KE894+KE75|KE72+KE891",
+   "out": {
+    "segments": [
+     {
+      "flight": "KE 894",
+      "airline": "Korean Air",
+      "airline_cn": "大韩航空",
+      "from": "PVG",
+      "to": "ICN",
+      "dep": "2027-06-19 01:05",
+      "arr": "2027-06-19 04:05",
+      "duration": 120,
+      "aircraft": "Airbus A321neo",
+      "class": "Economy"
+     },
+     {
+      "flight": "KE 75",
+      "airline": "Korean Air",
+      "airline_cn": "大韩航空",
+      "from": "ICN",
+      "to": "YVR",
+      "dep": "2027-06-19 22:40",
+      "arr": "2027-06-19 16:45",
+      "duration": 605,
+      "aircraft": "Boeing 787-10",
+      "class": "Economy"
+     }
+    ],
+    "layovers": [
+     {
+      "airport": "ICN",
+      "duration": 1115,
+      "overnight": false
+     }
+    ],
+    "total_duration": 1840,
+    "price": 1563,
+    "key": "KE894+KE75",
+    "from": "PVG",
+    "to": "YVR",
+    "dep": "2027-06-19 01:05",
+    "arr": "2027-06-19 16:45",
+    "valid": false,
+    "reject": "转机等待超过4小时"
+   },
+   "ret": {
+    "segments": [
+     {
+      "flight": "KE 72",
+      "airline": "Korean Air",
+      "airline_cn": "大韩航空",
+      "from": "YVR",
+      "to": "ICN",
+      "dep": "2027-06-27 14:50",
+      "arr": "2027-06-28 17:50",
+      "duration": 660,
+      "aircraft": "Boeing 787-10",
+      "class": "Economy"
+     },
+     {
+      "flight": "KE 891",
+      "airline": "Korean Air",
+      "airline_cn": "大韩航空",
+      "from": "ICN",
+      "to": "PVG",
+      "dep": "2027-06-28 18:55",
+      "arr": "2027-06-28 20:10",
+      "duration": 135,
+      "aircraft": "Boeing 737",
+      "class": "Economy"
+     }
+    ],
+    "layovers": [
+     {
+      "airport": "ICN",
+      "duration": 65,
+      "overnight": false
+     }
+    ],
+    "total_duration": 860,
+    "price": 2034,
+    "key": "KE72+KE891",
+    "from": "YVR",
+    "to": "PVG",
+    "dep": "2027-06-27 14:50",
+    "arr": "2027-06-28 20:10"
+   },
+   "price": 2034,
+   "price_est": false,
+   "total_minutes": 2700,
+   "arr_penalty": 3,
+   "arr_slot": "下午",
+   "gf_url": "https://www.google.com/travel/flights?hl=en&gl=ca&curr=CAD&tfs=CBwQAhp6EgoyMDI3LTA2LTE5Ih8KA1BWRxIKMjAyNy0wNi0xORoDSUNOKgJLRTIDODk0Ih4KA0lDThIKMjAyNy0wNi0xORoDWVZSKgJLRTICNzVqBwgBEgNQVkdqBwgBEgNTSEFqBwgBEgNIR0hyBwgBEgNZWVpyBwgBEgNZVlIaORIKMjAyNy0wNi0yN2oHCAESA1lZWmoHCAESA1lWUnIHCAESA1BWR3IHCAESA1NIQXIHCAESA0hHSEABSAFwAZgBAQ&tfu=EgIIAQ",
+   "out_date": "2027-06-19",
+   "ret_date": "2027-06-27",
+   "reject": "去程转机等待超过4小时"
+  },
+  {
+   "trip": "A",
+   "key": "A|KE888+KE71|KE72+KE881",
+   "out": {
+    "segments": [
+     {
+      "flight": "KE 888",
+      "airline": "Korean Air",
+      "airline_cn": "大韩航空",
+      "from": "PVG",
+      "to": "ICN",
+      "dep": "2027-06-19 13:40",
+      "arr": "2027-06-19 16:45",
+      "duration": 125,
+      "aircraft": "Boeing 737",
+      "class": "Economy"
+     },
+     {
+      "flight": "KE 71",
+      "airline": "Korean Air",
+      "airline_cn": "大韩航空",
+      "from": "ICN",
+      "to": "YVR",
+      "dep": "2027-06-19 18:45",
+      "arr": "2027-06-19 12:35",
+      "duration": 590,
+      "aircraft": "Boeing 787-10",
+      "class": "Economy"
+     }
+    ],
+    "layovers": [
+     {
+      "airport": "ICN",
+      "duration": 120,
+      "overnight": false
+     }
+    ],
+    "total_duration": 835,
+    "price": 2484,
+    "key": "KE888+KE71",
+    "from": "PVG",
+    "to": "YVR",
+    "dep": "2027-06-19 13:40",
+    "arr": "2027-06-19 12:35",
+    "valid": true,
+    "reject": null
+   },
+   "ret": {
+    "segments": [
+     {
+      "flight": "KE 72",
+      "airline": "Korean Air",
+      "airline_cn": "大韩航空",
+      "from": "YVR",
+      "to": "ICN",
+      "dep": "2027-06-27 14:50",
+      "arr": "2027-06-28 17:50",
+      "duration": 660,
+      "aircraft": "Boeing 787-10",
+      "class": "Economy"
+     },
+     {
+      "flight": "KE 881",
+      "airline": "Korean Air",
+      "airline_cn": "大韩航空",
+      "from": "ICN",
+      "to": "PVG",
+      "dep": "2027-06-29 08:25",
+      "arr": "2027-06-29 09:40",
+      "duration": 135,
+      "aircraft": "Airbus A330",
+      "class": "Economy"
+     }
+    ],
+    "layovers": [
+     {
+      "airport": "ICN",
+      "duration": 875,
+      "overnight": false
+     }
+    ],
+    "total_duration": 1670,
+    "price": 2447,
+    "key": "KE72+KE881",
+    "from": "YVR",
+    "to": "PVG",
+    "dep": "2027-06-27 14:50",
+    "arr": "2027-06-29 09:40"
+   },
+   "price": 2447,
+   "price_est": false,
+   "total_minutes": 2505,
+   "arr_penalty": 1.5,
+   "arr_slot": "中午",
+   "gf_url": "https://www.google.com/travel/flights?hl=en&gl=ca&curr=CAD&tfs=CBwQAhp6EgoyMDI3LTA2LTE5Ih8KA1BWRxIKMjAyNy0wNi0xORoDSUNOKgJLRTIDODg4Ih4KA0lDThIKMjAyNy0wNi0xORoDWVZSKgJLRTICNzFqBwgBEgNQVkdqBwgBEgNTSEFqBwgBEgNIR0hyBwgBEgNZWVpyBwgBEgNZVlIaORIKMjAyNy0wNi0yN2oHCAESA1lZWmoHCAESA1lWUnIHCAESA1BWR3IHCAESA1NIQXIHCAESA0hHSEABSAFwAZgBAQ&tfu=EgIIAQ",
+   "out_date": "2027-06-19",
+   "ret_date": "2027-06-27",
+   "reject": "回程转机等待超过4小时"
+  },
+  {
+   "trip": "A",
+   "key": "A|AC26|CA992+CA8321",
+   "out": {
+    "segments": [
+     {
+      "flight": "AC 26",
+      "airline": "Air Canada",
+      "airline_cn": "加拿大航空",
+      "from": "PVG",
+      "to": "YVR",
+      "dep": "2027-06-19 15:55",
+      "arr": "2027-06-19 11:40",
+      "duration": 645,
+      "aircraft": "Boeing 787",
+      "class": "Economy"
+     }
+    ],
+    "layovers": [],
+    "total_duration": 645,
+    "price": 2136,
+    "key": "AC26",
+    "from": "PVG",
+    "to": "YVR",
+    "dep": "2027-06-19 15:55",
+    "arr": "2027-06-19 11:40",
+    "valid": true,
+    "reject": null
+   },
+   "ret": {
+    "segments": [
+     {
+      "flight": "CA 992",
+      "airline": "Air China",
+      "airline_cn": "中国国际航空",
+      "from": "YVR",
+      "to": "PEK",
+      "dep": "2027-06-27 13:00",
+      "arr": "2027-06-28 17:00",
+      "duration": 780,
+      "aircraft": "Boeing 777",
+      "class": "Economy"
+     },
+     {
+      "flight": "CA 8321",
+      "airline": "Air China",
+      "airline_cn": "中国国际航空",
+      "from": "PKX",
+      "to": "PVG",
+      "dep": "2027-06-29 10:40",
+      "arr": "2027-06-29 12:50",
+      "duration": 130,
+      "aircraft": "Airbus A321",
+      "class": "Economy"
+     }
+    ],
+    "layovers": [
+     {
+      "airport": "PEK",
+      "duration": 1060,
+      "overnight": false
+     }
+    ],
+    "total_duration": 1970,
+    "price": 2955,
+    "key": "CA992+CA8321",
+    "from": "YVR",
+    "to": "PVG",
+    "dep": "2027-06-27 13:00",
+    "arr": "2027-06-29 12:50"
+   },
+   "price": 2955,
+   "price_est": false,
+   "total_minutes": 2615,
+   "arr_penalty": 0,
+   "arr_slot": "上午",
+   "gf_url": "https://www.google.com/travel/flights?hl=en&gl=ca&curr=CAD&tfs=CBwQAhpZEgoyMDI3LTA2LTE5Ih4KA1BWRxIKMjAyNy0wNi0xORoDWVZSKgJBQzICMjZqBwgBEgNQVkdqBwgBEgNTSEFqBwgBEgNIR0hyBwgBEgNZWVpyBwgBEgNZVlIaORIKMjAyNy0wNi0yN2oHCAESA1lZWmoHCAESA1lWUnIHCAESA1BWR3IHCAESA1NIQXIHCAESA0hHSEABSAFwAZgBAQ&tfu=EgIIAQ",
+   "out_date": "2027-06-19",
+   "ret_date": "2027-06-27",
+   "reject": "回程转机等待超过4小时"
+  },
+  {
+   "trip": "A",
+   "key": "A|HX247+HX80|BR9+BR891+CX376",
+   "out": {
+    "segments": [
+     {
+      "flight": "HX 247",
+      "airline": "Hong Kong Airlines",
+      "airline_cn": "香港航空",
+      "from": "PVG",
+      "to": "HKG",
+      "dep": "2027-06-19 16:55",
+      "arr": "2027-06-19 19:45",
+      "duration": 170,
+      "aircraft": "Airbus A320",
+      "class": "Economy"
+     },
+     {
+      "flight": "HX 80",
+      "airline": "Hong Kong Airlines",
+      "airline_cn": "香港航空",
+      "from": "HKG",
+      "to": "YVR",
+      "dep": "2027-06-19 22:55",
+      "arr": "2027-06-19 20:15",
+      "duration": 740,
+      "aircraft": "Airbus A330",
+      "class": "Economy"
+     }
+    ],
+    "layovers": [
+     {
+      "airport": "HKG",
+      "duration": 190,
+      "overnight": false
+     }
+    ],
+    "total_duration": 1100,
+    "price": 1223,
+    "key": "HX247+HX80",
+    "from": "PVG",
+    "to": "YVR",
+    "dep": "2027-06-19 16:55",
+    "arr": "2027-06-19 20:15",
+    "valid": true,
+    "reject": null
+   },
+   "ret": {
+    "segments": [
+     {
+      "flight": "BR 9",
+      "airline": "EVA Air",
+      "airline_cn": "长荣航空",
+      "from": "YVR",
+      "to": "TPE",
+      "dep": "2027-06-27 02:00",
+      "arr": "2027-06-28 05:00",
+      "duration": 720,
+      "aircraft": "Boeing 777",
+      "class": "Economy"
+     },
+     {
+      "flight": "BR 891",
+      "airline": "EVA Air",
+      "airline_cn": "长荣航空",
+      "from": "TPE",
+      "to": "HKG",
+      "dep": "2027-06-28 07:00",
+      "arr": "2027-06-28 08:50",
+      "duration": 110,
+      "aircraft": "Boeing 787-10",
+      "class": "Economy"
+     },
+     {
+      "flight": "CX 376",
+      "airline": "Cathay Pacific",
+      "airline_cn": "国泰航空",
+      "from": "HKG",
+      "to": "PVG",
+      "dep": "2027-06-28 10:25",
+      "arr": "2027-06-28 13:15",
+      "duration": 170,
+      "aircraft": "Airbus A330",
+      "class": "Economy"
+     }
+    ],
+    "layovers": [
+     {
+      "airport": "TPE",
+      "duration": 120,
+      "overnight": false
+     },
+     {
+      "airport": "HKG",
+      "duration": 95,
+      "overnight": false
+     }
+    ],
+    "total_duration": 1215,
+    "price": 4364,
+    "key": "BR9+BR891+CX376",
+    "from": "YVR",
+    "to": "PVG",
+    "dep": "2027-06-27 02:00",
+    "arr": "2027-06-28 13:15"
+   },
+   "price": 4364,
+   "price_est": false,
+   "total_minutes": 2315,
+   "arr_penalty": 6,
+   "arr_slot": "晚上",
+   "gf_url": "https://www.google.com/travel/flights?hl=en&gl=ca&curr=CAD&tfs=CBwQAhp6EgoyMDI3LTA2LTE5Ih8KA1BWRxIKMjAyNy0wNi0xORoDSEtHKgJIWDIDMjQ3Ih4KA0hLRxIKMjAyNy0wNi0xORoDWVZSKgJIWDICODBqBwgBEgNQVkdqBwgBEgNTSEFqBwgBEgNIR0hyBwgBEgNZWVpyBwgBEgNZVlIaORIKMjAyNy0wNi0yN2oHCAESA1lZWmoHCAESA1lWUnIHCAESA1BWR3IHCAESA1NIQXIHCAESA0hHSEABSAFwAZgBAQ&tfu=EgIIAQ",
+   "out_date": "2027-06-19",
+   "ret_date": "2027-06-27",
+   "reject": "回程经台北桃园转机需签证或未确认免签"
+  },
+  {
+   "trip": "A",
+   "key": "A|HX247+HX80|AC8810+BR25+BR722",
+   "out": {
+    "segments": [
+     {
+      "flight": "HX 247",
+      "airline": "Hong Kong Airlines",
+      "airline_cn": "香港航空",
+      "from": "PVG",
+      "to": "HKG",
+      "dep": "2027-06-19 16:55",
+      "arr": "2027-06-19 19:45",
+      "duration": 170,
+      "aircraft": "Airbus A320",
+      "class": "Economy"
+     },
+     {
+      "flight": "HX 80",
+      "airline": "Hong Kong Airlines",
+      "airline_cn": "香港航空",
+      "from": "HKG",
+      "to": "YVR",
+      "dep": "2027-06-19 22:55",
+      "arr": "2027-06-19 20:15",
+      "duration": 740,
+      "aircraft": "Airbus A330",
+      "class": "Economy"
+     }
+    ],
+    "layovers": [
+     {
+      "airport": "HKG",
+      "duration": 190,
+      "overnight": false
+     }
+    ],
+    "total_duration": 1100,
+    "price": 1223,
+    "key": "HX247+HX80",
+    "from": "PVG",
+    "to": "YVR",
+    "dep": "2027-06-19 16:55",
+    "arr": "2027-06-19 20:15",
+    "valid": true,
+    "reject": null
+   },
+   "ret": {
+    "segments": [
+     {
+      "flight": "AC 8810",
+      "airline": "Air Canada",
+      "airline_cn": "加拿大航空",
+      "from": "YVR",
+      "to": "SEA",
+      "dep": "2027-06-27 21:10",
+      "arr": "2027-06-27 22:17",
+      "duration": 67,
+      "aircraft": "De Havilland-Bombardier Dash-8",
+      "class": "Economy"
+     },
+     {
+      "flight": "BR 25",
+      "airline": "EVA Air",
+      "airline_cn": "长荣航空",
+      "from": "SEA",
+      "to": "TPE",
+      "dep": "2027-06-28 02:10",
+      "arr": "2027-06-29 05:05",
+      "duration": 715,
+      "aircraft": "Boeing 787-10",
+      "class": "Economy"
+     },
+     {
+      "flight": "BR 722",
+      "airline": "EVA Air",
+      "airline_cn": "长荣航空",
+      "from": "TPE",
+      "to": "PVG",
+      "dep": "2027-06-29 16:30",
+      "arr": "2027-06-29 18:25",
+      "duration": 115,
+      "aircraft": "Airbus A330",
+      "class": "Economy"
+     }
+    ],
+    "layovers": [
+     {
+      "airport": "SEA",
+      "duration": 233,
+      "overnight": false
+     },
+     {
+      "airport": "TPE",
+      "duration": 685,
+      "overnight": false
+     }
+    ],
+    "total_duration": 1815,
+    "price": 6406,
+    "key": "AC8810+BR25+BR722",
+    "from": "YVR",
+    "to": "PVG",
+    "dep": "2027-06-27 21:10",
+    "arr": "2027-06-29 18:25"
+   },
+   "price": 6406,
+   "price_est": false,
+   "total_minutes": 2915,
+   "arr_penalty": 6,
+   "arr_slot": "晚上",
+   "gf_url": "https://www.google.com/travel/flights?hl=en&gl=ca&curr=CAD&tfs=CBwQAhp6EgoyMDI3LTA2LTE5Ih8KA1BWRxIKMjAyNy0wNi0xORoDSEtHKgJIWDIDMjQ3Ih4KA0hLRxIKMjAyNy0wNi0xORoDWVZSKgJIWDICODBqBwgBEgNQVkdqBwgBEgNTSEFqBwgBEgNIR0hyBwgBEgNZWVpyBwgBEgNZVlIaORIKMjAyNy0wNi0yN2oHCAESA1lZWmoHCAESA1lWUnIHCAESA1BWR3IHCAESA1NIQXIHCAESA0hHSEABSAFwAZgBAQ&tfu=EgIIAQ",
+   "out_date": "2027-06-19",
+   "ret_date": "2027-06-27",
+   "reject": "回程经西雅图转机需签证或未确认免签"
+  },
+  {
+   "trip": "A",
+   "key": "A|KE894+KE75|NH115+NH967",
+   "out": {
+    "segments": [
+     {
+      "flight": "KE 894",
+      "airline": "Korean Air",
+      "airline_cn": "大韩航空",
+      "from": "PVG",
+      "to": "ICN",
+      "dep": "2027-06-19 01:05",
+      "arr": "2027-06-19 04:05",
+      "duration": 120,
+      "aircraft": "Airbus A321neo",
+      "class": "Economy"
+     },
+     {
+      "flight": "KE 75",
+      "airline": "Korean Air",
+      "airline_cn": "大韩航空",
+      "from": "ICN",
+      "to": "YVR",
+      "dep": "2027-06-19 22:40",
+      "arr": "2027-06-19 16:45",
+      "duration": 605,
+      "aircraft": "Boeing 787-10",
+      "class": "Economy"
+     }
+    ],
+    "layovers": [
+     {
+      "airport": "ICN",
+      "duration": 1115,
+      "overnight": false
+     }
+    ],
+    "total_duration": 1840,
+    "price": 1563,
+    "key": "KE894+KE75",
+    "from": "PVG",
+    "to": "YVR",
+    "dep": "2027-06-19 01:05",
+    "arr": "2027-06-19 16:45",
+    "valid": false,
+    "reject": "转机等待超过4小时"
+   },
+   "ret": {
+    "segments": [
+     {
+      "flight": "NH 115",
+      "airline": "ANA",
+      "airline_cn": "全日空",
+      "from": "YVR",
+      "to": "HND",
+      "dep": "2027-06-27 16:45",
+      "arr": "2027-06-28 19:00",
+      "duration": 615,
+      "aircraft": "Boeing 787",
+      "class": "Economy"
+     },
+     {
+      "flight": "NH 967",
+      "airline": "ANA",
+      "airline_cn": "全日空",
+      "from": "HND",
+      "to": "PVG",
+      "dep": "2027-06-28 22:30",
+      "arr": "2027-06-29 00:45",
+      "duration": 195,
+      "aircraft": "Boeing 767",
+      "class": "Economy"
+     }
+    ],
+    "layovers": [
+     {
+      "airport": "HND",
+      "duration": 210,
+      "overnight": false
+     }
+    ],
+    "total_duration": 1020,
+    "price": 6582,
+    "key": "NH115+NH967",
+    "from": "YVR",
+    "to": "PVG",
+    "dep": "2027-06-27 16:45",
+    "arr": "2027-06-29 00:45"
+   },
+   "price": 6582,
+   "price_est": false,
+   "total_minutes": 2860,
+   "arr_penalty": 3,
+   "arr_slot": "下午",
+   "gf_url": "https://www.google.com/travel/flights?hl=en&gl=ca&curr=CAD&tfs=CBwQAhp6EgoyMDI3LTA2LTE5Ih8KA1BWRxIKMjAyNy0wNi0xORoDSUNOKgJLRTIDODk0Ih4KA0lDThIKMjAyNy0wNi0xORoDWVZSKgJLRTICNzVqBwgBEgNQVkdqBwgBEgNTSEFqBwgBEgNIR0hyBwgBEgNZWVpyBwgBEgNZVlIaORIKMjAyNy0wNi0yN2oHCAESA1lZWmoHCAESA1lWUnIHCAESA1BWR3IHCAESA1NIQXIHCAESA0hHSEABSAFwAZgBAQ&tfu=EgIIAQ",
+   "out_date": "2027-06-19",
+   "ret_date": "2027-06-27",
+   "reject": "去程转机等待超过4小时"
+  },
+  {
+   "trip": "A",
+   "key": "A|KE890+KE75|AC572+UA35+NH975",
+   "out": {
+    "segments": [
+     {
+      "flight": "KE 890",
+      "airline": "Korean Air",
+      "airline_cn": "大韩航空",
+      "from": "PVG",
+      "to": "ICN",
+      "dep": "2027-06-19 16:20",
+      "arr": "2027-06-19 19:20",
+      "duration": 120,
+      "aircraft": "Airbus A321neo",
+      "class": "Economy"
+     },
+     {
+      "flight": "KE 75",
+      "airline": "Korean Air",
+      "airline_cn": "大韩航空",
+      "from": "ICN",
+      "to": "YVR",
+      "dep": "2027-06-19 22:40",
+      "arr": "2027-06-19 16:45",
+      "duration": 605,
+      "aircraft": "Boeing 787-10",
+      "class": "Economy"
+     }
+    ],
+    "layovers": [
+     {
+      "airport": "ICN",
+      "duration": 200,
+      "overnight": false
+     }
+    ],
+    "total_duration": 925,
+    "price": 1581,
+    "key": "KE890+KE75",
+    "from": "PVG",
+    "to": "YVR",
+    "dep": "2027-06-19 16:20",
+    "arr": "2027-06-19 16:45",
+    "valid": true,
+    "reject": null
+   },
+   "ret": {
+    "segments": [
+     {
+      "flight": "AC 572",
+      "airline": "Air Canada",
+      "airline_cn": "加拿大航空",
+      "from": "YVR",
+      "to": "SFO",
+      "dep": "2027-06-27 20:55",
+      "arr": "2027-06-27 23:17",
+      "duration": 142,
+      "aircraft": "Airbus A220-300 Passenger",
+      "class": "Economy"
+     },
+     {
+      "flight": "UA 35",
+      "airline": "United",
+      "airline_cn": "United",
+      "from": "SFO",
+      "to": "KIX",
+      "dep": "2027-06-28 11:10",
+      "arr": "2027-06-29 14:50",
+      "duration": 700,
+      "aircraft": "Boeing 777",
+      "class": "Economy"
+     },
+     {
+      "flight": "NH 975",
+      "airline": "ANA",
+      "airline_cn": "全日空",
+      "from": "KIX",
+      "to": "PVG",
+      "dep": "2027-06-29 15:55",
+      "arr": "2027-06-29 17:20",
+      "duration": 145,
+      "aircraft": "Airbus A320",
+      "class": "Economy"
+     }
+    ],
+    "layovers": [
+     {
+      "airport": "SFO",
+      "duration": 713,
+      "overnight": false
+     },
+     {
+      "airport": "KIX",
+      "duration": 65,
+      "overnight": false
+     }
+    ],
+    "total_duration": 1765,
+    "price": 6806,
+    "key": "AC572+UA35+NH975",
+    "from": "YVR",
+    "to": "PVG",
+    "dep": "2027-06-27 20:55",
+    "arr": "2027-06-29 17:20"
+   },
+   "price": 6806,
+   "price_est": false,
+   "total_minutes": 2690,
+   "arr_penalty": 3,
+   "arr_slot": "下午",
+   "gf_url": "https://www.google.com/travel/flights?hl=en&gl=ca&curr=CAD&tfs=CBwQAhp6EgoyMDI3LTA2LTE5Ih8KA1BWRxIKMjAyNy0wNi0xORoDSUNOKgJLRTIDODkwIh4KA0lDThIKMjAyNy0wNi0xORoDWVZSKgJLRTICNzVqBwgBEgNQVkdqBwgBEgNTSEFqBwgBEgNIR0hyBwgBEgNZWVpyBwgBEgNZVlIaORIKMjAyNy0wNi0yN2oHCAESA1lZWmoHCAESA1lWUnIHCAESA1BWR3IHCAESA1NIQXIHCAESA0hHSEABSAFwAZgBAQ&tfu=EgIIAQ",
+   "out_date": "2027-06-19",
+   "ret_date": "2027-06-27",
+   "reject": "回程经旧金山转机需签证或未确认免签"
+  },
+  {
+   "trip": "B",
+   "key": "B|HX247+HX80|HX81+HX246",
+   "out": {
+    "segments": [
+     {
+      "flight": "HX 247",
+      "airline": "Hong Kong Airlines",
+      "airline_cn": "香港航空",
+      "from": "PVG",
+      "to": "HKG",
+      "dep": "2027-06-26 16:55",
+      "arr": "2027-06-26 19:45",
+      "duration": 170,
+      "aircraft": "Airbus A320",
+      "class": "Economy"
+     },
+     {
+      "flight": "HX 80",
+      "airline": "Hong Kong Airlines",
+      "airline_cn": "香港航空",
+      "from": "HKG",
+      "to": "YVR",
+      "dep": "2027-06-26 22:25",
+      "arr": "2027-06-26 20:15",
+      "duration": 770,
+      "aircraft": "Airbus A330",
+      "class": "Economy"
+     }
+    ],
+    "layovers": [
+     {
+      "airport": "HKG",
+      "duration": 160,
+      "overnight": false
+     }
+    ],
+    "total_duration": 1100,
+    "price": 1223,
+    "key": "HX247+HX80",
+    "from": "PVG",
+    "to": "YVR",
+    "dep": "2027-06-26 16:55",
+    "arr": "2027-06-26 20:15",
+    "valid": true,
+    "reject": null
+   },
+   "ret": {
+    "segments": [
+     {
+      "flight": "HX 81",
+      "airline": "Hong Kong Airlines",
+      "airline_cn": "香港航空",
+      "from": "YVR",
+      "to": "HKG",
+      "dep": "2027-07-04 01:00",
+      "arr": "2027-07-05 06:20",
+      "duration": 860,
+      "aircraft": "Airbus A330",
+      "class": "Economy"
+     },
+     {
+      "flight": "HX 246",
+      "airline": "Hong Kong Airlines",
+      "airline_cn": "香港航空",
+      "from": "HKG",
+      "to": "PVG",
+      "dep": "2027-07-05 13:05",
+      "arr": "2027-07-05 15:45",
+      "duration": 160,
+      "aircraft": "Airbus A320",
+      "class": "Economy"
+     }
+    ],
+    "layovers": [
+     {
+      "airport": "HKG",
+      "duration": 405,
+      "overnight": false
+     }
+    ],
+    "total_duration": 1425,
+    "price": null,
+    "key": "HX81+HX246",
+    "from": "YVR",
+    "to": "PVG",
+    "dep": "2027-07-04 01:00",
+    "arr": "2027-07-05 15:45"
+   },
+   "price": 1223,
+   "price_est": true,
+   "total_minutes": 2525,
+   "arr_penalty": 6,
+   "arr_slot": "晚上",
+   "gf_url": "https://www.google.com/travel/flights?hl=en&gl=ca&curr=CAD&tfs=CBwQAhp6EgoyMDI3LTA2LTI2Ih8KA1BWRxIKMjAyNy0wNi0yNhoDSEtHKgJIWDIDMjQ3Ih4KA0hLRxIKMjAyNy0wNi0yNhoDWVZSKgJIWDICODBqBwgBEgNQVkdqBwgBEgNTSEFqBwgBEgNIR0hyBwgBEgNZWVpyBwgBEgNZVlIaORIKMjAyNy0wNy0wNGoHCAESA1lZWmoHCAESA1lWUnIHCAESA1BWR3IHCAESA1NIQXIHCAESA0hHSEABSAFwAZgBAQ&tfu=EgIIAQ",
+   "out_date": "2027-06-26",
+   "ret_date": "2027-07-04",
+   "reject": "回程转机等待超过4小时"
+  },
+  {
+   "trip": "B",
+   "key": "B|KE890+KE75|KE76+KE889",
+   "out": {
+    "segments": [
+     {
+      "flight": "KE 890",
+      "airline": "Korean Air",
+      "airline_cn": "大韩航空",
+      "from": "PVG",
+      "to": "ICN",
+      "dep": "2027-06-26 16:20",
+      "arr": "2027-06-26 19:20",
+      "duration": 120,
+      "aircraft": "Airbus A321neo",
+      "class": "Economy"
+     },
+     {
+      "flight": "KE 75",
+      "airline": "Korean Air",
+      "airline_cn": "大韩航空",
+      "from": "ICN",
+      "to": "YVR",
+      "dep": "2027-06-26 22:40",
+      "arr": "2027-06-26 16:45",
+      "duration": 605,
+      "aircraft": "Boeing 787-10",
+      "class": "Economy"
+     }
+    ],
+    "layovers": [
+     {
+      "airport": "ICN",
+      "duration": 200,
+      "overnight": false
+     }
+    ],
+    "total_duration": 925,
+    "price": 1392,
+    "key": "KE890+KE75",
+    "from": "PVG",
+    "to": "YVR",
+    "dep": "2027-06-26 16:20",
+    "arr": "2027-06-26 16:45",
+    "valid": true,
+    "reject": null
+   },
+   "ret": {
+    "segments": [
+     {
+      "flight": "KE 76",
+      "airline": "Korean Air",
+      "airline_cn": "大韩航空",
+      "from": "YVR",
+      "to": "ICN",
+      "dep": "2027-07-04 00:55",
+      "arr": "2027-07-05 04:25",
+      "duration": 690,
+      "aircraft": "Boeing 787-10",
+      "class": "Economy"
+     },
+     {
+      "flight": "KE 889",
+      "airline": "Korean Air",
+      "airline_cn": "大韩航空",
+      "from": "ICN",
+      "to": "PVG",
+      "dep": "2027-07-05 14:00",
+      "arr": "2027-07-05 15:00",
+      "duration": 120,
+      "aircraft": "Airbus A321neo",
+      "class": "Economy"
+     }
+    ],
+    "layovers": [
+     {
+      "airport": "ICN",
+      "duration": 575,
+      "overnight": false
+     }
+    ],
+    "total_duration": 1385,
+    "price": 1392,
+    "key": "KE76+KE889",
+    "from": "YVR",
+    "to": "PVG",
+    "dep": "2027-07-04 00:55",
+    "arr": "2027-07-05 15:00"
+   },
+   "price": 1392,
+   "price_est": false,
+   "total_minutes": 2310,
+   "arr_penalty": 3,
+   "arr_slot": "下午",
+   "gf_url": "https://www.google.com/travel/flights?hl=en&gl=ca&curr=CAD&tfs=CBwQAhp6EgoyMDI3LTA2LTI2Ih8KA1BWRxIKMjAyNy0wNi0yNhoDSUNOKgJLRTIDODkwIh4KA0lDThIKMjAyNy0wNi0yNhoDWVZSKgJLRTICNzVqBwgBEgNQVkdqBwgBEgNTSEFqBwgBEgNIR0hyBwgBEgNZWVpyBwgBEgNZVlIaORIKMjAyNy0wNy0wNGoHCAESA1lZWmoHCAESA1lWUnIHCAESA1BWR3IHCAESA1NIQXIHCAESA0hHSEABSAFwAZgBAQ&tfu=EgIIAQ",
+   "out_date": "2027-06-26",
+   "ret_date": "2027-07-04",
+   "reject": "回程转机等待超过4小时"
+  },
+  {
+   "trip": "B",
+   "key": "B|KE892+KE71|KE72+KE889",
+   "out": {
+    "segments": [
+     {
+      "flight": "KE 892",
+      "airline": "Korean Air",
+      "airline_cn": "大韩航空",
+      "from": "PVG",
+      "to": "ICN",
+      "dep": "2027-06-26 08:50",
+      "arr": "2027-06-26 11:55",
+      "duration": 125,
+      "aircraft": "Boeing 737",
+      "class": "Economy"
+     },
+     {
+      "flight": "KE 71",
+      "airline": "Korean Air",
+      "airline_cn": "大韩航空",
+      "from": "ICN",
+      "to": "YVR",
+      "dep": "2027-06-26 18:45",
+      "arr": "2027-06-26 12:35",
+      "duration": 590,
+      "aircraft": "Boeing 787-10",
+      "class": "Economy"
+     }
+    ],
+    "layovers": [
+     {
+      "airport": "ICN",
+      "duration": 410,
+      "overnight": false
+     }
+    ],
+    "total_duration": 1125,
+    "price": 1807,
+    "key": "KE892+KE71",
+    "from": "PVG",
+    "to": "YVR",
+    "dep": "2027-06-26 08:50",
+    "arr": "2027-06-26 12:35",
+    "valid": false,
+    "reject": "转机等待超过4小时"
+   },
+   "ret": {
+    "segments": [
+     {
+      "flight": "KE 72",
+      "airline": "Korean Air",
+      "airline_cn": "大韩航空",
+      "from": "YVR",
+      "to": "ICN",
+      "dep": "2027-07-04 14:50",
+      "arr": "2027-07-05 17:50",
+      "duration": 660,
+      "aircraft": "Boeing 787-10",
+      "class": "Economy"
+     },
+     {
+      "flight": "KE 889",
+      "airline": "Korean Air",
+      "airline_cn": "大韩航空",
+      "from": "ICN",
+      "to": "PVG",
+      "dep": "2027-07-06 14:00",
+      "arr": "2027-07-06 15:00",
+      "duration": 120,
+      "aircraft": "Airbus A321neo",
+      "class": "Economy"
+     }
+    ],
+    "layovers": [
+     {
+      "airport": "ICN",
+      "duration": 1210,
+      "overnight": false
+     }
+    ],
+    "total_duration": 1990,
+    "price": 1581,
+    "key": "KE72+KE889",
+    "from": "YVR",
+    "to": "PVG",
+    "dep": "2027-07-04 14:50",
+    "arr": "2027-07-06 15:00"
+   },
+   "price": 1581,
+   "price_est": false,
+   "total_minutes": 3115,
+   "arr_penalty": 1.5,
+   "arr_slot": "中午",
+   "gf_url": "https://www.google.com/travel/flights?hl=en&gl=ca&curr=CAD&tfs=CBwQAhp6EgoyMDI3LTA2LTI2Ih8KA1BWRxIKMjAyNy0wNi0yNhoDSUNOKgJLRTIDODkyIh4KA0lDThIKMjAyNy0wNi0yNhoDWVZSKgJLRTICNzFqBwgBEgNQVkdqBwgBEgNTSEFqBwgBEgNIR0hyBwgBEgNZWVpyBwgBEgNZVlIaORIKMjAyNy0wNy0wNGoHCAESA1lZWmoHCAESA1lWUnIHCAESA1BWR3IHCAESA1NIQXIHCAESA0hHSEABSAFwAZgBAQ&tfu=EgIIAQ",
+   "out_date": "2027-06-26",
+   "ret_date": "2027-07-04",
+   "reject": "去程转机等待超过4小时；回程转机等待超过4小时"
+  },
+  {
+   "trip": "B",
+   "key": "B|KE110+KE75|KE76+KE107",
+   "out": {
+    "segments": [
+     {
+      "flight": "KE 110",
+      "airline": "Korean Air",
+      "airline_cn": "大韩航空",
+      "from": "HGH",
+      "to": "ICN",
+      "dep": "2027-06-26 15:10",
+      "arr": "2027-06-26 18:15",
+      "duration": 125,
+      "aircraft": "Airbus A321neo",
+      "class": "Economy"
+     },
+     {
+      "flight": "KE 75",
+      "airline": "Korean Air",
+      "airline_cn": "大韩航空",
+      "from": "ICN",
+      "to": "YVR",
+      "dep": "2027-06-26 22:40",
+      "arr": "2027-06-26 16:45",
+      "duration": 605,
+      "aircraft": "Boeing 787-10",
+      "class": "Economy"
+     }
+    ],
+    "layovers": [
+     {
+      "airport": "ICN",
+      "duration": 265,
+      "overnight": false
+     }
+    ],
+    "total_duration": 995,
+    "price": 1620,
+    "key": "KE110+KE75",
+    "from": "HGH",
+    "to": "YVR",
+    "dep": "2027-06-26 15:10",
+    "arr": "2027-06-26 16:45",
+    "valid": false,
+    "reject": "转机等待超过4小时"
+   },
+   "ret": {
+    "segments": [
+     {
+      "flight": "KE 76",
+      "airline": "Korean Air",
+      "airline_cn": "大韩航空",
+      "from": "YVR",
+      "to": "ICN",
+      "dep": "2027-07-04 00:55",
+      "arr": "2027-07-05 04:25",
+      "duration": 690,
+      "aircraft": "Boeing 787-10",
+      "class": "Economy"
+     },
+     {
+      "flight": "KE 107",
+      "airline": "Korean Air",
+      "airline_cn": "大韩航空",
+      "from": "ICN",
+      "to": "HGH",
+      "dep": "2027-07-05 12:00",
+      "arr": "2027-07-05 13:25",
+      "duration": 145,
+      "aircraft": "Boeing 737",
+      "class": "Economy"
+     }
+    ],
+    "layovers": [
+     {
+      "airport": "ICN",
+      "duration": 455,
+      "overnight": false
+     }
+    ],
+    "total_duration": 1290,
+    "price": 1619,
+    "key": "KE76+KE107",
+    "from": "YVR",
+    "to": "HGH",
+    "dep": "2027-07-04 00:55",
+    "arr": "2027-07-05 13:25"
+   },
+   "price": 1619,
+   "price_est": false,
+   "total_minutes": 2285,
+   "arr_penalty": 3,
+   "arr_slot": "下午",
+   "gf_url": "https://www.google.com/travel/flights?hl=en&gl=ca&curr=CAD&tfs=CBwQAhp6EgoyMDI3LTA2LTI2Ih8KA0hHSBIKMjAyNy0wNi0yNhoDSUNOKgJLRTIDMTEwIh4KA0lDThIKMjAyNy0wNi0yNhoDWVZSKgJLRTICNzVqBwgBEgNQVkdqBwgBEgNTSEFqBwgBEgNIR0hyBwgBEgNZWVpyBwgBEgNZVlIaORIKMjAyNy0wNy0wNGoHCAESA1lZWmoHCAESA1lWUnIHCAESA1BWR3IHCAESA1NIQXIHCAESA0hHSEABSAFwAZgBAQ&tfu=EgIIAQ",
+   "out_date": "2027-06-26",
+   "ret_date": "2027-07-04",
+   "reject": "去程转机等待超过4小时；回程转机等待超过4小时"
+  },
+  {
+   "trip": "B",
+   "key": "B|KE110+KE75|KE72+KE109",
+   "out": {
+    "segments": [
+     {
+      "flight": "KE 110",
+      "airline": "Korean Air",
+      "airline_cn": "大韩航空",
+      "from": "HGH",
+      "to": "ICN",
+      "dep": "2027-06-26 15:10",
+      "arr": "2027-06-26 18:15",
+      "duration": 125,
+      "aircraft": "Airbus A321neo",
+      "class": "Economy"
+     },
+     {
+      "flight": "KE 75",
+      "airline": "Korean Air",
+      "airline_cn": "大韩航空",
+      "from": "ICN",
+      "to": "YVR",
+      "dep": "2027-06-26 22:40",
+      "arr": "2027-06-26 16:45",
+      "duration": 605,
+      "aircraft": "Boeing 787-10",
+      "class": "Economy"
+     }
+    ],
+    "layovers": [
+     {
+      "airport": "ICN",
+      "duration": 265,
+      "overnight": false
+     }
+    ],
+    "total_duration": 995,
+    "price": 1620,
+    "key": "KE110+KE75",
+    "from": "HGH",
+    "to": "YVR",
+    "dep": "2027-06-26 15:10",
+    "arr": "2027-06-26 16:45",
+    "valid": false,
+    "reject": "转机等待超过4小时"
+   },
+   "ret": {
+    "segments": [
+     {
+      "flight": "KE 72",
+      "airline": "Korean Air",
+      "airline_cn": "大韩航空",
+      "from": "YVR",
+      "to": "ICN",
+      "dep": "2027-07-04 14:50",
+      "arr": "2027-07-05 17:50",
+      "duration": 660,
+      "aircraft": "Boeing 787-10",
+      "class": "Economy"
+     },
+     {
+      "flight": "KE 109",
+      "airline": "Korean Air",
+      "airline_cn": "大韩航空",
+      "from": "ICN",
+      "to": "HGH",
+      "dep": "2027-07-06 12:30",
+      "arr": "2027-07-06 13:45",
+      "duration": 135,
+      "aircraft": "Airbus A321neo",
+      "class": "Economy"
+     }
+    ],
+    "layovers": [
+     {
+      "airport": "ICN",
+      "duration": 1120,
+      "overnight": false
+     }
+    ],
+    "total_duration": 1915,
+    "price": 1806,
+    "key": "KE72+KE109",
+    "from": "YVR",
+    "to": "HGH",
+    "dep": "2027-07-04 14:50",
+    "arr": "2027-07-06 13:45"
+   },
+   "price": 1806,
+   "price_est": false,
+   "total_minutes": 2910,
+   "arr_penalty": 3,
+   "arr_slot": "下午",
+   "gf_url": "https://www.google.com/travel/flights?hl=en&gl=ca&curr=CAD&tfs=CBwQAhp6EgoyMDI3LTA2LTI2Ih8KA0hHSBIKMjAyNy0wNi0yNhoDSUNOKgJLRTIDMTEwIh4KA0lDThIKMjAyNy0wNi0yNhoDWVZSKgJLRTICNzVqBwgBEgNQVkdqBwgBEgNTSEFqBwgBEgNIR0hyBwgBEgNZWVpyBwgBEgNZVlIaORIKMjAyNy0wNy0wNGoHCAESA1lZWmoHCAESA1lWUnIHCAESA1BWR3IHCAESA1NIQXIHCAESA0hHSEABSAFwAZgBAQ&tfu=EgIIAQ",
+   "out_date": "2027-06-26",
+   "ret_date": "2027-07-04",
+   "reject": "去程转机等待超过4小时；回程转机等待超过4小时"
+  },
+  {
+   "trip": "B",
+   "key": "B|KE892+KE71|KE72+KE893",
+   "out": {
+    "segments": [
+     {
+      "flight": "KE 892",
+      "airline": "Korean Air",
+      "airline_cn": "大韩航空",
+      "from": "PVG",
+      "to": "ICN",
+      "dep": "2027-06-26 08:50",
+      "arr": "2027-06-26 11:55",
+      "duration": 125,
+      "aircraft": "Boeing 737",
+      "class": "Economy"
+     },
+     {
+      "flight": "KE 71",
+      "airline": "Korean Air",
+      "airline_cn": "大韩航空",
+      "from": "ICN",
+      "to": "YVR",
+      "dep": "2027-06-26 18:45",
+      "arr": "2027-06-26 12:35",
+      "duration": 590,
+      "aircraft": "Boeing 787-10",
+      "class": "Economy"
+     }
+    ],
+    "layovers": [
+     {
+      "airport": "ICN",
+      "duration": 410,
+      "overnight": false
+     }
+    ],
+    "total_duration": 1125,
+    "price": 1807,
+    "key": "KE892+KE71",
+    "from": "PVG",
+    "to": "YVR",
+    "dep": "2027-06-26 08:50",
+    "arr": "2027-06-26 12:35",
+    "valid": false,
+    "reject": "转机等待超过4小时"
+   },
+   "ret": {
+    "segments": [
+     {
+      "flight": "KE 72",
+      "airline": "Korean Air",
+      "airline_cn": "大韩航空",
+      "from": "YVR",
+      "to": "ICN",
+      "dep": "2027-07-04 14:50",
+      "arr": "2027-07-05 17:50",
+      "duration": 660,
+      "aircraft": "Boeing 787-10",
+      "class": "Economy"
+     },
+     {
+      "flight": "KE 893",
+      "airline": "Korean Air",
+      "airline_cn": "大韩航空",
+      "from": "ICN",
+      "to": "PVG",
+      "dep": "2027-07-05 20:00",
+      "arr": "2027-07-05 20:55",
+      "duration": 115,
+      "aircraft": "Airbus A321neo",
+      "class": "Economy"
+     }
+    ],
+    "layovers": [
+     {
+      "airport": "ICN",
+      "duration": 130,
+      "overnight": false
+     }
+    ],
+    "total_duration": 905,
+    "price": 1806,
+    "key": "KE72+KE893",
+    "from": "YVR",
+    "to": "PVG",
+    "dep": "2027-07-04 14:50",
+    "arr": "2027-07-05 20:55"
+   },
+   "price": 1806,
+   "price_est": false,
+   "total_minutes": 2030,
+   "arr_penalty": 1.5,
+   "arr_slot": "中午",
+   "gf_url": "https://www.google.com/travel/flights?hl=en&gl=ca&curr=CAD&tfs=CBwQAhp6EgoyMDI3LTA2LTI2Ih8KA1BWRxIKMjAyNy0wNi0yNhoDSUNOKgJLRTIDODkyIh4KA0lDThIKMjAyNy0wNi0yNhoDWVZSKgJLRTICNzFqBwgBEgNQVkdqBwgBEgNTSEFqBwgBEgNIR0hyBwgBEgNZWVpyBwgBEgNZVlIaORIKMjAyNy0wNy0wNGoHCAESA1lZWmoHCAESA1lWUnIHCAESA1BWR3IHCAESA1NIQXIHCAESA0hHSEABSAFwAZgBAQ&tfu=EgIIAQ",
+   "out_date": "2027-06-26",
+   "ret_date": "2027-07-04",
+   "reject": "去程转机等待超过4小时"
+  },
+  {
+   "trip": "B",
+   "key": "B|CI504+CI32|CI31+CI501",
+   "out": {
+    "segments": [
+     {
+      "flight": "CI 504",
+      "airline": "China Airlines",
+      "airline_cn": "China Airlines",
+      "from": "PVG",
+      "to": "TPE",
+      "dep": "2027-06-26 19:50",
+      "arr": "2027-06-26 21:50",
+      "duration": 120,
+      "aircraft": "Airbus A350",
+      "class": "Economy"
+     },
+     {
+      "flight": "CI 32",
+      "airline": "China Airlines",
+      "airline_cn": "China Airlines",
+      "from": "TPE",
+      "to": "YVR",
+      "dep": "2027-06-26 23:35",
+      "arr": "2027-06-26 19:20",
+      "duration": 645,
+      "aircraft": "Boeing 777",
+      "class": "Economy"
+     }
+    ],
+    "layovers": [
+     {
+      "airport": "TPE",
+      "duration": 105,
+      "overnight": false
+     }
+    ],
+    "total_duration": 870,
+    "price": 1958,
+    "key": "CI504+CI32",
+    "from": "PVG",
+    "to": "YVR",
+    "dep": "2027-06-26 19:50",
+    "arr": "2027-06-26 19:20",
+    "valid": false,
+    "reject": "经台北桃园转机需签证或未确认免签"
+   },
+   "ret": {
+    "segments": [
+     {
+      "flight": "CI 31",
+      "airline": "China Airlines",
+      "airline_cn": "China Airlines",
+      "from": "YVR",
+      "to": "TPE",
+      "dep": "2027-07-04 02:30",
+      "arr": "2027-07-05 05:30",
+      "duration": 720,
+      "aircraft": "Boeing 777",
+      "class": "Economy"
+     },
+     {
+      "flight": "CI 501",
+      "airline": "China Airlines",
+      "airline_cn": "China Airlines",
+      "from": "TPE",
+      "to": "PVG",
+      "dep": "2027-07-05 08:40",
+      "arr": "2027-07-05 10:50",
+      "duration": 130,
+      "aircraft": "Airbus A350",
+      "class": "Economy"
+     }
+    ],
+    "layovers": [
+     {
+      "airport": "TPE",
+      "duration": 190,
+      "overnight": false
+     }
+    ],
+    "total_duration": 1040,
+    "price": 1957,
+    "key": "CI31+CI501",
+    "from": "YVR",
+    "to": "PVG",
+    "dep": "2027-07-04 02:30",
+    "arr": "2027-07-05 10:50"
+   },
+   "price": 1957,
+   "price_est": false,
+   "total_minutes": 1910,
+   "arr_penalty": 6,
+   "arr_slot": "晚上",
+   "gf_url": "https://www.google.com/travel/flights?hl=en&gl=ca&curr=CAD&tfs=CBwQAhp6EgoyMDI3LTA2LTI2Ih8KA1BWRxIKMjAyNy0wNi0yNhoDVFBFKgJDSTIDNTA0Ih4KA1RQRRIKMjAyNy0wNi0yNhoDWVZSKgJDSTICMzJqBwgBEgNQVkdqBwgBEgNTSEFqBwgBEgNIR0hyBwgBEgNZWVpyBwgBEgNZVlIaORIKMjAyNy0wNy0wNGoHCAESA1lZWmoHCAESA1lWUnIHCAESA1BWR3IHCAESA1NIQXIHCAESA0hHSEABSAFwAZgBAQ&tfu=EgIIAQ",
+   "out_date": "2027-06-26",
+   "ret_date": "2027-07-04",
+   "reject": "去程经台北桃园转机需签证或未确认免签；回程经台北桃园转机需签证或未确认免签"
+  },
+  {
+   "trip": "B",
+   "key": "B|KE892+KE71|KE72+KE891",
+   "out": {
+    "segments": [
+     {
+      "flight": "KE 892",
+      "airline": "Korean Air",
+      "airline_cn": "大韩航空",
+      "from": "PVG",
+      "to": "ICN",
+      "dep": "2027-06-26 08:50",
+      "arr": "2027-06-26 11:55",
+      "duration": 125,
+      "aircraft": "Boeing 737",
+      "class": "Economy"
+     },
+     {
+      "flight": "KE 71",
+      "airline": "Korean Air",
+      "airline_cn": "大韩航空",
+      "from": "ICN",
+      "to": "YVR",
+      "dep": "2027-06-26 18:45",
+      "arr": "2027-06-26 12:35",
+      "duration": 590,
+      "aircraft": "Boeing 787-10",
+      "class": "Economy"
+     }
+    ],
+    "layovers": [
+     {
+      "airport": "ICN",
+      "duration": 410,
+      "overnight": false
+     }
+    ],
+    "total_duration": 1125,
+    "price": 1807,
+    "key": "KE892+KE71",
+    "from": "PVG",
+    "to": "YVR",
+    "dep": "2027-06-26 08:50",
+    "arr": "2027-06-26 12:35",
+    "valid": false,
+    "reject": "转机等待超过4小时"
+   },
+   "ret": {
+    "segments": [
+     {
+      "flight": "KE 72",
+      "airline": "Korean Air",
+      "airline_cn": "大韩航空",
+      "from": "YVR",
+      "to": "ICN",
+      "dep": "2027-07-04 14:50",
+      "arr": "2027-07-05 17:50",
+      "duration": 660,
+      "aircraft": "Boeing 787-10",
+      "class": "Economy"
+     },
+     {
+      "flight": "KE 891",
+      "airline": "Korean Air",
+      "airline_cn": "大韩航空",
+      "from": "ICN",
+      "to": "PVG",
+      "dep": "2027-07-05 18:55",
+      "arr": "2027-07-05 20:10",
+      "duration": 135,
+      "aircraft": "Boeing 737",
+      "class": "Economy"
+     }
+    ],
+    "layovers": [
+     {
+      "airport": "ICN",
+      "duration": 65,
+      "overnight": false
+     }
+    ],
+    "total_duration": 860,
+    "price": 1995,
+    "key": "KE72+KE891",
+    "from": "YVR",
+    "to": "PVG",
+    "dep": "2027-07-04 14:50",
+    "arr": "2027-07-05 20:10"
+   },
+   "price": 1995,
+   "price_est": false,
+   "total_minutes": 1985,
+   "arr_penalty": 1.5,
+   "arr_slot": "中午",
+   "gf_url": "https://www.google.com/travel/flights?hl=en&gl=ca&curr=CAD&tfs=CBwQAhp6EgoyMDI3LTA2LTI2Ih8KA1BWRxIKMjAyNy0wNi0yNhoDSUNOKgJLRTIDODkyIh4KA0lDThIKMjAyNy0wNi0yNhoDWVZSKgJLRTICNzFqBwgBEgNQVkdqBwgBEgNTSEFqBwgBEgNIR0hyBwgBEgNZWVpyBwgBEgNZVlIaORIKMjAyNy0wNy0wNGoHCAESA1lZWmoHCAESA1lWUnIHCAESA1BWR3IHCAESA1NIQXIHCAESA0hHSEABSAFwAZgBAQ&tfu=EgIIAQ",
+   "out_date": "2027-06-26",
+   "ret_date": "2027-07-04",
+   "reject": "去程转机等待超过4小时"
+  },
+  {
+   "trip": "B",
+   "key": "B|CX959+CX810|AS2330+CX833+CX964",
+   "out": {
+    "segments": [
+     {
+      "flight": "CX 959",
+      "airline": "Cathay Pacific",
+      "airline_cn": "国泰航空",
+      "from": "HGH",
+      "to": "HKG",
+      "dep": "2027-06-26 11:25",
+      "arr": "2027-06-26 14:05",
+      "duration": 160,
+      "aircraft": "Airbus A321neo",
+      "class": "Economy"
+     },
+     {
+      "flight": "CX 810",
+      "airline": "Cathay Pacific",
+      "airline_cn": "国泰航空",
+      "from": "HKG",
+      "to": "YVR",
+      "dep": "2027-06-26 15:55",
+      "arr": "2027-06-26 13:00",
+      "duration": 725,
+      "aircraft": "Airbus A350",
+      "class": "Economy"
+     }
+    ],
+    "layovers": [
+     {
+      "airport": "HKG",
+      "duration": 110,
+      "overnight": false
+     }
+    ],
+    "total_duration": 995,
+    "price": 2048,
+    "key": "CX959+CX810",
+    "from": "HGH",
+    "to": "YVR",
+    "dep": "2027-06-26 11:25",
+    "arr": "2027-06-26 13:00",
+    "valid": true,
+    "reject": null
+   },
+   "ret": {
+    "segments": [
+     {
+      "flight": "AS 2330",
+      "airline": "Alaska",
+      "airline_cn": "Alaska",
+      "from": "YVR",
+      "to": "SEA",
+      "dep": "2027-07-04 07:55",
+      "arr": "2027-07-04 09:00",
+      "duration": 65,
+      "aircraft": "Embraer 175",
+      "class": "Economy"
+     },
+     {
+      "flight": "CX 833",
+      "airline": "Cathay Pacific",
+      "airline_cn": "国泰航空",
+      "from": "SEA",
+      "to": "HKG",
+      "dep": "2027-07-04 12:00",
+      "arr": "2027-07-05 16:30",
+      "duration": 810,
+      "aircraft": "Airbus A350",
+      "class": "Economy"
+     },
+     {
+      "flight": "CX 964",
+      "airline": "Cathay Pacific",
+      "airline_cn": "国泰航空",
+      "from": "HKG",
+      "to": "HGH",
+      "dep": "2027-07-05 20:10",
+      "arr": "2027-07-05 22:35",
+      "duration": 145,
+      "aircraft": "Airbus A330",
+      "class": "Economy"
+     }
+    ],
+    "layovers": [
+     {
+      "airport": "SEA",
+      "duration": 180,
+      "overnight": false
+     },
+     {
+      "airport": "HKG",
+      "duration": 220,
+      "overnight": false
+     }
+    ],
+    "total_duration": 1420,
+    "price": 2489,
+    "key": "AS2330+CX833+CX964",
+    "from": "YVR",
+    "to": "HGH",
+    "dep": "2027-07-04 07:55",
+    "arr": "2027-07-05 22:35"
+   },
+   "price": 2489,
+   "price_est": false,
+   "total_minutes": 2415,
+   "arr_penalty": 1.5,
+   "arr_slot": "中午",
+   "gf_url": "https://www.google.com/travel/flights?hl=en&gl=ca&curr=CAD&tfs=CBwQAhp7EgoyMDI3LTA2LTI2Ih8KA0hHSBIKMjAyNy0wNi0yNhoDSEtHKgJDWDIDOTU5Ih8KA0hLRxIKMjAyNy0wNi0yNhoDWVZSKgJDWDIDODEwagcIARIDUFZHagcIARIDU0hBagcIARIDSEdIcgcIARIDWVlacgcIARIDWVZSGjkSCjIwMjctMDctMDRqBwgBEgNZWVpqBwgBEgNZVlJyBwgBEgNQVkdyBwgBEgNTSEFyBwgBEgNIR0hAAUgBcAGYAQE&tfu=EgIIAQ",
+   "out_date": "2027-06-26",
+   "ret_date": "2027-07-04",
+   "reject": "回程经西雅图转机需签证或未确认免签"
+  },
+  {
+   "trip": "B",
+   "key": "B|AC26|AC126+AC27",
+   "out": {
+    "segments": [
+     {
+      "flight": "AC 26",
+      "airline": "Air Canada",
+      "airline_cn": "加拿大航空",
+      "from": "PVG",
+      "to": "YVR",
+      "dep": "2027-06-26 15:55",
+      "arr": "2027-06-26 11:40",
+      "duration": 645,
+      "aircraft": "Boeing 787",
+      "class": "Economy"
+     }
+    ],
+    "layovers": [],
+    "total_duration": 645,
+    "price": 2087,
+    "key": "AC26",
+    "from": "PVG",
+    "to": "YVR",
+    "dep": "2027-06-26 15:55",
+    "arr": "2027-06-26 11:40",
+    "valid": true,
+    "reject": null
+   },
+   "ret": {
+    "segments": [
+     {
+      "flight": "AC 126",
+      "airline": "Air Canada",
+      "airline_cn": "加拿大航空",
+      "from": "YVR",
+      "to": "YYZ",
+      "dep": "2027-07-04 23:25",
+      "arr": "2027-07-05 07:00",
+      "duration": 275,
+      "aircraft": "Airbus A321",
+      "class": "Economy"
+     },
+     {
+      "flight": "AC 27",
+      "airline": "Air Canada",
+      "airline_cn": "加拿大航空",
+      "from": "YYZ",
+      "to": "PVG",
+      "dep": "2027-07-05 13:00",
+      "arr": "2027-07-06 16:25",
+      "duration": 925,
+      "aircraft": "Boeing 787",
+      "class": "Economy"
+     }
+    ],
+    "layovers": [
+     {
+      "airport": "YYZ",
+      "duration": 360,
+      "overnight": false
+     }
+    ],
+    "total_duration": 1560,
+    "price": 3720,
+    "key": "AC126+AC27",
+    "from": "YVR",
+    "to": "PVG",
+    "dep": "2027-07-04 23:25",
+    "arr": "2027-07-06 16:25"
+   },
+   "price": 3720,
+   "price_est": false,
+   "total_minutes": 2205,
+   "arr_penalty": 0,
+   "arr_slot": "上午",
+   "gf_url": "https://www.google.com/travel/flights?hl=en&gl=ca&curr=CAD&tfs=CBwQAhpZEgoyMDI3LTA2LTI2Ih4KA1BWRxIKMjAyNy0wNi0yNhoDWVZSKgJBQzICMjZqBwgBEgNQVkdqBwgBEgNTSEFqBwgBEgNIR0hyBwgBEgNZWVpyBwgBEgNZVlIaORIKMjAyNy0wNy0wNGoHCAESA1lZWmoHCAESA1lWUnIHCAESA1BWR3IHCAESA1NIQXIHCAESA0hHSEABSAFwAZgBAQ&tfu=EgIIAQ",
+   "out_date": "2027-06-26",
+   "ret_date": "2027-07-04",
+   "reject": "回程转机等待超过4小时"
+  },
+  {
+   "trip": "B",
+   "key": "B|KE110+KE75|CX867+CX964",
+   "out": {
+    "segments": [
+     {
+      "flight": "KE 110",
+      "airline": "Korean Air",
+      "airline_cn": "大韩航空",
+      "from": "HGH",
+      "to": "ICN",
+      "dep": "2027-06-26 15:10",
+      "arr": "2027-06-26 18:15",
+      "duration": 125,
+      "aircraft": "Airbus A321neo",
+      "class": "Economy"
+     },
+     {
+      "flight": "KE 75",
+      "airline": "Korean Air",
+      "airline_cn": "大韩航空",
+      "from": "ICN",
+      "to": "YVR",
+      "dep": "2027-06-26 22:40",
+      "arr": "2027-06-26 16:45",
+      "duration": 605,
+      "aircraft": "Boeing 787-10",
+      "class": "Economy"
+     }
+    ],
+    "layovers": [
+     {
+      "airport": "ICN",
+      "duration": 265,
+      "overnight": false
+     }
+    ],
+    "total_duration": 995,
+    "price": 1620,
+    "key": "KE110+KE75",
+    "from": "HGH",
+    "to": "YVR",
+    "dep": "2027-06-26 15:10",
+    "arr": "2027-06-26 16:45",
+    "valid": false,
+    "reject": "转机等待超过4小时"
+   },
+   "ret": {
+    "segments": [
+     {
+      "flight": "CX 867",
+      "airline": "Cathay Pacific",
+      "airline_cn": "国泰航空",
+      "from": "YVR",
+      "to": "HKG",
+      "dep": "2027-07-04 14:55",
+      "arr": "2027-07-05 19:20",
+      "duration": 805,
+      "aircraft": "Airbus A350",
+      "class": "Economy"
+     },
+     {
+      "flight": "CX 964",
+      "airline": "Cathay Pacific",
+      "airline_cn": "国泰航空",
+      "from": "HKG",
+      "to": "HGH",
+      "dep": "2027-07-05 20:10",
+      "arr": "2027-07-05 22:35",
+      "duration": 145,
+      "aircraft": "Airbus A330",
+      "class": "Economy"
+     }
+    ],
+    "layovers": [
+     {
+      "airport": "HKG",
+      "duration": 50,
+      "overnight": false
+     }
+    ],
+    "total_duration": 1000,
+    "price": 6267,
+    "key": "CX867+CX964",
+    "from": "YVR",
+    "to": "HGH",
+    "dep": "2027-07-04 14:55",
+    "arr": "2027-07-05 22:35"
+   },
+   "price": 6267,
+   "price_est": false,
+   "total_minutes": 1995,
+   "arr_penalty": 3,
+   "arr_slot": "下午",
+   "gf_url": "https://www.google.com/travel/flights?hl=en&gl=ca&curr=CAD&tfs=CBwQAhp6EgoyMDI3LTA2LTI2Ih8KA0hHSBIKMjAyNy0wNi0yNhoDSUNOKgJLRTIDMTEwIh4KA0lDThIKMjAyNy0wNi0yNhoDWVZSKgJLRTICNzVqBwgBEgNQVkdqBwgBEgNTSEFqBwgBEgNIR0hyBwgBEgNZWVpyBwgBEgNZVlIaORIKMjAyNy0wNy0wNGoHCAESA1lZWmoHCAESA1lWUnIHCAESA1BWR3IHCAESA1NIQXIHCAESA0hHSEABSAFwAZgBAQ&tfu=EgIIAQ",
+   "out_date": "2027-06-26",
+   "ret_date": "2027-07-04",
+   "reject": "去程转机等待超过4小时"
+  },
+  {
+   "trip": "B",
+   "key": "B|CX959+CX810|JL17+CA146",
+   "out": {
+    "segments": [
+     {
+      "flight": "CX 959",
+      "airline": "Cathay Pacific",
+      "airline_cn": "国泰航空",
+      "from": "HGH",
+      "to": "HKG",
+      "dep": "2027-06-26 11:25",
+      "arr": "2027-06-26 14:05",
+      "duration": 160,
+      "aircraft": "Airbus A321neo",
+      "class": "Economy"
+     },
+     {
+      "flight": "CX 810",
+      "airline": "Cathay Pacific",
+      "airline_cn": "国泰航空",
+      "from": "HKG",
+      "to": "YVR",
+      "dep": "2027-06-26 15:55",
+      "arr": "2027-06-26 13:00",
+      "duration": 725,
+      "aircraft": "Airbus A350",
+      "class": "Economy"
+     }
+    ],
+    "layovers": [
+     {
+      "airport": "HKG",
+      "duration": 110,
+      "overnight": false
+     }
+    ],
+    "total_duration": 995,
+    "price": 2048,
+    "key": "CX959+CX810",
+    "from": "HGH",
+    "to": "YVR",
+    "dep": "2027-06-26 11:25",
+    "arr": "2027-06-26 13:00",
+    "valid": true,
+    "reject": null
+   },
+   "ret": {
+    "segments": [
+     {
+      "flight": "JL 17",
+      "airline": "JAL",
+      "airline_cn": "日本航空",
+      "from": "YVR",
+      "to": "NRT",
+      "dep": "2027-07-04 14:00",
+      "arr": "2027-07-05 15:55",
+      "duration": 595,
+      "aircraft": "Boeing 787",
+      "class": "Economy"
+     },
+     {
+      "flight": "CA 146",
+      "airline": "Air China",
+      "airline_cn": "中国国际航空",
+      "from": "NRT",
+      "to": "HGH",
+      "dep": "2027-07-05 21:00",
+      "arr": "2027-07-05 23:40",
+      "duration": 220,
+      "aircraft": "Airbus A321",
+      "class": "Economy"
+     }
+    ],
+    "layovers": [
+     {
+      "airport": "NRT",
+      "duration": 305,
+      "overnight": false
+     }
+    ],
+    "total_duration": 1120,
+    "price": 11439,
+    "key": "JL17+CA146",
+    "from": "YVR",
+    "to": "HGH",
+    "dep": "2027-07-04 14:00",
+    "arr": "2027-07-05 23:40"
+   },
+   "price": 11439,
+   "price_est": false,
+   "total_minutes": 2115,
+   "arr_penalty": 1.5,
+   "arr_slot": "中午",
+   "gf_url": "https://www.google.com/travel/flights?hl=en&gl=ca&curr=CAD&tfs=CBwQAhp7EgoyMDI3LTA2LTI2Ih8KA0hHSBIKMjAyNy0wNi0yNhoDSEtHKgJDWDIDOTU5Ih8KA0hLRxIKMjAyNy0wNi0yNhoDWVZSKgJDWDIDODEwagcIARIDUFZHagcIARIDU0hBagcIARIDSEdIcgcIARIDWVlacgcIARIDWVZSGjkSCjIwMjctMDctMDRqBwgBEgNZWVpqBwgBEgNZVlJyBwgBEgNQVkdyBwgBEgNTSEFyBwgBEgNIR0hAAUgBcAGYAQE&tfu=EgIIAQ",
+   "out_date": "2027-06-26",
+   "ret_date": "2027-07-04",
+   "reject": "回程转机等待超过4小时"
+  },
+  {
+   "trip": "B",
+   "key": "B|NH920+JL18|AC3+CA920",
+   "out": {
+    "segments": [
+     {
+      "flight": "NH 920",
+      "airline": "ANA",
+      "airline_cn": "全日空",
+      "from": "PVG",
+      "to": "NRT",
+      "dep": "2027-06-26 13:00",
+      "arr": "2027-06-26 16:55",
+      "duration": 175,
+      "aircraft": "Boeing 787",
+      "class": "Economy"
+     },
+     {
+      "flight": "JL 18",
+      "airline": "JAL",
+      "airline_cn": "日本航空",
+      "from": "NRT",
+      "to": "YVR",
+      "dep": "2027-06-26 18:55",
+      "arr": "2027-06-26 11:30",
+      "duration": 515,
+      "aircraft": "Boeing 787",
+      "class": "Economy"
+     }
+    ],
+    "layovers": [
+     {
+      "airport": "NRT",
+      "duration": 120,
+      "overnight": false
+     }
+    ],
+    "total_duration": 810,
+    "price": 13706,
+    "key": "NH920+JL18",
+    "from": "PVG",
+    "to": "YVR",
+    "dep": "2027-06-26 13:00",
+    "arr": "2027-06-26 11:30",
+    "valid": true,
+    "reject": null
+   },
+   "ret": {
+    "segments": [
+     {
+      "flight": "AC 3",
+      "airline": "Air Canada",
+      "airline_cn": "加拿大航空",
+      "from": "YVR",
+      "to": "NRT",
+      "dep": "2027-07-04 13:10",
+      "arr": "2027-07-05 14:55",
+      "duration": 585,
+      "aircraft": "Boeing 787",
+      "class": "Economy"
+     },
+     {
+      "flight": "CA 920",
+      "airline": "Air China",
+      "airline_cn": "中国国际航空",
+      "from": "NRT",
+      "to": "PVG",
+      "dep": "2027-07-05 20:10",
+      "arr": "2027-07-05 22:35",
+      "duration": 205,
+      "aircraft": "Airbus A350",
+      "class": "Economy"
+     }
+    ],
+    "layovers": [
+     {
+      "airport": "NRT",
+      "duration": 315,
+      "overnight": false
+     }
+    ],
+    "total_duration": 1105,
+    "price": 13465,
+    "key": "AC3+CA920",
+    "from": "YVR",
+    "to": "PVG",
+    "dep": "2027-07-04 13:10",
+    "arr": "2027-07-05 22:35"
+   },
+   "price": 13465,
+   "price_est": false,
+   "total_minutes": 1915,
+   "arr_penalty": 0,
+   "arr_slot": "上午",
+   "gf_url": "https://www.google.com/travel/flights?hl=en&gl=ca&curr=CAD&tfs=CBwQAhp6EgoyMDI3LTA2LTI2Ih8KA1BWRxIKMjAyNy0wNi0yNhoDTlJUKgJOSDIDOTIwIh4KA05SVBIKMjAyNy0wNi0yNhoDWVZSKgJKTDICMThqBwgBEgNQVkdqBwgBEgNTSEFqBwgBEgNIR0hyBwgBEgNZWVpyBwgBEgNZVlIaORIKMjAyNy0wNy0wNGoHCAESA1lZWmoHCAESA1lWUnIHCAESA1BWR3IHCAESA1NIQXIHCAESA0hHSEABSAFwAZgBAQ&tfu=EgIIAQ",
+   "out_date": "2027-06-26",
+   "ret_date": "2027-07-04",
+   "reject": "回程转机等待超过4小时"
+  },
+  {
+   "trip": "B",
+   "key": "B|NH920+JL18|JL17+CA920",
+   "out": {
+    "segments": [
+     {
+      "flight": "NH 920",
+      "airline": "ANA",
+      "airline_cn": "全日空",
+      "from": "PVG",
+      "to": "NRT",
+      "dep": "2027-06-26 13:00",
+      "arr": "2027-06-26 16:55",
+      "duration": 175,
+      "aircraft": "Boeing 787",
+      "class": "Economy"
+     },
+     {
+      "flight": "JL 18",
+      "airline": "JAL",
+      "airline_cn": "日本航空",
+      "from": "NRT",
+      "to": "YVR",
+      "dep": "2027-06-26 18:55",
+      "arr": "2027-06-26 11:30",
+      "duration": 515,
+      "aircraft": "Boeing 787",
+      "class": "Economy"
+     }
+    ],
+    "layovers": [
+     {
+      "airport": "NRT",
+      "duration": 120,
+      "overnight": false
+     }
+    ],
+    "total_duration": 810,
+    "price": 13706,
+    "key": "NH920+JL18",
+    "from": "PVG",
+    "to": "YVR",
+    "dep": "2027-06-26 13:00",
+    "arr": "2027-06-26 11:30",
+    "valid": true,
+    "reject": null
+   },
+   "ret": {
+    "segments": [
+     {
+      "flight": "JL 17",
+      "airline": "JAL",
+      "airline_cn": "日本航空",
+      "from": "YVR",
+      "to": "NRT",
+      "dep": "2027-07-04 14:00",
+      "arr": "2027-07-05 15:55",
+      "duration": 595,
+      "aircraft": "Boeing 787",
+      "class": "Economy"
+     },
+     {
+      "flight": "CA 920",
+      "airline": "Air China",
+      "airline_cn": "中国国际航空",
+      "from": "NRT",
+      "to": "PVG",
+      "dep": "2027-07-05 20:10",
+      "arr": "2027-07-05 22:35",
+      "duration": 205,
+      "aircraft": "Airbus A350",
+      "class": "Economy"
+     }
+    ],
+    "layovers": [
+     {
+      "airport": "NRT",
+      "duration": 255,
+      "overnight": false
+     }
+    ],
+    "total_duration": 1055,
+    "price": 13813,
+    "key": "JL17+CA920",
+    "from": "YVR",
+    "to": "PVG",
+    "dep": "2027-07-04 14:00",
+    "arr": "2027-07-05 22:35"
+   },
+   "price": 13813,
+   "price_est": false,
+   "total_minutes": 1865,
+   "arr_penalty": 0,
+   "arr_slot": "上午",
+   "gf_url": "https://www.google.com/travel/flights?hl=en&gl=ca&curr=CAD&tfs=CBwQAhp6EgoyMDI3LTA2LTI2Ih8KA1BWRxIKMjAyNy0wNi0yNhoDTlJUKgJOSDIDOTIwIh4KA05SVBIKMjAyNy0wNi0yNhoDWVZSKgJKTDICMThqBwgBEgNQVkdqBwgBEgNTSEFqBwgBEgNIR0hyBwgBEgNZWVpyBwgBEgNZVlIaORIKMjAyNy0wNy0wNGoHCAESA1lZWmoHCAESA1lWUnIHCAESA1BWR3IHCAESA1NIQXIHCAESA0hHSEABSAFwAZgBAQ&tfu=EgIIAQ",
+   "out_date": "2027-06-26",
+   "ret_date": "2027-07-04",
+   "reject": "回程转机等待超过4小时"
+  },
+  {
+   "trip": "B",
+   "key": "B|KE892+KE71|AA2776+AA127",
+   "out": {
+    "segments": [
+     {
+      "flight": "KE 892",
+      "airline": "Korean Air",
+      "airline_cn": "大韩航空",
+      "from": "PVG",
+      "to": "ICN",
+      "dep": "2027-06-26 08:50",
+      "arr": "2027-06-26 11:55",
+      "duration": 125,
+      "aircraft": "Boeing 737",
+      "class": "Economy"
+     },
+     {
+      "flight": "KE 71",
+      "airline": "Korean Air",
+      "airline_cn": "大韩航空",
+      "from": "ICN",
+      "to": "YVR",
+      "dep": "2027-06-26 18:45",
+      "arr": "2027-06-26 12:35",
+      "duration": 590,
+      "aircraft": "Boeing 787-10",
+      "class": "Economy"
+     }
+    ],
+    "layovers": [
+     {
+      "airport": "ICN",
+      "duration": 410,
+      "overnight": false
+     }
+    ],
+    "total_duration": 1125,
+    "price": 1807,
+    "key": "KE892+KE71",
+    "from": "PVG",
+    "to": "YVR",
+    "dep": "2027-06-26 08:50",
+    "arr": "2027-06-26 12:35",
+    "valid": false,
+    "reject": "转机等待超过4小时"
+   },
+   "ret": {
+    "segments": [
+     {
+      "flight": "AA 2776",
+      "airline": "American",
+      "airline_cn": "American",
+      "from": "YVR",
+      "to": "DFW",
+      "dep": "2027-07-04 23:59",
+      "arr": "2027-07-05 06:06",
+      "duration": 247,
+      "aircraft": "Airbus A321",
+      "class": "Economy"
+     },
+     {
+      "flight": "AA 127",
+      "airline": "American",
+      "airline_cn": "American",
+      "from": "DFW",
+      "to": "PVG",
+      "dep": "2027-07-05 10:50",
+      "arr": "2027-07-06 15:20",
+      "duration": 930,
+      "aircraft": "Boeing 787",
+      "class": "Economy"
+     }
+    ],
+    "layovers": [
+     {
+      "airport": "DFW",
+      "duration": 284,
+      "overnight": false
+     }
+    ],
+    "total_duration": 1461,
+    "price": 15580,
+    "key": "AA2776+AA127",
+    "from": "YVR",
+    "to": "PVG",
+    "dep": "2027-07-04 23:59",
+    "arr": "2027-07-06 15:20"
+   },
+   "price": 15580,
+   "price_est": false,
+   "total_minutes": 2586,
+   "arr_penalty": 1.5,
+   "arr_slot": "中午",
+   "gf_url": "https://www.google.com/travel/flights?hl=en&gl=ca&curr=CAD&tfs=CBwQAhp6EgoyMDI3LTA2LTI2Ih8KA1BWRxIKMjAyNy0wNi0yNhoDSUNOKgJLRTIDODkyIh4KA0lDThIKMjAyNy0wNi0yNhoDWVZSKgJLRTICNzFqBwgBEgNQVkdqBwgBEgNTSEFqBwgBEgNIR0hyBwgBEgNZWVpyBwgBEgNZVlIaORIKMjAyNy0wNy0wNGoHCAESA1lZWmoHCAESA1lWUnIHCAESA1BWR3IHCAESA1NIQXIHCAESA0hHSEABSAFwAZgBAQ&tfu=EgIIAQ",
+   "out_date": "2027-06-26",
+   "ret_date": "2027-07-04",
+   "reject": "去程转机等待超过4小时；回程经DFW转机需签证或未确认免签"
   }
  ],
  "quota": {
   "plan_name": "Free Plan",
   "searches_per_month": 250,
-  "plan_searches_left": 235,
-  "this_month_usage": 15,
-  "total_searches_left": 235
+  "plan_searches_left": 230,
+  "this_month_usage": 20,
+  "total_searches_left": 230
  },
- "changes": [
-  {
-   "type": "最优解更新",
-   "trip": "",
-   "flight": "",
-   "detail": "综合前五名单发生变化"
-  }
- ]
+ "changes": []
 }
