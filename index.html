@@ -45,6 +45,12 @@ h2 small{font-weight:normal;color:var(--muted);font-size:13px}
 .pricehist{font-size:13px;margin-top:6px}
 .pricehist .d{color:var(--good);font-weight:600}.pricehist .u{color:var(--accent);font-weight:600}
 details summary{cursor:pointer;color:var(--accent);font-weight:600}
+.exrow{justify-content:space-between;align-items:flex-start}
+.exrow .favbtns{margin-top:0;flex:none}
+.newtag.warn{background:var(--warn)}
+.favbtn.veto{color:var(--muted)}
+.u{color:var(--accent)}
+@media (max-width:560px){.exrow{flex-direction:column}}
 .chg{display:flex;gap:10px;padding:6px 0;border-bottom:1px solid var(--line);font-size:14px}
 .chg:last-child{border-bottom:0}
 .tag{flex:none;font-size:12px;padding:1px 8px;border-radius:4px;background:var(--chip);height:fit-content}
@@ -78,8 +84,11 @@ svg text{fill:var(--muted);font-size:11px}
   <h2>最近变化 <small>价格涨跌、航班新增或消失、最优解更新</small></h2>
   <div class="card" id="changes"></div>
 
-  <h2>便宜但被排除的选项 <small>为什么谷歌上更便宜的票没有进榜</small></h2>
+  <h2>便宜但被排除的选项 <small>不满足条件的票；点“撤回否决”可以加回榜单一起排名</small></h2>
   <div class="card" id="excluded"></div>
+
+  <h2>否决区 <small>手动移出榜单的机票，点“撤回否决”放回去</small></h2>
+  <div class="card" id="vetoed"></div>
 
   <h2>筛选规则与说明</h2>
   <div class="card note">
@@ -90,6 +99,7 @@ svg text{fill:var(--muted);font-size:11px}
       <li>托运行李：已排除标注“托运行李另收费”的票价。卡片上的托运和随身行李额度是按主承运航司（飞行时间最长那段的航司）经济舱的一般规定整理的，不是从票价里读出来的；基础票、特价票可能更少，购票前请在订票页面核实。</li>
       <li><b>时间榜</b>：往返总飞行时间（小时）加上落地罚分。加拿大当地上午落地不罚分，中午+1.5，下午+3，晚上+6，深夜+9。</li>
       <li><b>价格榜</b>：按每人往返价格从低到高。</li>
+      <li><b>否决和加回</b>：任何人都可以把榜单里的机票否决（移到否决区），或把被排除的机票加回榜单。所有人看到的是同一份结果，三个榜单会立即按新名单重新排名，下次自动刷新后也会保持。</li>
       <li><b>综合榜</b>：时间和价格各占50分，满分100。时间比最短的组合多出50%或以上扣满50分，价格比最便宜的贵一倍或以上扣满50分，中间按比例扣。</li>
       <li>价格来自 Google 航班，为单人往返含税价（加元），两人约为两倍；实际以航司或订票网站为准。2027年6月的部分航班可能尚未开售，开售后会自动出现在“最近变化”里。</li>
       <li>同一个去程在每个榜单里最多出现两次，避免榜单被一个航班占满。</li>
@@ -187,7 +197,7 @@ async function toggleFav(who, key, btn){
   try{
     if(FAV[who][k]){ await fetch(url, {method:"DELETE"}); delete FAV[who][k]; }
     else{
-      const p = D.pairs.find(x => x.key === key);
+      const p = byKey()[key];
       const rec = {key, trip:p.trip, added:new Date().toISOString(), price_at_add:p.price, snap:p};
       const r = await fetch(url, {method:"PUT", body:JSON.stringify(rec)});
       if(!r.ok) throw new Error(r.status);
@@ -205,7 +215,7 @@ function favBtns(p){
 }
 function priceSeries(key){ return H.map(h => ({t:h.time, v:h.prices ? h.prices[key] : undefined})).filter(x => x.v) }
 function favHtml(rec, i){
-  const cur = D.pairs.find(x => x.key === rec.key);
+  const cur = byKey()[rec.key];
   const p = cur || rec.snap;
   const ser = priceSeries(rec.key);
   let hist = "";
@@ -218,7 +228,7 @@ function favHtml(rec, i){
   }
   const chg = ser.filter((x,j) => j===0 || x.v !== ser[j-1].v);   // 只显示价格变动的节点
   if(chg.length > 1) hist += `<br>价格变化：` + chg.slice(-8).map(x => `${x.t.slice(5,10).replace("-","/")} $${x.v}`).join(" → ");
-  return pairHtml(p, i, `<div class="pricehist">${hist}</div>`);
+  return pairHtml(p, i, `<div class="pricehist">${hist}</div>`, false);
 }
 function renderFav(){
   const el = $("#fav");
@@ -240,33 +250,151 @@ function isNew(key){
   const prev = H[H.length-2].prices || {};
   return !(key in prev);
 }
+// ===== 否决与加回（共享保存在同一个数据库的 decisions 下）=====
+let DEC = {vetoed:{}, restored:{}}, decErr = "";
+async function loadDec(){
+  if(!FAV_DB) return;
+  try{ const r = await fetch(FAV_DB + "/decisions.json?" + Date.now()); const j = (r.ok ? await r.json() : null) || {};
+       DEC = {vetoed: j.vetoed || {}, restored: j.restored || {}}; }
+  catch(e){}
+}
+const isVetoed = k => !!DEC.vetoed[fkey(k)];
+const isRestored = k => !!DEC.restored[fkey(k)];
+async function setDec(kind, key, on, btn){
+  if(btn) btn.disabled = true;
+  const k = fkey(key), url = `${FAV_DB}/decisions/${kind}/${encodeURIComponent(k)}.json`;
+  try{
+    if(on){
+      const p = byKey()[key];
+      const rec = {key, at:new Date().toISOString(), price:p ? p.price : null, reject:p && p.reject || null};
+      const r = await fetch(url, {method:"PUT", body:JSON.stringify(rec)}); if(!r.ok) throw new Error(r.status);
+      DEC[kind][k] = rec;
+      if(kind === "restored") await clearDec("vetoed", k);   // 加回时顺便撤销否决
+    } else {
+      const r = await fetch(url, {method:"DELETE"}); if(!r.ok) throw new Error(r.status);
+      delete DEC[kind][k];
+    }
+    decErr = "";
+  }catch(e){ decErr = "保存失败。如果一直这样，可能是数据库规则还没更新，请联系 Daniel。"; }
+  renderAllViews();
+}
+async function clearDec(kind, k){
+  if(!DEC[kind][k]) return;
+  await fetch(`${FAV_DB}/decisions/${kind}/${encodeURIComponent(k)}.json`, {method:"DELETE"});
+  delete DEC[kind][k];
+}
+function byKey(){
+  const m = {};
+  (D.pairs || []).forEach(p => m[p.key] = p);
+  (D.excluded_pairs || []).forEach(p => m[p.key] = p);
+  return m;
+}
+const inTab = t => tab === "all" || t === tab;
+// 参与排名的组合：合格的 + 手动加回的，去掉被否决的
+function pool(){
+  const L = (D.pairs || []).concat((D.excluded_pairs || []).filter(p => isRestored(p.key)));
+  return L.filter(p => inTab(p.trip) && !isVetoed(p.key));
+}
+// 和后台同样的打分方法：时间比最短多50%扣满50分，价格比最便宜贵一倍扣满50分
+function score(L){
+  L.forEach(p => p._ts = p.total_minutes / 60 + p.arr_penalty);
+  const tmin = Math.min(...L.map(p => p._ts)), pmin = Math.min(...L.map(p => p.price));
+  L.forEach(p => {
+    const nt = Math.min(1, (p._ts - tmin) / (tmin * 0.5)), np = Math.min(1, (p.price - pmin) / pmin);
+    p._os = Math.round((100 - 50 * nt - 50 * np) * 10) / 10;
+  });
+  return L;
+}
+function topN(L, cmp){
+  const out = [], per = {};
+  for(const p of [...L].sort(cmp)){
+    const o = p.trip + p.out.key;
+    if((per[o] || 0) >= 2) continue;          // 同一去程最多出现两次
+    per[o] = (per[o] || 0) + 1; out.push(p);
+    if(out.length >= 5) break;
+  }
+  return out;
+}
+function rankFor(kind){
+  const L = score(pool());
+  if(!L.length) return [];
+  if(kind === "time") return topN(L, (a,b) => a._ts - b._ts || a.price - b.price);
+  if(kind === "price") return topN(L, (a,b) => a.price - b.price || a._ts - b._ts);
+  return topN(L, (a,b) => b._os - a._os || a.price - b.price);
+}
+function decBtns(p){
+  if(!FAV_DB) return "";
+  const k = encodeURIComponent(p.key);
+  let h = `<button class="favbtn veto" data-dec="vetoed" data-on="1" data-key="${k}">✕ 否决，移出榜单</button>`;
+  if(p.reject) h += `<button class="favbtn" data-dec="restored" data-on="0" data-key="${k}">↩ 取消加回</button>`;
+  return `<div class="favbtns">${h}</div>`;
+}
+function bindDecBtns(root){
+  root.querySelectorAll("[data-dec]").forEach(b => b.onclick = () =>
+    setDec(b.dataset.dec, decodeURIComponent(b.dataset.key), b.dataset.on === "1", b));
+}
 function renderAll(){
   if(!D || !D.pairs) return;
-  const L = D.pairs.filter(p => tab==="all" || p.trip===tab).sort((a,b) => b.overall_score - a.overall_score);
+  const L = score(pool()).sort((a,b) => b._os - a._os);
   const nNew = L.filter(p => isNew(p.key)).length;
   $("#allsum").textContent = `展开全部 ${L.length} 个组合` + (nNew ? `（其中 ${nNew} 个是这次新出现的）` : "");
-  $("#all").innerHTML = L.map(pairHtml).join("");
-  bindFavBtns($("#all"));
+  $("#all").innerHTML = L.map((p,i) => pairHtml(p,i,"",true)).join("");
+  bindFavBtns($("#all")); bindDecBtns($("#all"));
 }
-function renderAllViews(){ renderFav(); render(); renderAll(); }
-function pairHtml(p,i,extra){
+function renderAllViews(){ renderFav(); render(); renderAll(); renderExcluded(); renderVetoed(); }
+function priceTxt(p){ return (p.price_est ? "约$" : "$") + p.price }
+function pairHtml(p,i,extra,withDec){
   const slotCls=p.arr_slot==="上午"?"g":(p.arr_slot==="晚上"||p.arr_slot==="深夜/凌晨")?"w":"";
-  return `<div class="card"><div class="row"><div class="rk">${i+1}</div><div>${isNew(p.key)?'<span class="newtag">新增</span>':""}
+  const os = p._os != null ? p._os : p.overall_score;
+  const tags = (isNew(p.key)?'<span class="newtag">新增</span>':"") +
+    (p.reject && isRestored(p.key) ? `<span class="newtag warn">手动加回 · 原因：${p.reject}</span>` : "");
+  return `<div class="card"><div class="row"><div class="rk">${i+1}</div><div>${tags}
   ${legHtml(p.out,"去程")}${legHtml(p.ret,"回程")}
   <div class="chips"><span class="chip">${TRIPNAME[p.trip]}</span><span class="chip ${slotCls}">加拿大${p.arr_slot}落地</span>
-  <span class="chip">往返共飞${fmtDur(p.total_minutes)}</span><span class="chip">综合分 ${p.overall_score}</span></div>${extra||""}${linksHtml(p)}
-  </div><div class="price">$${p.price}<small>每人往返 · 两人约 $${p.price*2}</small>${favBtns(p)}</div></div></div>`}
-function rankFor(kind){
-  const src=tab==="all"?D.rank_all:D.trips.find(t=>t.id===tab).rank;
-  const byKey=Object.fromEntries(D.pairs.map(p=>[p.key,p]));
-  return src[kind].map(k=>byKey[k]).filter(Boolean)}
+  <span class="chip">往返共飞${fmtDur(p.total_minutes)}</span>${os!=null?`<span class="chip">综合分 ${os}</span>`:""}</div>${extra||""}${linksHtml(p)}
+  </div><div class="price">${priceTxt(p)}<small>每人往返 · 两人约 $${p.price*2}</small>${favBtns(p)}${withDec===false?"":decBtns(p)}</div></div></div>`}
 function render(){
   $("#tabs").innerHTML=[["all","两个日期一起比"],["A",TRIPNAME.A],["B",TRIPNAME.B]].map(([k,v])=>`<button class="${tab===k?"on":""}" data-k="${k}">${v}</button>`).join("");
-  document.querySelectorAll("#tabs button").forEach(b=>b.onclick=()=>{tab=b.dataset.k;render();renderAll();renderExcluded()});
+  document.querySelectorAll("#tabs button").forEach(b=>b.onclick=()=>{tab=b.dataset.k;renderAllViews()});
   if(!D||!D.pairs||!D.pairs.length){$("#main").innerHTML=`<div class="card empty">还没有可用的航班数据。首次自动查询完成后这里会显示结果。</div>`;return}
   const sec=[["overall","综合最佳前五","时间和价格各占一半"],["time","飞行时间短、上午落地前五","往返总时长＋落地时段"],["price","价格最低前五","每人往返含税价"]];
-  setTimeout(()=>bindFavBtns($("#main")),0);
-  $("#main").innerHTML=sec.map(([k,t,s])=>{const L=rankFor(k);return `<h2>${t} <small>${s}</small></h2>`+(L.length?L.map(pairHtml).join(""):`<div class="card empty">暂无符合条件的组合</div>`)}).join("");
+  $("#main").innerHTML=sec.map(([k,t,s])=>{const L=rankFor(k);return `<h2>${t} <small>${s}</small></h2>`+(L.length?L.map((p,i)=>pairHtml(p,i,"",true)).join(""):`<div class="card empty">暂无符合条件的组合</div>`)}).join("");
+  bindFavBtns($("#main")); bindDecBtns($("#main"));
+}
+function layTxt(ls){return ls&&ls.length?"（"+ls.map(l=>ap(l.airport)+"转机"+fmtDur(l.duration)).join("，")+"）":""}
+function legLine(l){ return `<span class="fn">${l.key.replace(/\+/g," + ")}</span> ${fmtT(l.dep)} ${ap(l.from)} → ${fmtT(l.arr)} ${ap(l.to)}${l.layovers.length?layTxt(l.layovers):"（直飞）"}` }
+function renderExcluded(){
+  const el=$("#excluded");if(!D){el.innerHTML="";return}
+  const rows=[];
+  // 1）可以加回的组合（去程和回程都查到了，只是不满足条件）
+  (D.excluded_pairs||[]).filter(p=>inTab(p.trip)&&!isRestored(p.key)&&!isVetoed(p.key)).forEach(p=>{
+    rows.push([p.price,`<div><b>${TRIPNAME[p.trip]}</b> · 每人往返 ${priceTxt(p)}${p.price_est?"（回程单独价格未查到，按去程报价估算）":""}<br>
+      去程 ${legLine(p.out)}<br>回程 ${legLine(p.ret)}<br>
+      <span class="u">排除原因：${p.reject}</span> · <a href="${gfExact(p)||zh(p.gf_url)||gfSearch(p)}" target="_blank" rel="noopener">在谷歌航班核对 ↗</a></div>
+      <div class="favbtns"><button class="favbtn" data-dec="restored" data-on="1" data-key="${encodeURIComponent(p.key)}">↩ 撤回否决，加回榜单</button></div>`])});
+  // 2）查不到可搭配回程的去程，只能说明原因，没法加回
+  (D.probe_notes||[]).filter(n=>n.returns_seen===0&&inTab(n.trip)).forEach(n=>{
+    rows.push([n.out_price,`<div><b>${TRIPNAME[n.trip]}</b>：去程 <span class="fn">${n.out}</span>（${ap(n.out_from)}→${ap(n.out_to)}）往返最低 $${n.out_price}，但谷歌航班没有给出可以搭配的回程，所以无法组成往返组合。</div>`])});
+  // 3）不合格、这次也没查回程的去程
+  const probed=new Set((D.probe_notes||[]).map(n=>n.trip+"|"+n.out));
+  const best={};(D.pairs||[]).forEach(p=>{best[p.trip]=Math.min(best[p.trip]||1e9,p.price)});
+  (D.outbounds||[]).filter(o=>!o.valid&&o.price&&o.price<(best[o.trip]||1e9)&&!probed.has(o.trip+"|"+o.key)&&inTab(o.trip)).forEach(o=>{
+    rows.push([o.price,`<div><b>${TRIPNAME[o.trip]}</b>：去程 <span class="fn">${o.key}</span>（${ap(o.from)}→${ap(o.to)}）往返最低 $${o.price}，排除原因：${o.reject}${layTxt(o.layovers)}。这次没有查它的回程，暂时不能加回。</div>`])});
+  rows.sort((a,b)=>a[0]-b[0]);
+  el.innerHTML=(decErr?`<div class="note u">${decErr}</div>`:"")+(rows.length?rows.map(r=>`<div class="chg exrow">${r[1]}</div>`).join(""):`<div class="empty">没有被排除的选项</div>`);
+  bindDecBtns(el);
+}
+function renderVetoed(){
+  const el=$("#vetoed");if(!D){el.innerHTML="";return}
+  const m=byKey();
+  const recs=Object.values(DEC.vetoed).filter(r=>inTab(r.key.split("|")[0]));
+  if(!recs.length){el.innerHTML=`<div class="empty">还没有否决的机票。在榜单卡片上点“✕ 否决，移出榜单”即可放到这里。</div>`;return}
+  el.innerHTML=recs.map(r=>{const p=m[r.key];
+    const body=p?`<b>${TRIPNAME[p.trip]}</b> · 每人往返 ${priceTxt(p)}<br>去程 ${legLine(p.out)}<br>回程 ${legLine(p.ret)}`:
+      `<b>${TRIPNAME[r.key.split("|")[0]]||""}</b> <span class="fn">${r.key.split("|").slice(1).join(" / ")}</span>（最近一次刷新没有查到这个组合，否决时 $${r.price}）`;
+    return `<div class="chg exrow"><div>${body}<div class="note">否决于 ${new Date(r.at).toLocaleString("zh-CN",{hour12:false})}</div></div>
+      <div class="favbtns"><button class="favbtn" data-dec="vetoed" data-on="0" data-key="${encodeURIComponent(r.key)}">↩ 撤回否决</button></div></div>`}).join("");
+  bindDecBtns(el);
 }
 function renderTrend(){
   if(H.length<1){$("#trend").innerHTML=`<div class="empty">暂无历史记录</div>`;return}
@@ -283,28 +411,6 @@ function renderTrend(){
   const d0=H[0].time.slice(5,10),d1=H[H.length-1].time.slice(5,10);
   svg+=`<text x="${pad}" y="${Hh-6}">${d0.replace("-","月")}日</text><text x="${W-pad}" y="${Hh-6}" text-anchor="end">${d1.replace("-","月")}日</text></svg>`;
   $("#trend").innerHTML=svg}
-function layTxt(ls){return ls&&ls.length?"（"+ls.map(l=>ap(l.airport)+"转机"+fmtDur(l.duration)).join("，")+"）":""}
-function renderExcluded(){
-  const el=$("#excluded");if(!D){el.innerHTML="";return}
-  const best={};D.pairs.forEach(p=>{best[p.trip]=Math.min(best[p.trip]||1e9,p.price)});
-  const inTab=t=>tab==="all"||t===tab;
-  const rows=[];
-  (D.probe_notes||[]).filter(n=>n.valid_returns===0&&inTab(n.trip)).forEach(n=>{
-    const r=n.rejected_returns&&n.rejected_returns[0];
-    let t=`<b>${TRIPNAME[n.trip]}</b>：去程 <span class="fn">${n.out}</span>（${ap(n.out_from)}→${ap(n.out_to)}）往返最低 $${n.out_price}。去程符合要求，但查到的 ${n.returns_seen} 个回程都不符合`;
-    if(r)t+=`，例如回程 <span class="fn">${r.ret}</span> $${r.price}：${r.reason}${layTxt(r.layovers)}`;
-    t+="。";
-    if(n.gf_url)t+=` <a href="${n.gf_url}" target="_blank" rel="noopener">在谷歌航班核对 ↗</a>`;
-    rows.push([n.out_price,t])});
-  (D.outbounds||[]).filter(o=>!o.valid&&o.price&&o.price<(best[o.trip]||1e9)&&inTab(o.trip)).forEach(o=>{
-    rows.push([o.price,`<b>${TRIPNAME[o.trip]}</b>：去程 <span class="fn">${o.key}</span>（${ap(o.from)}→${ap(o.to)}）往返最低 $${o.price}，排除原因：${o.reject}${layTxt(o.layovers)}。`])});
-  if(D.probe_notes){
-    const probed=new Set(D.probe_notes.map(n=>n.trip+"|"+n.out));
-    (D.outbounds||[]).filter(o=>o.valid&&!probed.has(o.trip+"|"+o.key)&&inTab(o.trip)).forEach(o=>{
-      rows.push([o.price,`<b>${TRIPNAME[o.trip]}</b>：去程 <span class="fn">${o.key}</span> 往返最低 $${o.price}，这次没有轮到查它的回程（每次查询次数有限）。`])});
-  }
-  rows.sort((a,b)=>a[0]-b[0]);
-  el.innerHTML=rows.length?rows.map(r=>`<div class="chg"><div>${r[1]}</div></div>`).join(""):`<div class="empty">没有比榜单更便宜但被排除的选项</div>`}
 function renderChanges(){
   const items=[];[...H].reverse().forEach(h=>(h.changes||[]).forEach(c=>items.push({...c,time:h.time})));
   if(!items.length){$("#changes").innerHTML=`<div class="empty">暂无变化记录（至少需要两次查询）</div>`;return}
@@ -315,9 +421,10 @@ Promise.all([fetch("data/latest.json?"+Date.now()).then(r=>r.ok?r.json():null).c
   D=d;H=h||[];
   $("#upd").textContent=D&&D.updated?"更新于 "+new Date(D.updated).toLocaleString("zh-CN",{hour12:false}):"尚未查询";
   if(D&&D.rejected){const r=Object.entries(D.rejected);if(r.length)$("#rej").innerHTML="<p>本次排除的航班："+r.map(([k,v])=>`${k} ${v}个`).join("，")+"。</p>"}
-  render();renderAll();renderTrend();renderChanges();renderExcluded();
-  loadFav().then(renderAllViews);
-  setInterval(()=>loadFav().then(renderAllViews),60000);   // 每分钟同步一次别人的收藏
+  renderTrend();renderChanges();renderAllViews();
+  const sync=()=>Promise.all([loadFav(),loadDec()]).then(renderAllViews);
+  sync();
+  setInterval(sync,60000);   // 每分钟同步一次别人的收藏和否决
 });
 </script>
 </body>

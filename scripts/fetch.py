@@ -30,7 +30,8 @@ TRIPS = [
 ]
 CURRENCY = "CAD"
 MAX_LAYOVER_MIN = 240            # 转机等待不超过4小时
-RETURN_PROBES_PER_TRIP = int(os.environ.get("RETURN_PROBES", "6"))  # 每个日期组合深入查回程的去程数量
+RETURN_PROBES_PER_TRIP = int(os.environ.get("RETURN_PROBES", "6"))  # 每个日期组合深入查回程的合格去程数量
+EXCLUDED_PROBES_PER_TRIP = int(os.environ.get("EXCLUDED_PROBES", "3"))  # 再查几个“便宜但被排除”的去程的回程，供网站上手动加回
 TOP_N = 5
 
 # 中国护照无需过境签即可在机场内转机的地区（经美国、台湾转机需签证或许可，排除）
@@ -216,8 +217,12 @@ def build_pairs(trip, offline=None):
         if len(probes) >= RETURN_PROBES_PER_TRIP:
             break
     probes = probes[:RETURN_PROBES_PER_TRIP]
+    # 便宜但不合格的去程（舱位不对的不算），也查回程，组合放进“排除区”，网站上可以手动加回
+    cheap_bad = sorted([l for l in outs if not l["valid"] and l["token"] and "舱" not in (l["reject"] or "")],
+                       key=lambda l: l["price"] or 1e9)[:EXCLUDED_PROBES_PER_TRIP]
+    probes = probes + cheap_bad
 
-    pairs, notes = [], []
+    pairs, notes, excluded = [], [], []
     for i, ob in enumerate(probes):
         rr = serpapi({"type": 1, "departure_id": ORIGINS, "arrival_id": DESTS,
                       "outbound_date": trip["out"], "return_date": trip["ret"],
@@ -229,26 +234,38 @@ def build_pairs(trip, offline=None):
             if not rleg:
                 continue
             why = reject_reason(rleg)
-            if why:
-                rejected["回程" + why] = rejected.get("回程" + why, 0) + 1
-                bad.append({"ret": rleg["key"], "price": rleg["price"], "reason": why,
-                            "layovers": rleg["layovers"]})
-                continue
-            n_ok += 1
-            price = rleg["price"] or ob["price"]
             pen, slot = arrival_penalty(ob["arr"])
-            pairs.append({
+            pair = {
                 "trip": trip["id"], "key": f"{trip['id']}|{ob['key']}|{rleg['key']}",
-                "out": strip(ob), "ret": strip(rleg), "price": price,
+                "out": strip(ob), "ret": strip(rleg),
+                "price": rleg["price"] or ob["price"], "price_est": not rleg["price"],
                 "total_minutes": ob["total_duration"] + rleg["total_duration"],
                 "arr_penalty": pen, "arr_slot": slot, "gf_url": gf_url,
                 "out_date": trip["out"], "ret_date": trip["ret"],
-            })
+            }
+            reasons = []
+            if ob["reject"]:
+                reasons.append("去程" + ob["reject"])
+            if why:
+                reasons.append("回程" + why)
+                rejected["回程" + why] = rejected.get("回程" + why, 0) + 1
+                bad.append({"ret": rleg["key"], "price": rleg["price"], "reason": why,
+                            "layovers": rleg["layovers"]})
+            if reasons:
+                if "舱" not in "".join(reasons):        # 舱位不对的组合不放进排除区
+                    pair["reject"] = "；".join(reasons)
+                    excluded.append(pair)
+                continue
+            n_ok += 1
+            pairs.append(pair)
         notes.append({"trip": trip["id"], "out": ob["key"], "out_price": ob["price"],
+                      "out_valid": ob["valid"], "out_reject": ob["reject"],
                       "out_from": ob["from"], "out_to": ob["to"], "valid_returns": n_ok,
                       "returns_seen": n_ok + len(bad), "gf_url": gf_url,
                       "rejected_returns": sorted(bad, key=lambda b: b["price"] or 1e9)[:5]})
-    return outs, pairs, rejected, notes
+    # 同一个排除组合只保留最便宜的前若干个，控制数据大小
+    excluded = sorted(excluded, key=lambda p: p["price"] or 1e9)[:30]
+    return outs, pairs, rejected, notes, excluded
 
 
 def strip(leg):
@@ -330,10 +347,11 @@ def main():
     args = ap.parse_args()
 
     now = dt.datetime.now(dt.timezone.utc).isoformat(timespec="seconds")
-    all_outs, all_pairs, rejected_all, trips_out, all_notes = [], [], {}, [], []
+    all_outs, all_pairs, rejected_all, trips_out, all_notes, all_excluded = [], [], {}, [], [], []
     for trip in TRIPS:
-        outs, pairs, rej, notes = build_pairs(trip, args.offline)
+        outs, pairs, rej, notes, excl = build_pairs(trip, args.offline)
         all_notes += notes
+        all_excluded += excl
         for o in outs:
             o["trip"] = trip["id"]
         all_outs += outs
@@ -350,7 +368,7 @@ def main():
         "outbounds": [{k: v for k, v in strip(o).items() if k != "segments"} | {"segments": o["segments"]}
                       for o in all_outs],
         "pairs": all_pairs, "rank_all": rank(all_pairs), "rejected": rejected_all,
-        "airports": AIRPORT_CN, "probe_notes": all_notes, "quota": account_info(args.offline),
+        "airports": AIRPORT_CN, "probe_notes": all_notes, "excluded_pairs": all_excluded, "quota": account_info(args.offline),
     }
     # rank() 会给 pairs 写入分数，按全部组合重新计算一次以统一口径
     DATA.mkdir(exist_ok=True)
@@ -369,7 +387,7 @@ def main():
         "best_price": {t["id"]: min([p["price"] for p in all_pairs if p["trip"] == t["id"]] or [None],
                                     key=lambda x: x or 1e9) for t in TRIPS},
         "outbound_count": {t["id"]: sum(1 for o in all_outs if o["trip"] == t["id"] and o["valid"]) for t in TRIPS},
-        "prices": {p["key"]: p["price"] for p in all_pairs},
+        "prices": {p["key"]: p["price"] for p in all_pairs + all_excluded if not p.get("price_est")},
         "changes": cur["changes"],
     })
     hist = hist[-200:]
